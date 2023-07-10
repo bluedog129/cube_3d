@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:56:19 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/10 16:27:06 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:27:50 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int			check_line_empty(char *line);
 void		exit_error(char *str, t_map *map_info, t_parse_info *parse_info);
 int			open_file(char *cub_file);
 void		free_2d_arr(char **arr);
+void		finish_cub(t_map *map_info, t_parse_info *parse_info);
 
 // linked list
 void		ft_lstadd_back(t_map_node *lst, t_map_node *new);

@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:28:09 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/10 14:11:11 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/07/10 20:01:56 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	parse_line_by_line(t_map *map_info, t_parse_info *parse_info)
 			validate_map(line, map_info, parse_info);
 		else if (parse_info->line_type == EMPTY_LINE && map_info->height > 0)
 			exit_error("Error: Invalid empty_line map\n", map_info, parse_info);
+		free(line);
 	}
 	if (validate_all_lines(parse_info) == ERROR)
 		exit_error("Error: Invalid all line validation\n", map_info, parse_info);

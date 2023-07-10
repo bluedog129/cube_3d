@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 13:13:06 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/10 15:46:49 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/07/10 19:49:03 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	validate_texture(char *tex_line, t_map *map_info, \
 	{
 		exit_error("Error: Invalid texture\n", map_info, parse_info);
 	}
+	free_2d_arr(texture_info);
 }
 
 void	validate_rgb(char *tex_line, t_map *map_info, t_parse_info *parse_info)
@@ -59,6 +60,7 @@ void	validate_rgb(char *tex_line, t_map *map_info, t_parse_info *parse_info)
 											map_info, parse_info);
 		parse_info->ceiling_rgb_count++;
 	}
+	free_2d_arr(rgb_info);
 }
 
 void	validate_map(char *map_line, t_map *map_info, t_parse_info *parse_info)
@@ -71,7 +73,10 @@ void	validate_map(char *map_line, t_map *map_info, t_parse_info *parse_info)
 		exit_error("Error: map allocate fail\n", map_info, parse_info);
 	map_node->line = ft_strdup(map_line);
 	if (map_node->line == NULL)
+	{
+		free(map_node);
 		exit_error("Error: fail get line to node\n", map_info, parse_info);
+	}
 	map_node->next = NULL;
 	ft_lstadd_back(map_info->head_node, map_node);
 	map_info->height++;

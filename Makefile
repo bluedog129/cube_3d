@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: choihyojong <choihyojong@student.42.fr>    +#+  +:+       +#+         #
+#    By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 14:41:13 by hyojocho          #+#    #+#              #
-#    Updated: 2023/07/09 22:14:44 by choihyojong      ###   ########.fr        #
+#    Updated: 2023/07/10 20:07:07 by hyojocho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC              = cc
-CFLAGS          = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS          = -Wall -Wextra -Werror -g
 NAME            = cub3d
 RM              = rm -f
 LIBS			= libft/libft.a
