@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:57:09 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/10 14:01:37 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:12:49 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	valid_map_characters(char *line, t_map *map_info, \
 								t_parse_info *parse_info)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])
@@ -45,11 +45,11 @@ static int	validate_start_point(char start_point)
 
 static int	validate_end_point(char *line_split)
 {
-	int idx;
+	int	idx;
 
 	idx = 0;
 	while (line_split[idx] != '\0' && line_split[idx] != '*')
-		idx++;	
+		idx++;
 	if (line_split[idx - 1] != '1')
 		return (ERROR);
 	return (SUCCESS);

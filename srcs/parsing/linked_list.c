@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choihyojong <choihyojong@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:30:17 by choihyojong       #+#    #+#             */
-/*   Updated: 2023/07/09 18:50:06 by choihyojong      ###   ########.fr       */
+/*   Updated: 2023/07/10 15:47:03 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   side_info_get.c                                    :+:      :+:    :+:   */
+/*   getting_side_info.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choihyojong <choihyojong@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 19:53:46 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/09 16:34:50 by choihyojong      ###   ########.fr       */
+/*   Updated: 2023/07/10 15:43:01 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	get_rgb(char *rgb_val, t_map *map_info, t_parse_info *parse_info)
 	int		g;
 	int		b;
 	char	**rgb;
-	
+
 	rgb = ft_split(rgb_val, ',');
 	if (rgb == NULL)
 		exit_error("Error: map allocate fail\n", map_info, parse_info);

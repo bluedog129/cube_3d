@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choihyojong <choihyojong@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:56:19 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/09 21:11:44 by choihyojong      ###   ########.fr       */
+/*   Updated: 2023/07/10 16:27:06 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,15 @@ enum e_check_type_enum
 };
 
 // parsing
-void		parse_cub_file(char *cub_file, t_map *map_info, t_parse_info *parse_info);
+void		parse_cub_file(char *cub_file, t_map *map_info, \
+										t_parse_info *parse_info);
 
 // args_validation
 void		validate_args(int argc, char *cub_file);
 
 // initailize
-void		initialize(char *cub_file, t_map *map_info, t_parse_info *parse_info);
+void		initialize(char *cub_file, t_map *map_info, \
+									t_parse_info *parse_info);
 
 // side_info_get
 int			get_texture_path(char **texture_info, t_map *map_info, \
@@ -63,13 +65,17 @@ int			get_rgb(char *rgb_val, t_map *map_info, t_parse_info *parse_info);
 
 // line_validation
 int			check_type(char *line);
-void		validate_texture(char *tex_line, t_map *map_info, t_parse_info *parse_info);
-void		validate_rgb(char *tex_line, t_map *map_info, t_parse_info *parse_info);
-void		validate_map(char *map_line, t_map *map_info, t_parse_info *parse_info);
+void		validate_texture(char *tex_line, t_map *map_info, \
+											t_parse_info *parse_info);
+void		validate_rgb(char *tex_line, t_map *map_info, \
+											t_parse_info *parse_info);
+void		validate_map(char *map_line, t_map *map_info, \
+										t_parse_info *parse_info);
 int			validate_all_lines(t_parse_info *parse_info);
 
 // map_validation
-void		valid_map_characters(char *line, t_map *map_info, t_parse_info *parse_info);
+void		valid_map_characters(char *line, t_map *map_info, \
+											t_parse_info *parse_info);
 int			validate_edge_part(t_parse_info *parse_info, t_map *map_info, \
 						int height, int width);
 
