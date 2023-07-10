@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choihyojong <choihyojong@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 13:05:00 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/09 22:46:38 by choihyojong      ###   ########.fr       */
+/*   Updated: 2023/07/10 13:56:19 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 	int i = 0;
 	while (i < map_info.height)
 	{
-		printf("%s\n", parse_info.map_board[i]);
+		printf("%s\n", map_info.map_board[i]);
 		i++;
 	}
 }

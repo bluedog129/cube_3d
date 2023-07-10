@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choihyojong <choihyojong@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:16:34 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/09 18:17:29 by choihyojong      ###   ########.fr       */
+/*   Updated: 2023/07/10 13:55:20 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_map
 {
 	int					width;
 	int					height;
+	char				**map_board;
 	struct s_map_node	*head_node;
 	struct s_side_info	*side_info;
 }				t_map;
@@ -49,7 +50,6 @@ typedef struct s_parse_info
 	int		start_position_count;
 	int		line_type;
 	char	*line;
-	char	**map_board;
 }	t_parse_info;
 
 #endif
