@@ -90,7 +90,7 @@ void	camera_setup(t_game_data *game_data)
 	// 원본 맵배열에서 캐릭터 있던곳 문자를 0으로 바꿔주기
 }
 
-void	load_textures(t_game_data	*game_data)
+int	load_textures(t_game_data	*game_data)
 {
 	char	*texture_path[4];
 	int		i;
@@ -105,12 +105,17 @@ void	load_textures(t_game_data	*game_data)
 		game_data->wall_texture[i].img_ptr = mlx_xpm_file_to_image(\
 		game_data->mlx_ptr, texture_path[i], &game_data->wall_texture[i].\
 		img_width, &game_data->wall_texture[i].img_height);
+		if (game_data->wall_texture[i].img_ptr == NULL)
+			return (ERROR);
 		game_data->wall_texture[i].img_addr = mlx_get_data_addr(\
 		game_data->wall_texture[i].img_ptr, &game_data->wall_texture[i].\
 		img_bpp, &game_data->wall_texture[i].img_line_len, \
 		&game_data->wall_texture[i].img_endian);
+		if (game_data->wall_texture[i].img_addr == NULL)
+			return (ERROR);
 		i++;
 	}
+	return (SUCCESS);
 }
 
 void	engine_main(t_map *map_info)
@@ -120,12 +125,17 @@ void	engine_main(t_map *map_info)
 	ft_bzero(&game_data, sizeof(t_game_data));
 	game_data.map_info = map_info;
 
+	if (load_textures(&game_data) == ERROR)
+	{
+		printf("invalid resource path\n");
+		return;
+	}
+
 	camera_setup(&game_data);
 	game_data.mlx_ptr = mlx_init();
 	game_data.win_ptr = mlx_new_window(game_data.mlx_ptr, WIDTH, HEIGHT, \
 	"raycast practice");
 
-	load_textures(&game_data);
 
 	draw_screen(&game_data);
 	
