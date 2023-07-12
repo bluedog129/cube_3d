@@ -1,9 +1,7 @@
 
-#include "cub3d.h"
+#include "../../headers/cub3d.h"
 
-extern int worldMap[14][33];
-
-static void	fill_floor_and_ceiling(t_img_data *screen)
+static void	fill_floor_and_ceiling(t_img_data *screen, int floor, int ceiling)
 {
 	int	x;
 	int	y;
@@ -15,9 +13,9 @@ static void	fill_floor_and_ceiling(t_img_data *screen)
 		while (x < WIDTH)
 		{
 			if (y < HEIGHT / 2)
-				pixel_put_to_image(screen, x, y, 0x06B0F9);
+				pixel_put_to_image(screen, x, y, floor);
 			else
-				pixel_put_to_image(screen, x, y, 0x9E5E1F);
+				pixel_put_to_image(screen, x, y, ceiling);
 			x++;
 		}
 		y++;
@@ -31,7 +29,8 @@ void	draw_screen(t_game_data *game_data)
 	screen.img_ptr = mlx_new_image(game_data->mlx_ptr, WIDTH, HEIGHT);
 	screen.img_addr = mlx_get_data_addr(screen.img_ptr, &screen.img_bpp, \
 	&screen.img_line_len, &screen.img_endian);
-	fill_floor_and_ceiling(&screen);
+	fill_floor_and_ceiling(&screen, game_data->map_info->side_info->floor_rgb, \
+	game_data->map_info->side_info->ceiling_rgb);
 	drawing_walls(game_data, &screen);
 
 	mlx_put_image_to_window(game_data->mlx_ptr, game_data->win_ptr, \

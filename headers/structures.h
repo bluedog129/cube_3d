@@ -107,7 +107,7 @@ typedef struct s_game_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	t_map		map_info;
+	t_map		*map_info;
 	t_img_data	wall_texture[4];
 	t_vec2d		move_input;
 	int			rot_input;

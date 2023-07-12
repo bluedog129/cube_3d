@@ -20,6 +20,9 @@
 # include "structures.h"
 # include "../libft/libft.h"
 
+# define WIDTH 640
+# define HEIGHT 480
+
 enum e_cub3d_enum
 {
 	SUCCESS = 1,
@@ -99,6 +102,19 @@ void		free_lst_node(t_map_node *head);
 
 // engine part
 
+int			engine_main(t_map *map_info);
 
+int			create_trgb(int t, int r, int g, int b);
+int			pixel_from_image(t_img_data *img, int x, int y);
+void		pixel_put_to_image(t_img_data *img, int x, int y, int color);
+
+int			my_key_pressed_hook(int keycode, t_game_data *game_data);
+int			my_key_released_hook(int keycode, t_game_data *game_data);
+int			my_loop_hook(t_game_data *game_data);
+
+void		move_event(t_game_data *game_data);
+
+void		draw_screen(t_game_data *game_data);
+void		drawing_walls(t_game_data *game_data, t_img_data *screen);
 
 #endif

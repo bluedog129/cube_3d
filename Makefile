@@ -30,9 +30,7 @@ PARSING_SRCS    = parsing.c args_validation.c getting_side_info.c initialize.c \
 PARSING         = $(addprefix $(PARSING_PATH), $(PARSING_SRCS))
 
 ENGINE_PATH		= srcs/engine/
-ENGINE_SRCS		= $(addprefix $(ENGINE_PATH), $(wildcard *.c))
-# ENGINE			= $(addprefix $(ENGINE_PATH), $(ENGINE_SRCS))
-ENGINE			= $(addprefix $(ENGINE_PATH), $(ENGINE_SRCS))
+ENGINE			= $(wildcard srcs/engine/*.c)
 
 SOURCES			= $(addprefix $(SRCS_PATH), $(MAIN))\
 				  $(addprefix $(SRCS_PATH), $(PARSING))\
