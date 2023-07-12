@@ -123,8 +123,9 @@ void	engine_main(t_map *map_info)
 	t_game_data	game_data;
 
 	ft_bzero(&game_data, sizeof(t_game_data));
+	game_data.mlx_ptr = mlx_init();
 	game_data.map_info = map_info;
-
+	
 	if (load_textures(&game_data) == ERROR)
 	{
 		printf("invalid resource path\n");
@@ -132,10 +133,9 @@ void	engine_main(t_map *map_info)
 	}
 
 	camera_setup(&game_data);
-	game_data.mlx_ptr = mlx_init();
+
 	game_data.win_ptr = mlx_new_window(game_data.mlx_ptr, WIDTH, HEIGHT, \
 	"raycast practice");
-
 
 	draw_screen(&game_data);
 	
