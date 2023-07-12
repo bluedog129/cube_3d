@@ -27,7 +27,7 @@ void	rotate_vector2(t_vec2d *vec2, float degree)
 	old_vec_x = (*vec2).x;
 	radian = degree * M_PI / 180;
 	(*vec2).x = (*vec2).x * cos(radian) - (*vec2).y * sin(radian);
-	(*vec2).y = old_vec_x * sin(radian) + cos(radian);
+	(*vec2).y = old_vec_x * sin(radian) + (*vec2).y * cos(radian);
 }
 
 void	camera_setup(t_game_data *game_data)
@@ -57,8 +57,8 @@ void	camera_setup(t_game_data *game_data)
 	int y;
 	int dir;
 
-	// game_data->camera.dir.y = -1.0;
-	// game_data->camera.plane.x = 0.66;
+	game_data->camera.dir.y = -1.0;
+	game_data->camera.plane.x = 0.66;
 
 	game_data->camera.move_speed = 0.04;
 	game_data->camera.rotate_speed = 0.03;
@@ -75,36 +75,8 @@ void	camera_setup(t_game_data *game_data)
 				game_data->camera.pos.x = x + 0.5;
 				game_data->camera.pos.y = y + 0.5;
 				dir = 90 * (ft_strchr(dir_str, game_data->map_info->map_board[y][x]) - dir_str);
-				// rotate_vector2(&game_data->camera.dir, dir);
-				// rotate_vector2(&game_data->camera.plane, dir);
-				if (dir == 0)
-				{
-					game_data->camera.dir.x = 0.0;
-					game_data->camera.dir.y = -1.0;
-					game_data->camera.plane.x = 0.66;
-					game_data->camera.plane.y = 0.0;
-				}
-				if (dir == 90)
-				{
-					game_data->camera.dir.x = 1.0;
-					game_data->camera.dir.y = 0.0;
-					game_data->camera.plane.x = 0.0;
-					game_data->camera.plane.y = 0.66;
-				}
-				if (dir == 180)
-				{
-					game_data->camera.dir.x = 0.0;
-					game_data->camera.dir.y = 1.0;
-					game_data->camera.plane.x = -0.66;
-					game_data->camera.plane.y = 0.0;
-				}
-				if (dir == 270)
-				{
-					game_data->camera.dir.x = 0.0;
-					game_data->camera.dir.y = -1.0;
-					game_data->camera.plane.x = 0.0;
-					game_data->camera.plane.y = -0.66;
-				}
+				rotate_vector2(&game_data->camera.dir, dir);
+				rotate_vector2(&game_data->camera.plane, dir);
 				game_data->map_info->map_board[y][x] = '0';
 				return ;
 			}

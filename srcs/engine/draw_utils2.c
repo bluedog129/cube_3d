@@ -52,7 +52,9 @@ void	draw_info_settup(t_camera cam, t_raycaster rc, t_draw_info *draw_info)
 
 void	dda_algorythm(char **map, t_raycaster *rc)
 {
-	while (map[(int)rc->map_check.y][(int)rc->map_check.x] == '1')
+	// (void)map;
+	// while (worldMap[(int)rc->map_check.y][(int)rc->map_check.x] == 0)
+	while (map[(int)rc->map_check.y][(int)rc->map_check.x] != '1')
 	{
 		if (rc->side_dist.x < rc->side_dist.y)
 		{
