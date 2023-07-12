@@ -52,4 +52,66 @@ typedef struct s_parse_info
 	char	*line;
 }	t_parse_info;
 
+// -------------------
+
+typedef struct s_vec2d
+{
+	float	x;
+	float	y;
+}	t_vec2d;
+
+typedef struct s_raycaster
+{
+	float	camera_x;
+	t_vec2d	dir;
+	t_vec2d	map_check;
+	t_vec2d	side_dist;
+	t_vec2d	delta_dist;
+	float	perp_wall_dist;
+	t_vec2d	step;
+	int		side;
+}	t_raycaster;
+
+typedef struct s_draw_info
+{
+	int		line_len;
+	int		draw_start;
+	int		draw_end;
+	float	wall_x;
+	int		texture_idx;
+	t_vec2d	texture_pos;
+	int		color;
+}	t_draw_info;
+
+typedef struct s_camera
+{
+	t_vec2d	pos;
+	t_vec2d	dir;
+	t_vec2d	plane;
+	float	move_speed;
+	float	rotate_speed;
+}	t_camera;
+
+typedef struct s_img_data
+{
+	void	*img_ptr;
+	char	*img_addr;
+	int		img_bpp;
+	int		img_line_len;
+	int		img_endian;
+	int		img_width;
+	int		img_height;
+}	t_img_data;
+
+typedef struct s_game_data
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_map		map_info;
+	t_img_data	wall_texture[4];
+	t_vec2d		move_input;
+	int			rot_input;
+	t_camera	camera;
+}	t_game_data;
+
 #endif

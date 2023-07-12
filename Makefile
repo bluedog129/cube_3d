@@ -29,8 +29,14 @@ PARSING_SRCS    = parsing.c args_validation.c getting_side_info.c initialize.c \
 					line_parse_utils.c making_map_array.c free_utils.c
 PARSING         = $(addprefix $(PARSING_PATH), $(PARSING_SRCS))
 
+ENGINE_PATH		= srcs/engine/
+ENGINE_SRCS		= $(addprefix $(ENGINE_PATH), $(wildcard *.c))
+# ENGINE			= $(addprefix $(ENGINE_PATH), $(ENGINE_SRCS))
+ENGINE			= $(addprefix $(ENGINE_PATH), $(ENGINE_SRCS))
+
 SOURCES			= $(addprefix $(SRCS_PATH), $(MAIN))\
-				  $(addprefix $(SRCS_PATH), $(PARSING))
+				  $(addprefix $(SRCS_PATH), $(PARSING))\
+				  $(addprefix $(SRCS_PATH), $(ENGINE))
 
 OBJECTS         = $(SOURCES:.c=.o)
 

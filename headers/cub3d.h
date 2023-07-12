@@ -97,4 +97,8 @@ void		ft_lstadd_back(t_map_node *lst, t_map_node *new);
 t_map_node	*ft_lstlast(t_map_node *lst);
 void		free_lst_node(t_map_node *head);
 
+// engine part
+
+
+
 #endif
