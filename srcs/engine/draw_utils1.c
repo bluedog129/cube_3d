@@ -38,20 +38,21 @@ void	draw_screen(t_game_data *game_data)
 	mlx_put_image_to_window(game_data->mlx_ptr, game_data->win_ptr, \
 	screen.img_ptr, 0, 0);
 
-	int mouse_x;
-	int mouse_y;
 	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 15, 0x000000, "mapX:");
 	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 70, 15, 0x000000, ft_itoa((int)game_data->camera.pos.x));
 	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 30, 0x000000, "mapY:");
 	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 70, 30, 0x000000, ft_itoa((int)game_data->camera.pos.y));
-	mlx_mouse_get_pos(game_data->mlx_ptr, game_data->win_ptr, &mouse_x, &mouse_y);
+
+	int mouse_x;
+	int mouse_y;
+	mlx_mouse_get_pos(game_data->win_ptr, &mouse_x, &mouse_y);
 	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 45, 0x000000, "mouseX:");
 	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 80, 45, 0x000000, ft_itoa(mouse_x));
 	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 60, 0x000000, "mouseY:");
 	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 80, 60, 0x000000, ft_itoa(mouse_y));
 
-	mlx_destroy_image(game_data->mlx_ptr, screen.img_ptr);
 	drawing_minimap(game_data);
+	mlx_destroy_image(game_data->mlx_ptr, screen.img_ptr);
 }
 
 int	create_trgb(int t, int r, int g, int b)

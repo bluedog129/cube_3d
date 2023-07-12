@@ -12,7 +12,11 @@ void	filling_background(t_img_data *screen)
 		x = 0;
 		while (x < 100)
 		{
-			pixel_put_to_image(screen, x, y, create_trgb(0, 0, 40, 0));
+			if (((x == 0 || x == 99) && (y >= 0 && y < 100)) || \
+			((x >= 0 && x < 100) && (y == 0 || y == 99)))
+				pixel_put_to_image(screen, x, y, create_trgb(0, 0, 255, 0));
+			else
+				pixel_put_to_image(screen, x, y, create_trgb(100, 0, 40, 0));
 			x++;
 		}
 		y++;

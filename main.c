@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	t_map			map_info;
 	t_parse_info	parse_info;
 
-	atexit(hyojocho);
+	// atexit(hyojocho);
 	validate_args(argc, argv[1]);
 
 	parse_cub_file(argv[1], &map_info, &parse_info);
