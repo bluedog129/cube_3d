@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/cub3d.h"
+#include "cub3d.h"
 
 static void	validate_cube_file(char *cub_file)
 {

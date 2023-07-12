@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/cub3d.h"
+#include "cub3d.h"
 
 void	hyojocho(void)
 {
@@ -27,8 +27,8 @@ int	main(int argc, char **argv)
 
 	parse_cub_file(argv[1], &map_info, &parse_info);
 	make_array_map(&map_info, &parse_info);
-	printf("hi\n");
-	engine_main(&map_info);
+	// printf("hi\n");
+	// engine_main(&map_info);
 	// int i = 0;
 	// while (i < map_info.height)
 	// {
