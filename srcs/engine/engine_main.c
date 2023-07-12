@@ -118,6 +118,15 @@ int	load_textures(t_game_data	*game_data)
 	return (SUCCESS);
 }
 
+int mouse_hook(int button, int x, int y, t_game_data *game_data)
+{
+	(void)button;
+	(void)x;
+	(void)y;
+	(void)game_data;
+	return (1);
+}
+
 void	engine_main(t_map *map_info)
 {
 	t_game_data	game_data;
@@ -140,9 +149,12 @@ void	engine_main(t_map *map_info)
 	draw_screen(&game_data);
 	
 	mlx_do_key_autorepeatoff(game_data.mlx_ptr);
+	mlx_mouse_hide(game_data.mlx_ptr, game_data.win_ptr);
 
 	mlx_hook(game_data.win_ptr, 2, 1L << 0, my_key_pressed_hook, &game_data);
 	mlx_hook(game_data.win_ptr, 3, 1L << 1, my_key_released_hook, &game_data);
+	// mlx_hook(game_data.win_ptr, 6, 1L << 6, my_mouse_motion_hook, &game_data);
+	mlx_mouse_hook(game_data.win_ptr, mouse_hook, &game_data);
 
 	mlx_loop_hook(game_data.mlx_ptr, my_loop_hook, &game_data);
 

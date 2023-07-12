@@ -116,6 +116,7 @@ void		pixel_put_to_image(t_img_data *img, int x, int y, int color);
 
 int			my_key_pressed_hook(int keycode, t_game_data *game_data);
 int			my_key_released_hook(int keycode, t_game_data *game_data);
+int			my_mouse_motion_hook(int x, int y, t_game_data *game_data);
 int			my_loop_hook(t_game_data *game_data);
 
 void		move_event(t_game_data *game_data);
