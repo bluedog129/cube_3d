@@ -17,8 +17,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <math.h>
+# include <stdio.h>//
+
+# include "libft.h"
 # include "structures.h"
-# include "../libft/libft.h"
+# include "mlx.h"
+# include "os_define.h"
 
 # define WIDTH 640
 # define HEIGHT 480
@@ -102,7 +107,7 @@ void		free_lst_node(t_map_node *head);
 
 // engine part
 
-int			engine_main(t_map *map_info);
+void		engine_main(t_map *map_info);
 
 int			create_trgb(int t, int r, int g, int b);
 int			pixel_from_image(t_img_data *img, int x, int y);

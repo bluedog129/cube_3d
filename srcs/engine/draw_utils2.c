@@ -1,5 +1,5 @@
 
-#include "../../headers/cub3d.h"
+#include "cub3d.h"
 
 extern int worldMap[14][33];
 

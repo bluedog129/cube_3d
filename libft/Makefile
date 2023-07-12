@@ -41,24 +41,24 @@ endif
 all : $(NAME)
 
 $(NAME) : $(OBJECTS)
-	ar rcs $@ $^
-	@echo -e "$(GREEN)$(EXEC) created!$(DEFAULT)"
+	@ar rcs $@ $^
+	@echo "$(GREEN)LIBFT created!$(DEFAULT)"
 
 .c.o :
-	cc $(CFLAGS) -c $< -o $(<:.c=.o)
+	@cc $(CFLAGS) -c $< -o $(<:.c=.o)
 bonus :
 	make WITH_BONUS=1 all
 	
 clean :
-	rm -rf $(OBJECT) $(B_OBJECT) $(P_OBJECT)
+	@rm -rf $(OBJECT) $(B_OBJECT) $(P_OBJECT)
 
 fclean : clean
-	rm -rf $(NAME)
-	@echo -e "$(BLUE)delete all!$(DEFAULT)"
+	@rm -rf $(NAME)
+	@echo "$(BLUE)LIBFT delete all!$(DEFAULT)"
 
 re :
-	make fclean
-	make all
+	@make fclean
+	@make all
 
 .PHONY : all clean fclean re
 
