@@ -51,6 +51,7 @@ void	draw_screen(t_game_data *game_data)
 	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 80, 60, 0x000000, ft_itoa(mouse_y));
 
 	mlx_destroy_image(game_data->mlx_ptr, screen.img_ptr);
+	drawing_minimap(game_data);
 }
 
 int	create_trgb(int t, int r, int g, int b)

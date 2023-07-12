@@ -123,5 +123,6 @@ void		move_event(t_game_data *game_data);
 
 void		draw_screen(t_game_data *game_data);
 void		drawing_walls(t_game_data *game_data, t_img_data *screen);
+void		drawing_minimap(t_game_data *game_data);
 
 #endif
