@@ -50,9 +50,9 @@ void	draw_info_settup(t_camera cam, t_raycaster rc, t_draw_info *draw_info)
 	draw_info->line_len / 2) * (64.0 / draw_info->line_len);
 }
 
-void	dda_algorythm(t_raycaster *rc)
+void	dda_algorythm(char **map, t_raycaster *rc)
 {
-	while (worldMap[(int)rc->map_check.y][(int)rc->map_check.x] == 0)
+	while (map[(int)rc->map_check.y][(int)rc->map_check.x] == '1')
 	{
 		if (rc->side_dist.x < rc->side_dist.y)
 		{
@@ -105,7 +105,7 @@ void	drawing_walls(t_game_data *game_data, t_img_data *screen)
 	while (screen_x < WIDTH)
 	{
 		raycaster_setup(&raycaster, game_data->camera, screen_x);
-		dda_algorythm(&raycaster);
+		dda_algorythm(game_data->map_info->map_board, &raycaster);
 		draw_info_settup(game_data->camera, raycaster, &draw_info);
 		draw_info.texture_idx = raycaster.side;
 		if ((raycaster.side == 0 && raycaster.dir.x < 0) || \

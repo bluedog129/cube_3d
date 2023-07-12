@@ -12,6 +12,11 @@
 
 #include "cub3d.h"
 
+int is_blank(char c)
+{
+	return ((c >= 9 && c <= 13) || c == 32);
+}
+
 int	open_file(char *cub_file)
 {
 	int	fd;

@@ -94,6 +94,7 @@ void		make_array_map(t_map *map_info, t_parse_info *parse_info);
 void		print_error(char *str);
 int			check_line_empty(char *line);
 int			open_file(char *cub_file);
+int			is_blank(char c);
 
 // free_utils
 void		free_2d_arr(char **arr);
