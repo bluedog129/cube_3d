@@ -22,10 +22,10 @@ static void	rotate_horizontal(t_game_data *game_data)
 	game_data->camera.plane.y = old_plane_x * sin(rotate_speed * \
 	game_data->rot_input) + game_data->camera.plane.y * cos(rotate_speed * \
 	game_data->rot_input);
-	if (fabsf(game_data->rot_input) > 0.05)
-		game_data->rot_input /= 2;
-	else
-		game_data->rot_input = 0;
+	// if (fabsf(game_data->rot_input) > 0.05)
+	// 	game_data->rot_input /= 2;
+	// else
+	// 	game_data->rot_input = 0;
 }
 
 static void	move_horizontal(t_game_data *game_data)
