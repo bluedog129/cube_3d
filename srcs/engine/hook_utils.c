@@ -5,13 +5,11 @@ extern int worldMap[14][33];
 
 int	my_mouse_motion_hook(int x, int y, t_game_data *game_data)
 {
-	if (x != WIDTH / 2 && y != HEIGHT / 2)
+	if (x != WIDTH / 2 || y != HEIGHT / 2)
 	{
-		game_data->rot_input = (x > (WIDTH / 2)) - (x < (WIDTH / 2));
-		mlx_mouse_move(game_data->win_ptr, WIDTH / 2, HEIGHT / 2);
+		game_data->rot_input = (x - (WIDTH / 2)) * 0.3;
+		// mlx_mouse_move(game_data->win_ptr, WIDTH / 2, HEIGHT / 2);
 	}
-	else
-		game_data->rot_input = 0;
 	return (1);
 }
 
@@ -49,5 +47,6 @@ int	my_loop_hook(t_game_data *game_data)
 		move_event(game_data);
 	}
 	draw_screen(game_data);
+	mlx_mouse_move(game_data->win_ptr, WIDTH / 2, HEIGHT / 2);
 	return (0);
 }

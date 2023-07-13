@@ -110,7 +110,7 @@ typedef struct s_game_data
 	t_map		*map_info;
 	t_img_data	wall_texture[4];
 	t_vec2d		move_input;
-	int			rot_input;
+	float		rot_input;
 	t_camera	camera;
 }	t_game_data;
 

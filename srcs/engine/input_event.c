@@ -24,6 +24,10 @@ static void	rotate_horizontal(t_game_data *game_data)
 	game_data->camera.plane.y = old_plane_x * sin(rotate_speed * \
 	game_data->rot_input) + game_data->camera.plane.y * cos(rotate_speed * \
 	game_data->rot_input);
+	if (fabsf(game_data->rot_input) > 0.05)
+		game_data->rot_input /= 2;
+	else
+		game_data->rot_input = 0;
 }
 
 static void	move_horizontal(t_game_data *game_data)
@@ -42,8 +46,8 @@ static void	move_horizontal(t_game_data *game_data)
 	+ rot_dir.x * move_speed * game_data->move_input.x)] != '1')
 		game_data->camera.pos.x += rot_dir.x * move_speed * \
 		game_data->move_input.x;
-	if (map[(int)(game_data->camera.pos.y + rot_dir.y * \
-	move_speed * game_data->move_input.x)][(int)(game_data->camera.pos.x)] != '1')
+	if (map[(int)(game_data->camera.pos.y + rot_dir.y * move_speed * \
+	game_data->move_input.x)][(int)(game_data->camera.pos.x)] != '1')
 		game_data->camera.pos.y += rot_dir.y * move_speed * \
 		game_data->move_input.x;
 }
@@ -60,7 +64,8 @@ static void	move_vertical(t_game_data *game_data)
 		game_data->camera.pos.x -= game_data->camera.dir.x * move_speed * \
 		game_data->move_input.y;
 	if (map[(int)(game_data->camera.pos.y - game_data->camera.dir.y * \
-	move_speed * game_data->move_input.y)][(int)(game_data->camera.pos.x)] != '1')
+	move_speed * game_data->move_input.y)][(int)(game_data->camera.pos.x)] != \
+	'1')
 		game_data->camera.pos.y -= game_data->camera.dir.y * move_speed * \
 		game_data->move_input.y;
 }
