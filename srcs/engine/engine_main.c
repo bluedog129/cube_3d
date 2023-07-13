@@ -1,28 +1,10 @@
 
 #include "cub3d.h"
 
-int worldMap[14][33] =
-{
-  {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-  {1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0},
-  {1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0},
-  {1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0},
-  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0},
-  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0},
-  {1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0},
-  {1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0},
-  {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0}
-};
-
 void	rotate_vector2(t_vec2d *vec2, float degree)
 {
-	float old_vec_x;
-	float radian;
+	float	old_vec_x;
+	float	radian;
 
 	old_vec_x = (*vec2).x;
 	radian = degree * M_PI / 180;
@@ -32,37 +14,15 @@ void	rotate_vector2(t_vec2d *vec2, float degree)
 
 void	camera_setup(t_game_data *game_data)
 {
-	// t_vec2d	pos;
-	// t_vec2d	dir;
-	// t_vec2d	plane;
-
-	// pos.x = 1.5;
-	// pos.y = 5.5;
-
-	// dir.x = 0.0;
-	// dir.y = -1.0;
-
-	// plane.x = 0.66;
-	// plane.y = 0;
-
-	// game_data->camera.pos.x = pos.x;
-	// game_data->camera.pos.y = pos.y;
-	// game_data->camera.dir.x = dir.x;
-	// game_data->camera.dir.y = dir.y;
-	// game_data->camera.plane.x = plane.x;
-	// game_data->camera.plane.y = plane.y;
-
-	char *dir_str;
-	int x;
-	int y;
-	int dir;
+	char	*dir_str;
+	int		x;
+	int		y;
+	int		dir;
 
 	game_data->camera.dir.y = -1.0;
 	game_data->camera.plane.x = 0.66;
-
 	game_data->camera.move_speed = 0.04;
 	game_data->camera.rotate_speed = 0.03;
-
 	y = 0;
 	dir_str = "NESW";
 	while (y < game_data->map_info->height)
@@ -74,7 +34,8 @@ void	camera_setup(t_game_data *game_data)
 			{
 				game_data->camera.pos.x = x + 0.5;
 				game_data->camera.pos.y = y + 0.5;
-				dir = 90 * (ft_strchr(dir_str, game_data->map_info->map_board[y][x]) - dir_str);
+				dir = 90 * (ft_strchr(dir_str, game_data->\
+				map_info->map_board[y][x]) - dir_str);
 				rotate_vector2(&game_data->camera.dir, dir);
 				rotate_vector2(&game_data->camera.plane, dir);
 				game_data->map_info->map_board[y][x] = '0';
@@ -84,10 +45,6 @@ void	camera_setup(t_game_data *game_data)
 		}
 		y++;
 	}
-
-	// 배열 순회하며 player position 구하기, 카메라위치는 + 0.5로 설정하기
-	// 방향에 따라 dir과 plane 설정하기
-	// 원본 맵배열에서 캐릭터 있던곳 문자를 0으로 바꿔주기
 }
 
 int	load_textures(t_game_data	*game_data)

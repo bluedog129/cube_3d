@@ -1,8 +1,6 @@
 
 #include "cub3d.h"
 
-extern int worldMap[14][33];
-
 static void	rotate_horizontal(t_game_data *game_data)
 {
 	float	rotate_speed;

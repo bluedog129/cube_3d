@@ -1,15 +1,10 @@
 
 #include "cub3d.h"
 
-extern int worldMap[14][33];
-
 int	my_mouse_motion_hook(int x, int y, t_game_data *game_data)
 {
 	if (x != WIDTH / 2 || y != HEIGHT / 2)
-	{
 		game_data->rot_input = (x - (WIDTH / 2)) * 0.3;
-		// mlx_mouse_move(game_data->win_ptr, WIDTH / 2, HEIGHT / 2);
-	}
 	return (1);
 }
 

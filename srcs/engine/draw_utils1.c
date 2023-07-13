@@ -1,8 +1,6 @@
 
 #include "cub3d.h"
 
-extern int worldMap[14][33];
-
 static void	fill_floor_and_ceiling(t_img_data *screen, int floor, int ceiling)
 {
 	int	x;

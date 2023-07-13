@@ -1,8 +1,6 @@
 
 #include "cub3d.h"
 
-extern int worldMap[14][33];
-
 void	draw_vertical_line(t_game_data *game_data, t_img_data *img, \
 int x, t_draw_info *draw_info)
 {
@@ -52,8 +50,6 @@ void	draw_info_settup(t_camera cam, t_raycaster rc, t_draw_info *draw_info)
 
 void	dda_algorythm(char **map, t_raycaster *rc)
 {
-	// (void)map;
-	// while (worldMap[(int)rc->map_check.y][(int)rc->map_check.x] == 0)
 	while (map[(int)rc->map_check.y][(int)rc->map_check.x] != '1')
 	{
 		if (rc->side_dist.x < rc->side_dist.y)
