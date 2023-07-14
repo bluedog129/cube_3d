@@ -94,8 +94,7 @@ void	engine_main(t_map *map_info)
 	game_data.win_ptr = mlx_new_window(game_data.mlx_ptr, WIDTH, HEIGHT, \
 	"raycast practice");
 
-	mlx_mouse_move(game_data.win_ptr, WIDTH / 2, HEIGHT / 2);
-	// mlx_mouse_move(game_data.mlx_ptr, game_data.win_ptr, WIDTH / 2, HEIGHT / 2);
+	os_mouse_move(game_data.mlx_ptr, game_data.win_ptr, WIDTH / 2, HEIGHT / 2);
 	draw_screen(&game_data);
 
 	mlx_do_key_autorepeatoff(game_data.mlx_ptr);

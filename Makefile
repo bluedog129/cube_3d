@@ -53,6 +53,7 @@ else ifeq ($(UNAME), Linux)
 endif
 
 INC += -I$(MLX_DIR) -I./headers/os_$(UNAME)
+ENGINE			+= ./headers/os_$(UNAME)/os_$(UNAME)_mouse_func.c
 
 #----------
 
