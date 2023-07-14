@@ -3,8 +3,11 @@
 
 int	my_mouse_motion_hook(int x, int y, t_game_data *game_data)
 {
-	if (x != WIDTH / 2 || y != HEIGHT / 2)
-		game_data->rot_input = (x - (WIDTH / 2)) * 0.3;
+	(void)x;
+	(void)y;
+	(void)game_data;
+	// if (x != WIDTH / 2 || y != HEIGHT / 2)
+	// 	game_data->rot_input = (x - (WIDTH / 2)) * 0.3;
 	return (1);
 }
 
@@ -42,6 +45,7 @@ int	my_loop_hook(t_game_data *game_data)
 		move_event(game_data);
 	}
 	draw_screen(game_data);
-	mlx_mouse_move(game_data->win_ptr, WIDTH / 2, HEIGHT / 2);
+	mlx_mouse_move(game_data->mlx_ptr, game_data->win_ptr, WIDTH / 2, HEIGHT / 2);
+	// mlx_mouse_move(game_data->win_ptr, WIDTH / 2, HEIGHT / 2);
 	return (0);
 }

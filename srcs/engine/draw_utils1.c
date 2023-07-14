@@ -43,7 +43,8 @@ void	draw_screen(t_game_data *game_data)
 
 	int mouse_x;
 	int mouse_y;
-	mlx_mouse_get_pos(game_data->win_ptr, &mouse_x, &mouse_y);
+	mlx_mouse_get_pos(game_data->mlx_ptr, game_data->win_ptr, &mouse_x, &mouse_y);
+	// mlx_mouse_get_pos(game_data->win_ptr, &mouse_x, &mouse_y);
 	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 45, 0x000000, "mouseX:");
 	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 80, 45, 0x000000, ft_itoa(mouse_x));
 	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 60, 0x000000, "mouseY:");
