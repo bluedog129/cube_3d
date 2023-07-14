@@ -6,62 +6,31 @@ void	darwing_wall(t_game_data *game_data, t_img_data *screen)
 	// 맵 배열을 벗어나면 안됨
 	// 미니맵 사이즈를 벗어나면 안됨
 	// 기준점은 플레이어의 좌표 및 미니맵 화면 중앙
-	int	y;
-	int	x;
+	// int	y;
+	// int	x;
 
-	// y = 0;
-	// while (y < 100)
-	// {
-	// 	x = 0;
-	// 	while (x < 100)
-	// 	{
-	// 		if (game_data->camera.pos.x - (x / 15) >= 0 && game_data->camera.pos.x + (x / 15) <= game_data->map_info->width)
-	// 		{
-	// 			if (game_data->camera.pos.y - (y / 15) >= 0 && game_data->camera.pos.y + (y / 15) <= game_data->map_info->height)
-	// 			{
-	// 				if (game_data->map_info->map_board[y / 15][x / 15] == '1')
-	// 				{
-	// 					pixel_put_to_image(screen, x, y, create_trgb(0, 0, 255, 0));
-	// 				}
-	// 			}
-	// 		}
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
-
-	y = -2;
-	while (y <= 2)
+	for (int y = 0; y < 100; y++)
 	{
-		if (game_data->camera.pos.y + y < 0 || game_data->camera.pos.y + y >= game_data->map_info->height)
+		for (int x = 0; x < 100; x++)
 		{
-			y++;
-			continue;
-		}
-		x = -2;
-		while (x <= 2)
-		{
-			if (game_data->camera.pos.x + x < 0 || game_data->camera.pos.x + x >= game_data->map_info->width)
-			{
-				x++;
+			int check_x = x / 20;
+			int check_y = y / 20;
+
+			check_x -= 2;
+			check_y -= 2;
+
+			if (game_data->camera.pos.x + check_x < 0 || game_data->camera.pos.x + check_x >= game_data->map_info->width ||
+			game_data->camera.pos.y + check_y < 0 || game_data->camera.pos.y + check_y >= game_data->map_info->height)
 				continue;
-			}
-			// printf("game_data->camera.pos.y + y: %d\n", (int)(game_data->camera.pos.y + y));
-			// printf("game_data->camera.pos.x + x: %d\n", (int)(game_data->camera.pos.x + x));
-			// printf("game_data->map_info->map_board[(int)(game_data->camera.pos.y + y)][(int)(game_data->camera.pos.x + x)]: %c\n", game_data->map_info->map_board[(int)(game_data->camera.pos.y + y)][(int)(game_data->camera.pos.x + x)]);
-			// printf("y: %d\n", y);
-			// printf("x: %d\n", x);
-			if (game_data->map_info->map_board[(int)(game_data->camera.pos.y + y)][(int)(game_data->camera.pos.x + x)] == '1')
-			{
+			
+			if (check_x == 0 && check_y == 0)
+				pixel_put_to_image(screen, x, y, create_trgb(0, 255, 0, 0));
+			else if (game_data->map_info->map_board[(int)(game_data->camera.pos.y + check_y)][(int)(game_data->camera.pos.x + check_x)] == '1')
 				pixel_put_to_image(screen, x, y, create_trgb(0, 0, 255, 0));
-				// printf("hi\n");
-			}
-			x++;
 		}
-		y++;
 	}
 
-	pixel_put_to_image(screen, 50, 50, create_trgb(0, 255, 0, 0));
+	// pixel_put_to_image(screen, 50, 50, create_trgb(0, 255, 0, 0));
 }
 
 void	filling_background(t_img_data *screen)
