@@ -46,11 +46,12 @@ void	draw_info_settup(t_camera cam, t_raycaster rc, t_draw_info *draw_info)
 	draw_info->texture_pos.x = 64.0 * draw_info->wall_x;
 	draw_info->texture_pos.y = (draw_info->draw_start - HEIGHT / 2 + \
 	draw_info->line_len / 2) * (64.0 / draw_info->line_len);
+	draw_info->obj_type = rc.obj_type;
 }
 
 void	dda_algorythm(char **map, t_raycaster *rc)
 {
-	while (map[(int)rc->map_check.y][(int)rc->map_check.x] != '1')
+	while (map[(int)rc->map_check.y][(int)rc->map_check.x] == '0')
 	{
 		if (rc->side_dist.x < rc->side_dist.y)
 		{
@@ -65,10 +66,34 @@ void	dda_algorythm(char **map, t_raycaster *rc)
 			rc->side = 1;
 		}
 	}
-	if (rc->side == 0)
-		rc->perp_wall_dist = rc->side_dist.x - rc->delta_dist.x;
+
+	if (map[(int)rc->map_check.y][(int)rc->map_check.x] == '1')
+		rc->obj_type = WALL;
+	else if (map[(int)rc->map_check.y][(int)rc->map_check.x] == 'd')
+		rc->obj_type = V_DOOR;
 	else
+		rc->obj_type = H_DOOR;
+
+	if (rc->side == 0)
+	{
+		rc->perp_wall_dist = rc->side_dist.x - rc->delta_dist.x;
+		if (rc->obj_type != WALL)
+		{
+			rc->perp_wall_dist += rc->delta_dist.x / 2;
+			// rc->perp_wall_dist -= rc->delta_dist.x / 2;
+			// rc->perp_wall_dist = 0;
+		}
+	}
+	else
+	{
 		rc->perp_wall_dist = rc->side_dist.y - rc->delta_dist.y;
+		if (rc->obj_type != WALL)
+		{
+			rc->perp_wall_dist += rc->delta_dist.y / 2;
+			// rc->perp_wall_dist -= rc->delta_dist.y / 2;
+			// rc->perp_wall_dist = 0;
+		}
+	}
 }
 
 void	raycaster_setup(t_raycaster *rc, t_camera cam, int screen_x)

@@ -55,6 +55,13 @@ enum e_check_type_enum
 	RGB = 12
 };
 
+enum e_obj_types
+{
+	WALL = 1,
+	V_DOOR = 2,
+	H_DOOR = 3
+};
+
 // parsing
 void		parse_cub_file(char *cub_file, t_map *map_info, \
 										t_parse_info *parse_info);

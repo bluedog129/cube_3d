@@ -22,7 +22,7 @@ void	valid_map_characters(char *line, t_map *map_info, \
 	{
 		if (line[i] != '0' && line[i] != '1' && line[i] != 'E' && \
 			line[i] != 'W' && line[i] != 'S' && line[i] != 'N' && \
-			line[i] != ' ')
+			line[i] != ' ' && line[i] != 'D')
 			exit_error("Error: invalid map characters", map_info, parse_info);
 		else if (line[i] == 'N')
 			parse_info->start_position_count++;

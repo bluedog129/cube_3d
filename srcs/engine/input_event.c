@@ -41,11 +41,11 @@ static void	move_horizontal(t_game_data *game_data)
 	rot_dir.y = game_data->camera.dir.x * sin(90 * M_PI / 180) + \
 	game_data->camera.dir.y * cos(90 * M_PI / 180);
 	if (map[(int)game_data->camera.pos.y][(int)(game_data->camera.pos.x \
-	+ rot_dir.x * move_speed * game_data->move_input.x)] != '1')
+	+ rot_dir.x * move_speed * game_data->move_input.x)] == '0')
 		game_data->camera.pos.x += rot_dir.x * move_speed * \
 		game_data->move_input.x;
 	if (map[(int)(game_data->camera.pos.y + rot_dir.y * move_speed * \
-	game_data->move_input.x)][(int)(game_data->camera.pos.x)] != '1')
+	game_data->move_input.x)][(int)(game_data->camera.pos.x)] == '0')
 		game_data->camera.pos.y += rot_dir.y * move_speed * \
 		game_data->move_input.x;
 }
@@ -58,12 +58,12 @@ static void	move_vertical(t_game_data *game_data)
 	map = game_data->map_info->map_board;
 	move_speed = game_data->camera.move_speed;
 	if (map[(int)game_data->camera.pos.y][(int)(game_data->camera.pos.x - \
-	game_data->camera.dir.x * move_speed * game_data->move_input.y)] != '1')
+	game_data->camera.dir.x * move_speed * game_data->move_input.y)] == '0')
 		game_data->camera.pos.x -= game_data->camera.dir.x * move_speed * \
 		game_data->move_input.y;
 	if (map[(int)(game_data->camera.pos.y - game_data->camera.dir.y * \
-	move_speed * game_data->move_input.y)][(int)(game_data->camera.pos.x)] != \
-	'1')
+	move_speed * game_data->move_input.y)][(int)(game_data->camera.pos.x)] == \
+	'0')
 		game_data->camera.pos.y -= game_data->camera.dir.y * move_speed * \
 		game_data->move_input.y;
 }
