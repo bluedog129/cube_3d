@@ -119,6 +119,8 @@ int			my_key_released_hook(int keycode, t_game_data *game_data);
 int			my_mouse_motion_hook(int x, int y, t_game_data *game_data);
 int			my_loop_hook(t_game_data *game_data);
 
+void		rotate_vector2(t_vec2d *vec2, float degree);
+
 void		move_event(t_game_data *game_data);
 
 void		draw_screen(t_game_data *game_data);

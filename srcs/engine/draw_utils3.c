@@ -13,11 +13,15 @@ void	darwing_wall(t_game_data *game_data, t_img_data *screen)
 	{
 		for (int x = 0; x < 100; x++)
 		{
-			int check_x = x / 20;
-			int check_y = y / 20;
+			int map_div = 7;
+			int factor = 100 / map_div;
+			int check_x = x / factor;
+			int check_y = y / factor;
 
-			check_x -= 2;
-			check_y -= 2;
+			t_vec2d draw_vec;
+
+			check_x -= map_div / 2;
+			check_y -= map_div / 2;
 
 			if (game_data->camera.pos.x + check_x < 0 || game_data->camera.pos.x + check_x >= game_data->map_info->width ||
 			game_data->camera.pos.y + check_y < 0 || game_data->camera.pos.y + check_y >= game_data->map_info->height)
@@ -26,7 +30,16 @@ void	darwing_wall(t_game_data *game_data, t_img_data *screen)
 			if (check_x == 0 && check_y == 0)
 				pixel_put_to_image(screen, x, y, create_trgb(0, 255, 0, 0));
 			else if (game_data->map_info->map_board[(int)(game_data->camera.pos.y + check_y)][(int)(game_data->camera.pos.x + check_x)] == '1')
-				pixel_put_to_image(screen, x, y, create_trgb(0, 0, 255, 0));
+			{
+				draw_vec.x = x - 50;
+				draw_vec.y = y - 50;
+				rotate_vector2(&draw_vec, atan2f(game_data->camera.dir.y, game_data->camera.dir.x) * 180 / M_PI * -1 - 90);
+				draw_vec.x += 50;
+				draw_vec.y += 50;
+				if (draw_vec.x < 0 || draw_vec.x >= 100 || draw_vec.y < 0 || draw_vec.y >= 100)
+					continue;
+				pixel_put_to_image(screen, draw_vec.x, draw_vec.y, create_trgb(0, 0, 255, 0));
+			}
 		}
 	}
 
