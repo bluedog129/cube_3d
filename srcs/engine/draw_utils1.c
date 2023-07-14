@@ -32,6 +32,7 @@ void	draw_screen(t_game_data *game_data)
 	fill_floor_and_ceiling(&screen, game_data->map_info->side_info->floor_rgb, \
 	game_data->map_info->side_info->ceiling_rgb);
 	drawing_walls(game_data, &screen);
+	drawing_doors(game_data, &screen);
 
 	mlx_put_image_to_window(game_data->mlx_ptr, game_data->win_ptr, \
 	screen.img_ptr, 0, 0);

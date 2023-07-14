@@ -9,7 +9,7 @@ int x, t_draw_info *draw_info)
 	int			color;
 
 	target_texture = &game_data->wall_texture[draw_info->texture_idx];
-	y = draw_info->draw_start;
+	y = draw_info->draw_start; // 이 부분을 밖으로 빼면 모듈화가 될것같기도...?
 	while (y <= draw_info->draw_end)
 	{
 		color = pixel_from_image(target_texture, draw_info->texture_pos.x, \
@@ -51,7 +51,7 @@ void	draw_info_settup(t_camera cam, t_raycaster rc, t_draw_info *draw_info)
 
 void	dda_algorythm(char **map, t_raycaster *rc)
 {
-	while (map[(int)rc->map_check.y][(int)rc->map_check.x] == '0')
+	while (map[(int)rc->map_check.y][(int)rc->map_check.x] != '1')
 	{
 		if (rc->side_dist.x < rc->side_dist.y)
 		{
@@ -67,33 +67,10 @@ void	dda_algorythm(char **map, t_raycaster *rc)
 		}
 	}
 
-	if (map[(int)rc->map_check.y][(int)rc->map_check.x] == '1')
-		rc->obj_type = WALL;
-	else if (map[(int)rc->map_check.y][(int)rc->map_check.x] == 'd')
-		rc->obj_type = V_DOOR;
-	else
-		rc->obj_type = H_DOOR;
-
 	if (rc->side == 0)
-	{
 		rc->perp_wall_dist = rc->side_dist.x - rc->delta_dist.x;
-		if (rc->obj_type != WALL)
-		{
-			rc->perp_wall_dist += rc->delta_dist.x / 2;
-			// rc->perp_wall_dist -= rc->delta_dist.x / 2;
-			// rc->perp_wall_dist = 0;
-		}
-	}
 	else
-	{
 		rc->perp_wall_dist = rc->side_dist.y - rc->delta_dist.y;
-		if (rc->obj_type != WALL)
-		{
-			rc->perp_wall_dist += rc->delta_dist.y / 2;
-			// rc->perp_wall_dist -= rc->delta_dist.y / 2;
-			// rc->perp_wall_dist = 0;
-		}
-	}
 }
 
 void	raycaster_setup(t_raycaster *rc, t_camera cam, int screen_x)
