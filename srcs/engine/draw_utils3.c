@@ -9,22 +9,35 @@ void	darwing_wall(t_game_data *game_data, t_img_data *screen)
 	int	y;
 	int	x;
 
+	// y = 0;
+	// while (y < 100)
+	// {
+	// 	x = 0;
+	// 	while (x < 100)
+	// 	{
+	// 		if (game_data->camera.pos.x - (x / 15) >= 0 && game_data->camera.pos.x + (x / 15) <= game_data->map_info->width)
+	// 		{
+	// 			if (game_data->camera.pos.y - (y / 15) >= 0 && game_data->camera.pos.y + (y / 15) <= game_data->map_info->height)
+	// 			{
+	// 				if (game_data->map_info->map_board[y / 15][x / 15] == '1')
+	// 				{
+	// 					pixel_put_to_image(screen, x, y, create_trgb(0, 0, 255, 0));
+	// 				}
+	// 			}
+	// 		}
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
 	y = 0;
 	while (y < 100)
 	{
 		x = 0;
 		while (x < 100)
 		{
-			if (game_data->camera.pos.x - (x / 15) >= 0 && game_data->camera.pos.x + (x / 15) <= game_data->map_info->width)
-			{
-				if (game_data->camera.pos.y - (y / 15) >= 0 && game_data->camera.pos.y + (y / 15) <= game_data->map_info->height)
-				{
-					if (game_data->map_info->map_board[y / 15][x / 15] == '1')
-					{
-						pixel_put_to_image(screen, x, y, create_trgb(0, 0, 255, 0));
-					}
-				}
-			}
+			// if (game_data->map_info->map_board[(int)((y + game_data->camera.pos.y) / 15)][(int)((x + game_data->camera.pos.x) / 15)] == '1')
+			if (game_data->map_info->map_board[y / game_data->map_info->height][x / game_data->map_info->width] == '1')
+				pixel_put_to_image(screen, x, y, create_trgb(0, 0, 255, 0));
 			x++;
 		}
 		y++;
