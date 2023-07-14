@@ -9,21 +9,52 @@ void	darwing_wall(t_game_data *game_data, t_img_data *screen)
 	int	y;
 	int	x;
 
-	y = 0;
-	while (y < 100)
+	// y = 0;
+	// while (y < 100)
+	// {
+	// 	x = 0;
+	// 	while (x < 100)
+	// 	{
+	// 		if (game_data->camera.pos.x - (x / 15) >= 0 && game_data->camera.pos.x + (x / 15) <= game_data->map_info->width)
+	// 		{
+	// 			if (game_data->camera.pos.y - (y / 15) >= 0 && game_data->camera.pos.y + (y / 15) <= game_data->map_info->height)
+	// 			{
+	// 				if (game_data->map_info->map_board[y / 15][x / 15] == '1')
+	// 				{
+	// 					pixel_put_to_image(screen, x, y, create_trgb(0, 0, 255, 0));
+	// 				}
+	// 			}
+	// 		}
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
+
+	y = -2;
+	while (y <= 2)
 	{
-		x = 0;
-		while (x < 100)
+		if (game_data->camera.pos.y + y < 0 || game_data->camera.pos.y + y >= game_data->map_info->height)
 		{
-			if (game_data->camera.pos.x - (x / 15) >= 0 && game_data->camera.pos.x + (x / 15) <= game_data->map_info->width)
+			y++;
+			continue;
+		}
+		x = -2;
+		while (x <= 2)
+		{
+			if (game_data->camera.pos.x + x < 0 || game_data->camera.pos.x + x >= game_data->map_info->width)
 			{
-				if (game_data->camera.pos.y - (y / 15) >= 0 && game_data->camera.pos.y + (y / 15) <= game_data->map_info->height)
-				{
-					if (game_data->map_info->map_board[y / 15][x / 15] == '1')
-					{
-						pixel_put_to_image(screen, x, y, create_trgb(0, 0, 255, 0));
-					}
-				}
+				x++;
+				continue;
+			}
+			// printf("game_data->camera.pos.y + y: %d\n", (int)(game_data->camera.pos.y + y));
+			// printf("game_data->camera.pos.x + x: %d\n", (int)(game_data->camera.pos.x + x));
+			// printf("game_data->map_info->map_board[(int)(game_data->camera.pos.y + y)][(int)(game_data->camera.pos.x + x)]: %c\n", game_data->map_info->map_board[(int)(game_data->camera.pos.y + y)][(int)(game_data->camera.pos.x + x)]);
+			// printf("y: %d\n", y);
+			// printf("x: %d\n", x);
+			if (game_data->map_info->map_board[(int)(game_data->camera.pos.y + y)][(int)(game_data->camera.pos.x + x)] == '1')
+			{
+				pixel_put_to_image(screen, x, y, create_trgb(0, 0, 255, 0));
+				// printf("hi\n");
 			}
 			x++;
 		}
