@@ -53,9 +53,9 @@ void	dda_algorythm2(char **map, t_raycaster *rc)
 	int	check_mod;
 
 	check_mod = 0; // 0: wall 1: door
-	while (map[(int)rc->map_check.y][(int)rc->map_check.x] != 'D')
+	while (map[(int)rc->map_check.y][(int)rc->map_check.x] != 'D' || map[(int)rc->map_check.y][(int)rc->map_check.x] != '1')
 	{
-		printf("---\ny: %d\nx: %d\n", (int)rc->map_check.y, (int)rc->map_check.x);
+		printf("---\nmod: %d\ny: %f\nx: %f\n", check_mod, rc->map_check.y, rc->map_check.x);
 		if (check_mod == 0)
 		{
 			if (map[(int)rc->map_check.y][(int)rc->map_check.x] == '1')
@@ -108,9 +108,13 @@ void	raycaster_setup2(t_raycaster *rc, t_camera cam, int screen_x)
 	else
 		rc->side_dist.x = (rc->map_check.x + 1 - cam.pos.x + .5) * rc->delta_dist.x;
 	if (rc->dir.y < 0)
-		rc->side_dist.y = (cam.pos.y - rc->map_check.y + .5) * rc->delta_dist.y;
+	{
+		rc->side_dist.y = (cam.pos.y - rc->map_check.y) * rc->delta_dist.y * 2;
+	}
 	else
-		rc->side_dist.y = (rc->map_check.y + 1 - cam.pos.y + .5) * rc->delta_dist.y;
+	{
+		rc->side_dist.y = (rc->map_check.y + 1 - cam.pos.y) * rc->delta_dist.y * 2;
+	}
 
 	// rc->camera_x = 2 * screen_x / (float)WIDTH - 1;
 	// rc->dir.x = cam.dir.x + cam.plane.y * rc->camera_x;
