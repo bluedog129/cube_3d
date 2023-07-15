@@ -50,20 +50,31 @@ void	draw_info_settup2(float eye_level, t_camera cam, t_raycaster rc, t_draw_inf
 
 void	dda_algorythm2(char **map, t_raycaster *rc)
 {
-	int	check_mod;
+	// int	check_mod;
 
-	check_mod = 0; // 0: wall 1: door
-	while (map[(int)rc->map_check.y][(int)rc->map_check.x] != 'D' || map[(int)rc->map_check.y][(int)rc->map_check.x] != '1')
+	// check_mod = 0; // 0: wall 1: door
+	while (1)
 	{
-		printf("---\nmod: %d\ny: %f\nx: %f\n", check_mod, rc->map_check.y, rc->map_check.x);
-		if (check_mod == 0)
-		{
-			if (map[(int)rc->map_check.y][(int)rc->map_check.x] == '1')
-			{
-				rc->side = 2;
-				return ;
-			}
-		}
+		// printf("---\nmod: %d\ny: %f\nx: %f\n", check_mod, rc->map_check.y, rc->map_check.x);
+		// if (!(rc->map_check.y - (int)rc->map_check.y) && map[(int)rc->map_check.y][(int)rc->map_check.x] == '1')
+		// {
+		// 	rc->side = 2;
+		// 	return ;
+		// }
+
+		// if (rc->side_dist.x < rc->side_dist.y)
+		// {
+		// 	rc->side_dist.x += rc->delta_dist.x;
+		// 	rc->map_check.x += rc->step.x;
+		// 	rc->side = 0;
+		// }
+		// else
+		// {
+		// 	rc->side_dist.y += rc->delta_dist.y;
+		// 	rc->map_check.y += rc->step.y;
+		// 	rc->side = 1;
+		// }
+		// check_mod = (check_mod == 0);
 
 		if (rc->side_dist.x < rc->side_dist.y)
 		{
@@ -77,16 +88,31 @@ void	dda_algorythm2(char **map, t_raycaster *rc)
 			rc->map_check.y += rc->step.y;
 			rc->side = 1;
 		}
-		check_mod = (check_mod == 0);
+
+		if (map[(int)rc->map_check.y][(int)rc->map_check.x] == '1')
+		{
+			if ((rc->side == 0 && rc->map_check.x - (int)rc->map_check.x == 0) || (rc->side == 1 && rc->map_check.y - (int)rc->map_check.y == 0))
+			{
+				rc->side = 2;
+				return ;
+			}
+		}
+		else if (map[(int)rc->map_check.y][(int)rc->map_check.x] == 'D')
+		{
+			if ((rc->side == 0 && rc->map_check.x - (int)rc->map_check.x != 0) || (rc->side == 1 && rc->map_check.y - (int)rc->map_check.y != 0))
+				break;
+		}
 	}
-	printf("hi\n");
 
 	if (rc->side == 0)
+	{
 		rc->perp_wall_dist = rc->side_dist.x - rc->delta_dist.x;
+		rc->perp_wall_dist += rc->delta_dist.x;
+	}
 	else
 	{
 		rc->perp_wall_dist = rc->side_dist.y - rc->delta_dist.y;
-		rc->perp_wall_dist -= rc->delta_dist.y / 2;
+		rc->perp_wall_dist += rc->delta_dist.y;
 	}
 
 }
@@ -101,12 +127,12 @@ void	raycaster_setup2(t_raycaster *rc, t_camera cam, int screen_x)
 	ft_bzero(&rc->step, sizeof(t_vec2d));
 	rc->delta_dist.x = fabsf(1 / rc->dir.x) / 2;
 	rc->delta_dist.y = fabsf(1 / rc->dir.y) / 2;
-	rc->step.x = -1 * (rc->dir.x < 0) + (rc->dir.x > 0);
-	rc->step.y = -1 * (rc->dir.y < 0) + (rc->dir.y > 0);
+	rc->step.x = -0.5 * (rc->dir.x < 0) + 0.5 * (rc->dir.x > 0);
+	rc->step.y = -0.5 * (rc->dir.y < 0) + 0.5 * (rc->dir.y > 0);
 	if (rc->dir.x < 0)
-		rc->side_dist.x = (cam.pos.x - rc->map_check.x + .5) * rc->delta_dist.x;
+		rc->side_dist.x = (cam.pos.x - rc->map_check.x) * rc->delta_dist.x * 2;
 	else
-		rc->side_dist.x = (rc->map_check.x + 1 - cam.pos.x + .5) * rc->delta_dist.x;
+		rc->side_dist.x = (rc->map_check.x + 1 - cam.pos.x) * rc->delta_dist.x * 2;
 	if (rc->dir.y < 0)
 	{
 		rc->side_dist.y = (cam.pos.y - rc->map_check.y) * rc->delta_dist.y * 2;
