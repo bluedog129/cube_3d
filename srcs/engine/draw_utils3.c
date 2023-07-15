@@ -29,7 +29,7 @@ void	darwing_wall(t_game_data *game_data, t_img_data *screen)
 			
 			if (check_x == 0 && check_y == 0)
 				pixel_put_to_image(screen, x, y, create_trgb(0, 255, 0, 0));
-			else if (game_data->map_info->map_board[(int)(game_data->camera.pos.y + check_y)][(int)(game_data->camera.pos.x + check_x)] == '1')
+			else if (game_data->map_info->map_board[(int)(game_data->camera.pos.y + check_y)][(int)(game_data->camera.pos.x + check_x)] != '0')
 			{
 				draw_vec.x = x - 50;
 				draw_vec.y = y - 50;
@@ -38,7 +38,10 @@ void	darwing_wall(t_game_data *game_data, t_img_data *screen)
 				draw_vec.y += 50;
 				if (draw_vec.x < 0 || draw_vec.x >= 100 || draw_vec.y < 0 || draw_vec.y >= 100)
 					continue;
-				pixel_put_to_image(screen, draw_vec.x, draw_vec.y, create_trgb(0, 0, 255, 0));
+				if (game_data->map_info->map_board[(int)(game_data->camera.pos.y + check_y)][(int)(game_data->camera.pos.x + check_x)] == '1')
+					pixel_put_to_image(screen, draw_vec.x, draw_vec.y, create_trgb(0, 0, 255, 0));
+				else if (game_data->map_info->map_board[(int)(game_data->camera.pos.y + check_y)][(int)(game_data->camera.pos.x + check_x)] == 'D')
+					pixel_put_to_image(screen, draw_vec.x, draw_vec.y, create_trgb(0, 255, 255, 102));
 			}
 		}
 	}
