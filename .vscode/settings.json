@@ -2,6 +2,8 @@
 	"files.associations": {
 		"cub3d.h": "c",
 		"ios": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"__bit_reference": "c",
+		"algorithm": "c"
 	}
 }

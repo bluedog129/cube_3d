@@ -20,13 +20,38 @@ int x, t_draw_info *draw_info)
 	}
 }
 
-void	draw_info_settup(t_camera cam, t_raycaster rc, t_draw_info *draw_info)
+void	draw_info_settup(float eye_level, t_camera cam, t_raycaster rc, t_draw_info *draw_info)
 {
+	// draw_info->line_len = (int)(HEIGHT / rc.perp_wall_dist);
+	// draw_info->draw_start = -draw_info->line_len / 2 + HEIGHT / 2;
+	// if (draw_info->draw_start < 0)
+	// 	draw_info->draw_start = 0;
+	// draw_info->draw_end = draw_info->line_len / 2 + HEIGHT / 2;
+	// if (draw_info->draw_end >= HEIGHT)
+	// 	draw_info->draw_end = HEIGHT - 1;
+	// if (rc.side == 0)
+	// {
+	// 	draw_info->wall_x = cam.pos.y + rc.perp_wall_dist * rc.dir.y;
+	// 	if (rc.dir.x < 0)
+	// 		draw_info->wall_x = 64.0 - draw_info->wall_x;
+	// 	draw_info->wall_x -= (int)draw_info->wall_x;
+	// }
+	// else
+	// {
+	// 	draw_info->wall_x = cam.pos.x + rc.perp_wall_dist * rc.dir.x;
+	// 	if (rc.dir.y > 0)
+	// 		draw_info->wall_x = 64.0 - draw_info->wall_x;
+	// 	draw_info->wall_x -= (int)draw_info->wall_x;
+	// }
+	// draw_info->texture_pos.x = 64.0 * draw_info->wall_x;
+	// draw_info->texture_pos.y = (draw_info->draw_start - HEIGHT / 2 + \
+	// draw_info->line_len / 2) * (64.0 / draw_info->line_len);
+
 	draw_info->line_len = (int)(HEIGHT / rc.perp_wall_dist);
-	draw_info->draw_start = -draw_info->line_len / 2 + HEIGHT / 2;
+	draw_info->draw_start = -draw_info->line_len / 2 + eye_level;
 	if (draw_info->draw_start < 0)
 		draw_info->draw_start = 0;
-	draw_info->draw_end = draw_info->line_len / 2 + HEIGHT / 2;
+	draw_info->draw_end = draw_info->line_len / 2 + eye_level;
 	if (draw_info->draw_end >= HEIGHT)
 		draw_info->draw_end = HEIGHT - 1;
 	if (rc.side == 0)
@@ -44,9 +69,8 @@ void	draw_info_settup(t_camera cam, t_raycaster rc, t_draw_info *draw_info)
 		draw_info->wall_x -= (int)draw_info->wall_x;
 	}
 	draw_info->texture_pos.x = 64.0 * draw_info->wall_x;
-	draw_info->texture_pos.y = (draw_info->draw_start - HEIGHT / 2 + \
+	draw_info->texture_pos.y = (draw_info->draw_start - eye_level + \
 	draw_info->line_len / 2) * (64.0 / draw_info->line_len);
-	draw_info->obj_type = rc.obj_type;
 }
 
 void	dda_algorythm(char **map, t_raycaster *rc)
@@ -106,7 +130,7 @@ void	drawing_walls(t_game_data *game_data, t_img_data *screen)
 	{
 		raycaster_setup(&raycaster, game_data->camera, screen_x);
 		dda_algorythm(game_data->map_info->map_board, &raycaster);
-		draw_info_settup(game_data->camera, raycaster, &draw_info);
+		draw_info_settup(game_data->eye_level, game_data->camera, raycaster, &draw_info);
 		draw_info.texture_idx = raycaster.side;
 		if ((raycaster.side == 0 && raycaster.dir.x < 0) || \
 		(raycaster.side == 1 && raycaster.dir.y > 0))

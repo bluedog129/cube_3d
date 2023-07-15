@@ -1,7 +1,7 @@
 
 #include "cub3d.h"
 
-static void	fill_floor_and_ceiling(t_img_data *screen, int floor, int ceiling)
+static void	fill_floor_and_ceiling(t_img_data *screen, float eye_level, int floor, int ceiling)
 {
 	int	x;
 	int	y;
@@ -12,7 +12,8 @@ static void	fill_floor_and_ceiling(t_img_data *screen, int floor, int ceiling)
 		x = 0;
 		while (x < WIDTH)
 		{
-			if (y < HEIGHT / 2)
+			// if (y < HEIGHT / 2)
+			if (y < eye_level)
 				pixel_put_to_image(screen, x, y, floor);
 			else
 				pixel_put_to_image(screen, x, y, ceiling);
@@ -29,7 +30,7 @@ void	draw_screen(t_game_data *game_data)
 	screen.img_ptr = mlx_new_image(game_data->mlx_ptr, WIDTH, HEIGHT);
 	screen.img_addr = mlx_get_data_addr(screen.img_ptr, &screen.img_bpp, \
 	&screen.img_line_len, &screen.img_endian);
-	fill_floor_and_ceiling(&screen, game_data->map_info->side_info->floor_rgb, \
+	fill_floor_and_ceiling(&screen, game_data->eye_level, game_data->map_info->side_info->floor_rgb, \
 	game_data->map_info->side_info->ceiling_rgb);
 	drawing_walls(game_data, &screen);
 	drawing_doors(game_data, &screen);
@@ -49,6 +50,15 @@ void	draw_screen(t_game_data *game_data)
 	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 80, 45, 0x000000, ft_itoa(mouse_x));
 	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 60, 0x000000, "mouseY:");
 	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 80, 60, 0x000000, ft_itoa(mouse_y));
+
+	char rschar[10];
+	sprintf(rschar, "%.3f", game_data->camera.rotate_speed);
+	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 75, 0x000000, "rotSpeed:");
+	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 110, 75, 0x000000, rschar);
+	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 90, 0x000000, "rotInputX:");
+	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 110, 90, 0x000000, ft_itoa(game_data->rot_input.x));
+	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 105, 0x000000, "rotInputY:");
+	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 110, 105, 0x000000, ft_itoa(game_data->rot_input.y));
 
 	drawing_minimap(game_data);
 	mlx_destroy_image(game_data->mlx_ptr, screen.img_ptr);

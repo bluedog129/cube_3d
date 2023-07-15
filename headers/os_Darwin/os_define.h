@@ -56,7 +56,9 @@ typedef enum e_keycode{
 	KEY_RIGHT = 124,
 	KEY_TAB = 48,
 	KEY_SPACEBAR = 49,
-	KEY_ESC = 53
+	KEY_ESC = 53,
+	KEY_LEFT_SQUARE_BRACKET = 33,
+	KEY_RIGHT_SQUARE_BRACKET = 30
 }	t_keycode;
 
 #endif

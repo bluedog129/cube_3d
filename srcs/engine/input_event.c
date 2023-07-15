@@ -1,6 +1,23 @@
 
 #include "cub3d.h"
 
+static void	rotate_vertical(t_game_data *game_data)
+{
+	float	limit;
+
+	limit = HEIGHT / 8;
+	game_data->eye_level += game_data->rot_input.y * game_data->camera.rotate_speed;
+	if (game_data->eye_level < -limit)
+		game_data->eye_level = -limit;
+	else if (game_data->eye_level >= HEIGHT + limit)
+		game_data->eye_level = HEIGHT + limit - 1;
+
+	if (fabsf(game_data->rot_input.y) > 0.05)
+		game_data->rot_input.y /= 2;
+	else
+		game_data->rot_input.y = 0;	
+}
+
 static void	rotate_horizontal(t_game_data *game_data)
 {
 	float	rotate_speed;
@@ -10,22 +27,22 @@ static void	rotate_horizontal(t_game_data *game_data)
 	rotate_speed = game_data->camera.rotate_speed;
 	old_dir_x = game_data->camera.dir.x;
 	game_data->camera.dir.x = game_data->camera.dir.x * cos(rotate_speed * \
-	game_data->rot_input) - game_data->camera.dir.y * sin(rotate_speed * \
-	game_data->rot_input);
+	game_data->rot_input.x) - game_data->camera.dir.y * sin(rotate_speed * \
+	game_data->rot_input.x);
 	game_data->camera.dir.y = old_dir_x * sin(rotate_speed * \
-	game_data->rot_input) + game_data->camera.dir.y * cos(rotate_speed * \
-	game_data->rot_input);
+	game_data->rot_input.x) + game_data->camera.dir.y * cos(rotate_speed * \
+	game_data->rot_input.x);
 	old_plane_x = game_data->camera.plane.x;
 	game_data->camera.plane.x = game_data->camera.plane.x * \
-	cos(rotate_speed * game_data->rot_input) - game_data->camera.plane.y * \
-	sin(rotate_speed * game_data->rot_input);
+	cos(rotate_speed * game_data->rot_input.x) - game_data->camera.plane.y * \
+	sin(rotate_speed * game_data->rot_input.x);
 	game_data->camera.plane.y = old_plane_x * sin(rotate_speed * \
-	game_data->rot_input) + game_data->camera.plane.y * cos(rotate_speed * \
-	game_data->rot_input);
-	// if (fabsf(game_data->rot_input) > 0.05)
-	// 	game_data->rot_input /= 2;
-	// else
-	// 	game_data->rot_input = 0;
+	game_data->rot_input.x) + game_data->camera.plane.y * cos(rotate_speed * \
+	game_data->rot_input.x);
+	if (fabsf(game_data->rot_input.x) > 0.05)
+		game_data->rot_input.x /= 2;
+	else
+		game_data->rot_input.x = 0;
 }
 
 static void	move_horizontal(t_game_data *game_data)
@@ -74,6 +91,8 @@ void	move_event(t_game_data *game_data)
 		move_vertical(game_data);
 	if (game_data->move_input.x != 0)
 		move_horizontal(game_data);
-	if (game_data->rot_input != 0)
+	if (game_data->rot_input.x != 0)
 		rotate_horizontal(game_data);
+	if (game_data->rot_input.y != 0)
+		rotate_vertical(game_data);
 }
