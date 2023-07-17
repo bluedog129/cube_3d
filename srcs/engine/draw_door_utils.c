@@ -12,8 +12,9 @@ int x, t_draw_info *draw_info)
 	y = draw_info->draw_start; // 이 부분을 밖으로 빼면 모듈화가 될것같기도...?
 	while (y <= draw_info->draw_end)
 	{
-		color = pixel_from_image(target_texture, draw_info->texture_pos.x, \
-		draw_info->texture_pos.y + (64.0 / draw_info->line_len));
+		// color = pixel_from_image(target_texture, draw_info->texture_pos.x, \
+		// draw_info->texture_pos.y + (64.0 / draw_info->line_len));
+		color = create_trgb(0, 0, 0, 0);
 		pixel_put_to_image(img, x, y, color);
 		draw_info->texture_pos.y += (64.0 / draw_info->line_len);
 		y++;
@@ -93,16 +94,27 @@ void	dda_algorythm2(char **map, t_raycaster *rc)
 		{
 			if ((rc->side == 0 && rc->map_check.x - (int)rc->map_check.x == 0) || (rc->side == 1 && rc->map_check.y - (int)rc->map_check.y == 0))
 			{
+				// printf("rc->map_check.x: %f\n", rc->map_check.x);
+				// printf("rc->map_check.y: %f\n", rc->map_check.y);
+				// printf("map[(int)rc->map_check.y][(int)rc->map_check.x]: %c\n", map[(int)rc->map_check.y][(int)rc->map_check.x]);
 				rc->side = 2;
 				return ;
 			}
 		}
 		else if (map[(int)rc->map_check.y][(int)rc->map_check.x] == 'D')
 		{
-			if ((rc->side == 0 && rc->map_check.x - (int)rc->map_check.x != 0) || (rc->side == 1 && rc->map_check.y - (int)rc->map_check.y != 0))
+			if ((rc->side == 0 && rc->map_check.x - (int)rc->map_check.x == 0.5) || (rc->side == 1 && rc->map_check.y - (int)rc->map_check.y == 0.5))
 				break;
 		}
 	}
+	printf("rc->side: %d\n", rc->side);
+	// printf("step.x: %f\n", rc->step.x);
+	// printf("step.y: %f\n", rc->step.y);
+	// printf("(int)rc->map_check.x: %d\n", (int)rc->map_check.x);
+	// printf("(int)rc->map_check.y: %d\n", (int)rc->map_check.y);
+	printf("rc->map_check.x: %f\n", rc->map_check.x);
+	printf("rc->map_check.y: %f\n", rc->map_check.y);
+	printf("map[(int)rc->map_check.y][(int)rc->map_check.x]: %c\n", map[(int)rc->map_check.y][(int)rc->map_check.x]);
 
 	if (rc->side == 0)
 	{
