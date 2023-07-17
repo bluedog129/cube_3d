@@ -51,12 +51,13 @@ void	draw_info_settup2(float eye_level, t_camera cam, t_raycaster rc, t_draw_inf
 
 void	dda_algorythm2(char **map, t_raycaster *rc)
 {
-	float temp_check_x = rc->map_check.x;
-	float temp_check_y = rc->map_check.y;
-	float temp_side_x = rc->side_dist.x;
-	float temp_side_y = rc->side_dist.y;
-	float temp_delta_x = rc->delta_dist.x;
-	float temp_delta_y = rc->delta_dist.y;
+	// float temp_check_x = rc->map_check.x;
+	// float temp_check_y = rc->map_check.y;
+	// float temp_side_x = rc->side_dist.x;
+	// float temp_side_y = rc->side_dist.y;
+	// float temp_delta_x = rc->delta_dist.x;
+	// float temp_delta_y = rc->delta_dist.y;
+
 	// int	check_mod;
 
 	// check_mod = 0; // 0: wall 1: door
@@ -109,52 +110,71 @@ void	dda_algorythm2(char **map, t_raycaster *rc)
 		}
 		else if (map[(int)rc->map_check.y][(int)rc->map_check.x] == 'D')
 		{
+			if (rc->side == 0)
+			{
+				if (rc->dir.x < 0 && map[(int)rc->map_check.y][(int)(rc->map_check.x + 0.5)] != '1')
+					break ;
+				else if (rc->dir.x > 0 && map[(int)rc->map_check.y][(int)(rc->map_check.x - 0.5)] != '1')
+					break ;
+				else if (rc->dir.x == 0)
+					break ;
+			}
+			else
+			{
+				if (rc->dir.y < 0 && map[(int)(rc->map_check.y + 0.5)][(int)rc->map_check.x] == 'D' && (rc->camera_x > -0.4 && rc->camera_x < 0.4))
+					break ;
+				else if (rc->dir.y > 0 && map[(int)(rc->map_check.y + 0.5)][(int)rc->map_check.x] == 'D' && (rc->camera_x > -0.4 && rc->camera_x < 0.4))
+					break ;
+				else if (rc->dir.y == 0)
+					break ;
+			}
 			// if ((rc->side == 0 && rc->map_check.x - (int)rc->map_check.x == 0.5) || (rc->side == 1 && rc->map_check.y - (int)rc->map_check.y == 0.5))
-				break;
+			// 	break;
 		}
 	}
-	printf("=================================\n");
+	// printf("=================================\n");
 	// printf("rc->side: %d\n", rc->side);
 	// printf("step.x: %f\n", rc->step.x);
 	// printf("step.y: %f\n", rc->step.y);
 	// printf("(int)rc->map_check.x: %d\n", (int)rc->map_check.x);
 	// printf("(int)rc->map_check.y: %d\n", (int)rc->map_check.y);
-	printf("rc->map_check.x: %f\n", rc->map_check.x);
-	printf("rc->map_check.y: %f\n", rc->map_check.y);
-	printf("map[(int)rc->map_check.y][(int)rc->map_check.x]: %c\n", map[(int)rc->map_check.y][(int)rc->map_check.x]);
+	// printf("rc->map_check.x: %f\n", rc->map_check.x);
+	// printf("rc->map_check.y: %f\n", rc->map_check.y);
+	// printf("map[(int)rc->map_check.y][(int)rc->map_check.x]: %c\n", map[(int)rc->map_check.y][(int)rc->map_check.x]);
 
-	while (temp_check_x != rc->map_check.x && temp_check_y != rc->map_check.y)
-	{
-		printf("============\n");
-		printf("tempX: %f\n", temp_check_x);
-		printf("tempy: %f\n", temp_check_y);
-		printf("board[y][x]: %c\n", map[(int)temp_check_y][(int)temp_check_x]);
+	// while (temp_check_x != rc->map_check.x && temp_check_y != rc->map_check.y)
+	// {
+	// 	printf("============\n");
+	// 	printf("tempX: %f\n", temp_check_x);
+	// 	printf("tempy: %f\n", temp_check_y);
+	// 	printf("board[y][x]: %c\n", map[(int)temp_check_y][(int)temp_check_x]);
 
-		if (temp_side_x < temp_side_y)
-		{
-			temp_side_x += temp_delta_x;
-			temp_check_x += rc->step.x;
-		}
-		else
-		{
-			temp_side_y += temp_delta_y;
-			temp_check_y += rc->step.y;
-		}
-	}
-	printf("============1\n");
-	printf("tempX: %f\n", temp_check_x);
-	printf("tempy: %f\n", temp_check_y);
-	printf("board[y][x]: %c\n", map[(int)temp_check_y][(int)temp_check_x]);
+	// 	if (temp_side_x < temp_side_y)
+	// 	{
+	// 		temp_side_x += temp_delta_x;
+	// 		temp_check_x += rc->step.x;
+	// 	}
+	// 	else
+	// 	{
+	// 		temp_side_y += temp_delta_y;
+	// 		temp_check_y += rc->step.y;
+	// 	}
+	// }
+	// printf("============1\n");
+	// printf("tempX: %f\n", temp_check_x);
+	// printf("tempy: %f\n", temp_check_y);
+	// printf("board[y][x]: %c\n", map[(int)temp_check_y][(int)temp_check_x]);
+	// printf("cameraX: %f\n", rc->camera_x);
 
 	if (rc->side == 0)
 	{
 		rc->perp_wall_dist = rc->side_dist.x - rc->delta_dist.x;
-		// rc->perp_wall_dist += rc->delta_dist.x;
+		rc->perp_wall_dist += rc->delta_dist.x / 2.5;
 	}
 	else
 	{
 		rc->perp_wall_dist = rc->side_dist.y - rc->delta_dist.y;
-		// rc->perp_wall_dist += rc->delta_dist.y;
+		rc->perp_wall_dist += rc->delta_dist.y / 2.5;
 	}
 
 }
