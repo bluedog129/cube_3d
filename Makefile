@@ -12,6 +12,7 @@
 
 CC              = cc
 CFLAGS          = -Wall -Wextra -Werror -g
+INC				= -I./headers -I./libft
 NAME            = cub3d
 RM              = rm -f
 LIBS			= libft/libft.a
@@ -29,36 +30,62 @@ PARSING_SRCS    = parsing.c args_validation.c getting_side_info.c initialize.c \
 					line_parse_utils.c making_map_array.c free_utils.c
 PARSING         = $(addprefix $(PARSING_PATH), $(PARSING_SRCS))
 
+ENGINE_PATH		= srcs/engine/
+ENGINE			= $(wildcard srcs/engine/*.c)
+
 SOURCES			= $(addprefix $(SRCS_PATH), $(MAIN))\
-				  $(addprefix $(SRCS_PATH), $(PARSING))
+				  $(addprefix $(SRCS_PATH), $(PARSING))\
+				  $(addprefix $(SRCS_PATH), $(ENGINE))
 
 OBJECTS         = $(SOURCES:.c=.o)
 
-HEADER_PATH     = ./headers/
-S_HEADER        = cub3d.h strutures.h
-HEADER          = $(addprefix $(HEADER_PATH), $(S_HEADER))
+#----------
+
+UNAME := $(shell uname)
+ifeq ($(UNAME), Darwin)
+	MLX_DIR		:= ./mlx_mms_mac
+	MLX_A		:= $(MLX_DIR)/libmlx.dylib
+	MLX_FLAGS	:= -L$(MLX_DIR) -framework OpenGL -framework AppKit
+else ifeq ($(UNAME), Linux)
+	MLX_DIR		:= ./mlx_linux
+	MLX_A		:= $(MLX_DIR)/libmlx.a
+	MLX_FLAGS	:= -L$(MLX_DIR) -lXext -lX11 -lm -lz
+endif
+
+INC += -I$(MLX_DIR) -I./headers/os_$(UNAME)
+ENGINE			+= ./headers/os_$(UNAME)/os_$(UNAME)_mouse_func.c
+
+#----------
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) $(LIBS)
-	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBS) -o $(EXEC)
-	@echo -e "$(GREEN)$(EXEC) created!$(DEFAULT)"
+$(NAME): $(LIBS) $(MLX_A) $(OBJECTS)
+	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBS) $(MLX_A) $(MLX_FLAGS) -o $(EXEC)
+	@echo "\n$(GREEN)$(EXEC) created!$(DEFAULT)\n"
 
 $(LIBS) :
 	@make -C libft all
 
-%.o: %.c $(HEADER)
-	@$(CC) $(CFLAGS) -c $< -o $@
+$(MLX_A):
+	@make --no-print-directory -C $(MLX_DIR)
+ifeq ($(UNAME), Darwin)
+	@install_name_tool -id $(MLX_A) $(MLX_A)
+endif
+
+%.o: %.c
+	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 clean:
 	@$(RM) $(OBJECTS)
 	@$(RM) $(OBJECTS:.o=.d)
 	make -C libft clean
+	@cd $(MLX_DIR); make --no-print-directory clean
 
 fclean: clean
 	@$(RM) $(EXEC)
-	@$(RM) libft/libft.a
-	@echo -e "$(BLUE)delete all!$(DEFAULT)"
+	@$(RM) $(LIBS)
+	@cd $(MLX_DIR); make --no-print-directory clean
+	@echo "\n$(BLUE)delete all!$(DEFAULT)\n"
 
 re:
 	@make fclean

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/cub3d.h"
+#include "cub3d.h"
 
 void	ft_lstadd_back(t_map_node *lst, t_map_node *new)
 {

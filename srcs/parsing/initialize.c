@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/cub3d.h"
+#include "cub3d.h"
 
 void	initialize(char *cub_file, t_map *map_info, t_parse_info *parse_info)
 {

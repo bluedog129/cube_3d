@@ -17,8 +17,16 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <math.h>
+# include <stdio.h>//
+
+# include "libft.h"
 # include "structures.h"
-# include "../libft/libft.h"
+# include "mlx.h"
+# include "os_define.h"
+
+# define WIDTH 640
+# define HEIGHT 480
 
 enum e_cub3d_enum
 {
@@ -45,6 +53,13 @@ enum e_check_type_enum
 	EMPTY_LINE = 9,
 	SIDE_TEXTURE = 11,
 	RGB = 12
+};
+
+enum e_obj_types
+{
+	WALL = 1,
+	V_DOOR = 2,
+	H_DOOR = 3
 };
 
 // parsing
@@ -86,6 +101,7 @@ void		make_array_map(t_map *map_info, t_parse_info *parse_info);
 void		print_error(char *str);
 int			check_line_empty(char *line);
 int			open_file(char *cub_file);
+int			is_blank(char c);
 
 // free_utils
 void		free_2d_arr(char **arr);
@@ -96,5 +112,30 @@ void		exit_error(char *str, t_map *map_info, t_parse_info *parse_info);
 void		ft_lstadd_back(t_map_node *lst, t_map_node *new);
 t_map_node	*ft_lstlast(t_map_node *lst);
 void		free_lst_node(t_map_node *head);
+
+// engine part
+
+void		engine_main(t_map *map_info);
+
+int			create_trgb(int t, int r, int g, int b);
+int			pixel_from_image(t_img_data *img, int x, int y);
+void		pixel_put_to_image(t_img_data *img, int x, int y, int color);
+
+int			my_key_pressed_hook(int keycode, t_game_data *game_data);
+int			my_key_released_hook(int keycode, t_game_data *game_data);
+int			my_mouse_motion_hook(int x, int y, t_game_data *game_data);
+int			my_loop_hook(t_game_data *game_data);
+
+void		rotate_vector2(t_vec2d *vec2, float degree);
+
+void		move_event(t_game_data *game_data);
+
+void		draw_screen(t_game_data *game_data);
+void		drawing_walls(t_game_data *game_data, t_img_data *screen);
+void		drawing_doors(t_game_data *game_data, t_img_data *screen);
+void		drawing_minimap(t_game_data *game_data);
+
+void		os_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
+void		os_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
 
 #endif
