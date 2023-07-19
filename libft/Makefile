@@ -26,7 +26,9 @@ SOURCES = ft_bzero.c ft_isalnum.c ft_isalpha.c \
 			ft_putnbr_fd.c ft_htoa.c ft_utoa.c ft_uitoa.c \
 			ft_uitoa_lower.c ft_strcmp.c ft_atol.c ft_atoi_extension.c \
 			./get_next_line/get_next_line.c \
-			./get_next_line/get_next_line_utils.c
+			./get_next_line/get_next_line_utils.c \
+			ft_lstclear.c ft_lstdelone.c ft_lstnew.c ft_lstiter.c \
+			ft_lstadd_back2.c ft_lstlast2.c
 
 OBJECT = $(SOURCES:.c=.o)
 B_OBJECT = $(B_SOURCES:.c=.o)

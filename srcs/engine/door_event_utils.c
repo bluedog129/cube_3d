@@ -1,49 +1,7 @@
 
 #include "cub3d.h"
 
-void	draw_vertical_line2(t_img_data *target_texture, t_img_data *img, \
-int x, t_draw_info *draw_info)
-{
-	int			y;
-	int			color;
-
-	y = draw_info->draw_start;
-	while (y <= draw_info->draw_end)
-	{
-		color = pixel_from_image(target_texture, draw_info->texture_pos.x, \
-		draw_info->texture_pos.y + (64.0 / draw_info->line_len));
-		if ((unsigned int)color != 0xff000000)
-			pixel_put_to_image(img, x, y, color);
-		draw_info->texture_pos.y += (64.0 / draw_info->line_len);
-		y++;
-	}
-}
-
-void	draw_info_settup2(float eye_level, t_camera cam, t_raycaster rc, t_draw_info *draw_info)
-{
-	draw_info->line_len = (int)(HEIGHT / rc.perp_wall_dist);
-	draw_info->draw_start = -draw_info->line_len / 2 + eye_level;
-	if (draw_info->draw_start < 0)
-		draw_info->draw_start = 0;
-	draw_info->draw_end = draw_info->line_len / 2 + eye_level;
-	if (draw_info->draw_end >= HEIGHT)
-		draw_info->draw_end = HEIGHT - 1;
-	if (rc.side == 0)
-	{
-		draw_info->wall_x = cam.pos.y + rc.perp_wall_dist * rc.dir.y;
-		draw_info->wall_x -= (int)draw_info->wall_x;
-	}
-	else
-	{
-		draw_info->wall_x = cam.pos.x + rc.perp_wall_dist * rc.dir.x;
-		draw_info->wall_x -= (int)draw_info->wall_x;
-	}
-	draw_info->texture_pos.x = 64.0 * draw_info->wall_x;
-	draw_info->texture_pos.y = (draw_info->draw_start - eye_level + \
-	draw_info->line_len / 2) * (64.0 / draw_info->line_len);
-}
-
-void	dda_algorythm2(char **map, t_raycaster *rc, t_camera *cam)
+void	dda_algorythm3(char **map, t_raycaster *rc, t_camera *cam)
 {
 	while (1)
 	{
@@ -110,7 +68,7 @@ void	dda_algorythm2(char **map, t_raycaster *rc, t_camera *cam)
 		rc->perp_wall_dist = rc->side_dist.y - rc->delta_dist.y;
 }
 
-void	raycaster_setup2(t_raycaster *rc, t_camera cam, int screen_x)
+void	raycaster_setup3(t_raycaster *rc, t_camera cam, int screen_x)
 {
 	rc->camera_x = 2 * screen_x / (float)WIDTH - 1;
 	rc->dir.x = cam.dir.x + cam.plane.x * rc->camera_x;
@@ -135,30 +93,37 @@ void	raycaster_setup2(t_raycaster *rc, t_camera cam, int screen_x)
 		rc->side_dist.y = (rc->map_check.y + 1 - cam.pos.y) * rc->delta_dist.y;
 }
 
-void drawing_doors(t_game_data *game_data, t_img_data *screen)
+void interact_doors(t_game_data *game_data)
 {
 	int			screen_x;
-	t_draw_info	draw_info;
 	t_raycaster	raycaster;
+	float		event_dist;
 	t_door		*target_door;
 
-	screen_x = 0;
-	while (screen_x < WIDTH)
+	event_dist = INT_MAX;
+	target_door = NULL;
+	screen_x = 160;
+	while (screen_x < 320)
 	{
-		raycaster_setup2(&raycaster, game_data->camera, screen_x);
-		dda_algorythm2(game_data->map_info->map_board, &raycaster, &game_data->camera);
+		raycaster_setup3(&raycaster, game_data->camera, screen_x);
+		dda_algorythm3(game_data->map_info->map_board, &raycaster, &game_data->camera);
 		if (raycaster.side == 2)
 		{
 			screen_x++;
 			continue ;
 		}
-		target_door = get_door(game_data->door_list, raycaster.map_check.x, raycaster.map_check.y)->content;
-		draw_info_settup2(game_data->eye_level, game_data->camera, raycaster, &draw_info);
-		draw_info.texture_idx = raycaster.side;
-		if ((raycaster.side == 0 && raycaster.dir.x < 0) || \
-		(raycaster.side == 1 && raycaster.dir.y > 0))
-			draw_info.texture_idx += 2;
-		draw_vertical_line2(&game_data->door_texture[(int)target_door->frame], screen, screen_x, &draw_info);
+		if (event_dist > raycaster.perp_wall_dist && raycaster.perp_wall_dist <= 1.5)
+		{
+			event_dist = raycaster.perp_wall_dist;
+			target_door = get_door(game_data->door_list, raycaster.map_check.x, raycaster.map_check.y)->content;
+		}
 		screen_x++;
 	}
+	printf("dist: %f\n", event_dist);
+	if (!target_door)
+		return ;
+	if (target_door->state == OPEN)
+		target_door->state = CLOSING;
+	else if (target_door->state == CLOSE)
+		target_door->state = OPENING;
 }

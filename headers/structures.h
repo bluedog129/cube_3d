@@ -60,6 +60,13 @@ typedef struct s_vec2d
 	float	y;
 }	t_vec2d;
 
+typedef struct s_door
+{
+	t_vec2d	pos;
+	int		state;
+	float	frame;
+}	t_door;
+
 typedef struct s_raycaster
 {
 	float	camera_x;
@@ -81,7 +88,6 @@ typedef struct s_draw_info
 	float	wall_x;
 	int		texture_idx;
 	t_vec2d	texture_pos;
-	int		obj_type;
 	int		color;
 }	t_draw_info;
 
@@ -110,7 +116,9 @@ typedef struct s_game_data
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_map		*map_info;
+	t_list		*door_list;
 	t_img_data	wall_texture[4];
+	t_img_data	door_texture[6];
 	t_vec2d		move_input;
 	t_vec2d		rot_input;
 	float		eye_level;

@@ -1,6 +1,97 @@
 
 #include "cub3d.h"
 
+void	door_print(void *content)
+{
+	t_door *door;
+
+	door = content;
+	printf("--------------------\n");
+	printf("door x: %d\n", (int)door->pos.x);
+	printf("door y: %d\n", (int)door->pos.y);
+	printf("door state: %d\n", (int)door->state);
+	printf("door frame: %d\n", (int)door->frame);
+}
+
+void	door_update(void *content)
+{
+	t_door *door;
+
+	door = content;
+	if (door->state == OPENING)
+	{
+		if (door->frame < 5.0)
+			door->frame += 0.2;
+		else
+			door->state = OPEN;
+	}
+	else if (door->state == CLOSING)
+	{
+		if (door->frame > 0.0)
+			door->frame -= 0.2;
+		else
+			door->state = CLOSE;
+	}
+}
+
+t_list *get_door(t_list *door_list, int x, int y)
+{
+	t_door *door;
+
+	while (door_list)
+	{
+		door = door_list->content;
+		if (door->pos.x == x && door->pos.y == y)
+			return (door_list);
+		door_list = door_list->next;
+	}
+	return (NULL);
+}
+
+t_list *new_door(int x, int y)
+{
+	t_list *new;
+	t_door *content;
+
+	new = NULL;
+	content = malloc(sizeof(t_door));
+	if (content)
+	{
+		memset(content, 0, sizeof(t_door));
+		content->pos.x = x;
+		content->pos.y = y;
+		new = ft_lstnew(content);
+		if (!new)
+			free(content);
+	}
+	return (new);
+}
+
+void	get_door_list(t_map *map_info, t_list **door_list)
+{
+	t_list *new;
+	int y;
+	int x;
+
+	y = 0;
+	while (y < map_info->height)
+	{
+		x = 0;
+		while (x < map_info->width)
+		{
+			if (map_info->map_board[y][x] == 'd' || map_info->map_board[y][x] == 'D')
+			{
+				new = new_door(x, y);
+				if (!new)
+					return ;
+				ft_lstadd_back2(door_list, new);
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
 void	rotate_vector2(t_vec2d *vec2, float degree)
 {
 	float	old_vec_x;
@@ -73,6 +164,26 @@ int	load_textures(t_game_data	*game_data)
 			return (ERROR);
 		i++;
 	}
+
+	game_data->door_texture[0].img_ptr = mlx_xpm_file_to_image(game_data->mlx_ptr, "./res/door1.xpm", &game_data->door_texture[0].img_width, &game_data->door_texture[0].img_height);
+	game_data->door_texture[0].img_addr = mlx_get_data_addr(game_data->door_texture[0].img_ptr, &game_data->door_texture[0].img_bpp, &game_data->door_texture[0].img_line_len, &game_data->door_texture[0].img_endian);
+
+	game_data->door_texture[1].img_ptr = mlx_xpm_file_to_image(game_data->mlx_ptr, "./res/door2.xpm", &game_data->door_texture[1].img_width, &game_data->door_texture[1].img_height);
+	game_data->door_texture[1].img_addr = mlx_get_data_addr(game_data->door_texture[1].img_ptr, &game_data->door_texture[1].img_bpp, &game_data->door_texture[1].img_line_len, &game_data->door_texture[1].img_endian);
+
+	game_data->door_texture[2].img_ptr = mlx_xpm_file_to_image(game_data->mlx_ptr, "./res/door3.xpm", &game_data->door_texture[2].img_width, &game_data->door_texture[2].img_height);
+	game_data->door_texture[2].img_addr = mlx_get_data_addr(game_data->door_texture[2].img_ptr, &game_data->door_texture[2].img_bpp, &game_data->door_texture[2].img_line_len, &game_data->door_texture[2].img_endian);
+
+	game_data->door_texture[3].img_ptr = mlx_xpm_file_to_image(game_data->mlx_ptr, "./res/door4.xpm", &game_data->door_texture[3].img_width, &game_data->door_texture[3].img_height);
+	game_data->door_texture[3].img_addr = mlx_get_data_addr(game_data->door_texture[3].img_ptr, &game_data->door_texture[3].img_bpp, &game_data->door_texture[3].img_line_len, &game_data->door_texture[3].img_endian);
+
+	game_data->door_texture[4].img_ptr = mlx_xpm_file_to_image(game_data->mlx_ptr, "./res/door5.xpm", &game_data->door_texture[4].img_width, &game_data->door_texture[4].img_height);
+	game_data->door_texture[4].img_addr = mlx_get_data_addr(game_data->door_texture[4].img_ptr, &game_data->door_texture[4].img_bpp, &game_data->door_texture[4].img_line_len, &game_data->door_texture[4].img_endian);
+
+	game_data->door_texture[5].img_ptr = mlx_xpm_file_to_image(game_data->mlx_ptr, "./res/door6.xpm", &game_data->door_texture[5].img_width, &game_data->door_texture[5].img_height);
+	game_data->door_texture[5].img_addr = mlx_get_data_addr(game_data->door_texture[5].img_ptr, &game_data->door_texture[5].img_bpp, &game_data->door_texture[5].img_line_len, &game_data->door_texture[5].img_endian);
+	
+
 	return (SUCCESS);
 }
 
@@ -90,6 +201,9 @@ void	engine_main(t_map *map_info)
 		return ;
 	}
 
+	get_door_list(map_info, &game_data.door_list);
+	ft_lstiter(game_data.door_list, door_print);
+	printf("%p\n", game_data.door_list);
 	camera_setup(&game_data);
 
 	game_data.win_ptr = mlx_new_window(game_data.mlx_ptr, WIDTH, HEIGHT, \

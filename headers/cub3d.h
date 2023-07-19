@@ -55,11 +55,12 @@ enum e_check_type_enum
 	RGB = 12
 };
 
-enum e_obj_types
+enum e_door_state
 {
-	WALL = 1,
-	V_DOOR = 2,
-	H_DOOR = 3
+	CLOSE = 0,
+	OPENING = 1,
+	OPEN = 2,
+	CLOSING = 3
 };
 
 // parsing
@@ -137,5 +138,9 @@ void		drawing_minimap(t_game_data *game_data);
 
 void		os_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
 void		os_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
+
+t_list *get_door(t_list *door_list, int x, int y);
+void	door_update(void *content);
+void interact_doors(t_game_data *game_data);
 
 #endif

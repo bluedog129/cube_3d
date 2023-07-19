@@ -25,6 +25,8 @@ int	my_key_pressed_hook(int keycode, t_game_data *game_data)
 	if ((keycode == KEY_RIGHT) || (keycode == KEY_LEFT))
 		game_data->rot_input.x += ((keycode == KEY_RIGHT) - \
 		(keycode == KEY_LEFT));
+	if (keycode == KEY_SPACEBAR)
+		interact_doors(game_data);
 	return (1);
 }
 
@@ -53,6 +55,7 @@ int	my_loop_hook(t_game_data *game_data)
 	{
 		move_event(game_data);
 	}
+	ft_lstiter(game_data->door_list, door_update);
 	draw_screen(game_data);
 	os_mouse_move(game_data->mlx_ptr, game_data->win_ptr, WIDTH / 2, HEIGHT / 2);
 	return (0);
