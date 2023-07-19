@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 22:38:42 by choihyojong       #+#    #+#             */
-/*   Updated: 2023/07/18 17:20:32 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:23:17 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	exit_error(char *str, t_map *map_info, t_parse_info *parse_info)
 		if (map_info->head_node->next != NULL)
 			free_lst_node(map_info->head_node->next);
 	}
-	if (map_info->head_node != NULL)
-		free(map_info->head_node);
+	if (map_info->side_info != NULL)
+		free(map_info->side_info);
 	if (parse_info->line != NULL)
 		free(parse_info->line);
 	if (parse_info->fd > 2)
@@ -67,8 +67,6 @@ void	finish_cub(t_map *map_info, t_parse_info *parse_info)
 	}
 	if (map_info->side_info != NULL)
 		free(map_info->side_info);
-	if (map_info->head_node != NULL)
-		free(map_info->head_node);
 	if (parse_info->line != NULL)
 		free(parse_info->line);
 	if (parse_info->fd > 2)
