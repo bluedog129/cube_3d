@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 17:30:02 by choihyojong       #+#    #+#             */
-/*   Updated: 2023/07/10 16:26:31 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/07/18 18:35:27 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,20 @@ static int	validate_all_round(t_map *map_info, char **map, int y, int x)
 		if (map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
 			return (ERROR);
 		y_idx = y;
-		while (0 < y_idx--)
+		while (0 < --y_idx)
 		{
 			if (map[y_idx][x] == '1')
 				break ;
 			else if (map[y_idx][x] == ' ' || map[y_idx][x] == '*')
 				return (ERROR);
 		}
-		while (y_idx < map_info->height)
+		y_idx = y;
+		while (y_idx++ < map_info->height)
 		{
 			if (map[y_idx][x] == '1')
 				return (SUCCESS);
 			else if (map[y_idx][x] == ' ' || map[y_idx][x] == '*')
 				return (ERROR);
-			y_idx++;
 		}
 	}
 	return (SUCCESS);

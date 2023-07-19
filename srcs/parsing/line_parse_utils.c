@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   line_parse_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choihyojong <choihyojong@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:53:54 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/10 22:43:08 by choihyojong      ###   ########.fr       */
+/*   Updated: 2023/07/18 18:34:27 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int is_blank(char c)
+int	is_blank(char c)
 {
 	return ((c >= 9 && c <= 13) || c == 32);
 }
