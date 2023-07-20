@@ -28,16 +28,16 @@ void	draw_info_settup2(float eye_level, t_camera cam, t_raycaster rc, t_draw_inf
 	draw_info->draw_end = draw_info->line_len / 2 + eye_level;
 	if (draw_info->draw_end >= HEIGHT)
 		draw_info->draw_end = HEIGHT - 1;
-	if (rc.side == 0)
-	{
-		draw_info->wall_x = cam.pos.y + rc.perp_wall_dist * rc.dir.y;
-		draw_info->wall_x -= (int)draw_info->wall_x;
-	}
-	else
-	{
+	// if (rc.side == 0)
+	// {
+	// 	draw_info->wall_x = cam.pos.y + rc.perp_wall_dist * rc.dir.y;
+	// 	draw_info->wall_x -= (int)draw_info->wall_x;
+	// }
+	// else
+	// {
 		draw_info->wall_x = cam.pos.x + rc.perp_wall_dist * rc.dir.x;
 		draw_info->wall_x -= (int)draw_info->wall_x;
-	}
+	// }
 	draw_info->texture_pos.x = 64.0 * draw_info->wall_x;
 	draw_info->texture_pos.y = (draw_info->draw_start - eye_level + \
 	draw_info->line_len / 2) * (64.0 / draw_info->line_len);
@@ -71,6 +71,15 @@ void	dda_algorythm2(char **map, t_raycaster *rc, t_camera *cam)
 		}
 		else if (rc->side == 1 && map[(int)rc->map_check.y][(int)rc->map_check.x] == 'D')
 			flag = 1;
+		/*
+
+			어느면에 닿았는지 체크는 side 로 수행한다
+			side 를 설정하는것은 직접 거리를 더해주지 않아도
+			if 문을 그대로 써도 되지 않나...?
+			그럼 줄수도 줄일수있고 플래그를 사용하지 않아도 된다...
+			-> 잘 안되는중...
+
+		*/
 	}
 
 	if (rc->side == 1)
@@ -90,15 +99,15 @@ void	dda_algorythm2(char **map, t_raycaster *rc, t_camera *cam)
 		if (temp < 0.5)
 		{
 			rc->side_dist.y += rc->delta_dist.y / 2;
-			rc->side = 1;
+			rc->side = 0;
 		}
 		else
 			rc->side = 2;
 	}
 
-	if (rc->side == 0)
-		rc->perp_wall_dist = rc->side_dist.x - rc->delta_dist.x;
-	else
+	// if (rc->side == 0)
+	// 	rc->perp_wall_dist = rc->side_dist.x - rc->delta_dist.x;
+	// else
 		rc->perp_wall_dist = rc->side_dist.y - rc->delta_dist.y;
 }
 
@@ -132,6 +141,7 @@ void	casting_through_door(t_game_data *game_data, t_raycaster raycaster, t_img_d
 	t_draw_info	draw_info;
 	t_door		*target_door;
 
+	raycaster.side_dist.y -= raycaster.delta_dist.y / 2;
 	dda_algorythm2(game_data->map_info->map_board, &raycaster, &game_data->camera);
 	if (raycaster.side == 2)
 		return ;
@@ -169,13 +179,3 @@ void drawing_doors(t_game_data *game_data, t_img_data *screen)
 		screen_x++;
 	}
 }
-
-		/*
-			rc_settup(new_pos) << pos is argument
-			if (raycaster.side == 2)
-				return ;
-			else if ((check == 'D' || check == 'd') && (door != close))
-				재귀
-			drawing_door
-	
-		*/
