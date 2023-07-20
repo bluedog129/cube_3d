@@ -100,7 +100,7 @@ void interact_doors(t_game_data *game_data)
 	float		event_dist;
 	t_door		*target_door;
 
-	event_dist = INT_MAX;
+	event_dist = 10;
 	target_door = NULL;
 	screen_x = 160;
 	while (screen_x < 320)
