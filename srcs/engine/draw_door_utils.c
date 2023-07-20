@@ -32,11 +32,6 @@ void	draw_info_settup2(float eye_level, t_camera cam, t_raycaster rc, t_draw_inf
 	{
 		draw_info->wall_x = cam.pos.y + rc.perp_wall_dist * rc.dir.y;
 		draw_info->wall_x -= (int)draw_info->wall_x;
-		if (draw_info->wall_x < 0.5)
-		{
-			rc.side == 2;
-			return ;
-		}
 	}
 	else
 	{
@@ -50,6 +45,9 @@ void	draw_info_settup2(float eye_level, t_camera cam, t_raycaster rc, t_draw_inf
 
 void	dda_algorythm2(char **map, t_raycaster *rc, t_camera *cam)
 {
+	int flag;
+
+	flag = 0;
 	while (1)
 	{
 		if (rc->side_dist.x < rc->side_dist.y)
@@ -64,55 +62,44 @@ void	dda_algorythm2(char **map, t_raycaster *rc, t_camera *cam)
 			rc->map_check.y += rc->step.y;
 			rc->side = 1;
 		}
-
+		if (flag == 1)
+			break ;
 		if (map[(int)rc->map_check.y][(int)rc->map_check.x] == '1')
 		{
 			rc->side = 2;
 			return ;
 		}
 		else if (rc->side == 1 && map[(int)rc->map_check.y][(int)rc->map_check.x] == 'D')
-		{
-			// 한 번 더 쏴본다
-			if (rc->side_dist.x < rc->side_dist.y)
-			{
-				rc->side_dist.x += rc->delta_dist.x;
-				rc->side = 0;
-			}
-			else
-			{
-				rc->side_dist.y += rc->delta_dist.y;
-				rc->side = 1;
-			}
-			
-			// 여전히 같은 y축에 닿은경우 그대로 draw
-			if (rc->side == 1)
-			{
-				rc->side_dist.y -= rc->delta_dist.y / 2;
-				break ;
-			}
-			// 반대면에 닿은경우
-			else
-			{
-				float temp;
-				temp = cam->pos.y + (rc->side_dist.x - rc->delta_dist.x) * rc->dir.y;
-				if (rc->dir.y > 0)
-					temp = 64.0 - temp;
-				temp -= (int)temp;
-
-				if (temp < 0.5)
-				{
-					rc->side = 0;
-					break ;
-				}
-				else
-				{
-					rc->side = 2;
-					break ;
-				}
-			}
-		}
+			flag = 1;
 	}
-	rc->perp_wall_dist = rc->side_dist.y - rc->delta_dist.y;
+
+	if (rc->side == 1)
+	{
+		rc->map_check.y -= rc->step.y;
+		rc->side_dist.y -= rc->delta_dist.y / 2;
+	}
+	else
+	{
+		rc->map_check.x -= rc->step.x;
+		float temp;
+		temp = cam->pos.y + (rc->side_dist.x - rc->delta_dist.x) * rc->dir.y;
+		temp -= (int)temp;
+		if (rc->dir.y > 0)
+			temp = 1 - temp;
+
+		if (temp < 0.5)
+		{
+			rc->side_dist.y += rc->delta_dist.y / 2;
+			rc->side = 1;
+		}
+		else
+			rc->side = 2;
+	}
+
+	if (rc->side == 0)
+		rc->perp_wall_dist = rc->side_dist.x - rc->delta_dist.x;
+	else
+		rc->perp_wall_dist = rc->side_dist.y - rc->delta_dist.y;
 }
 
 void	raycaster_setup2(t_raycaster *rc, t_camera cam, int screen_x)
@@ -175,7 +162,7 @@ void drawing_doors(t_game_data *game_data, t_img_data *screen)
 			continue ;
 		}
 		target_door = get_door(game_data->door_list, raycaster.map_check.x, raycaster.map_check.y)->content;
-		if (target_door->state != CLOSE)
+		if (raycaster.side == 1 && target_door->state != CLOSE)
 			casting_through_door(game_data, raycaster, screen, screen_x);
 		draw_info_settup2(game_data->eye_level, game_data->camera, raycaster, &draw_info);
 		draw_vertical_line2(&game_data->door_texture[(int)target_door->frame], screen, screen_x, &draw_info);

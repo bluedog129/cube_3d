@@ -119,7 +119,7 @@ void interact_doors(t_game_data *game_data)
 		}
 		screen_x++;
 	}
-	printf("dist: %f\n", event_dist);
+	// printf("dist: %f\n", event_dist);
 	if (!target_door)
 		return ;
 	if (target_door->state == OPEN)

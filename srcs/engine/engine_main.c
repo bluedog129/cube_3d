@@ -202,8 +202,8 @@ void	engine_main(t_map *map_info)
 	}
 
 	get_door_list(map_info, &game_data.door_list);
-	ft_lstiter(game_data.door_list, door_print);
-	printf("%p\n", game_data.door_list);
+	// ft_lstiter(game_data.door_list, door_print);
+	// printf("%p\n", game_data.door_list);
 	camera_setup(&game_data);
 
 	game_data.win_ptr = mlx_new_window(game_data.mlx_ptr, WIDTH, HEIGHT, \
