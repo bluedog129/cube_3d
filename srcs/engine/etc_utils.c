@@ -61,6 +61,7 @@ int	is_passable(t_game_data *game_data, int x, int y)
 	char	**map;
 	t_door	*door;
 
+	printf("x: %d\ny: %d\n", x, y);
 	map = game_data->map_info->map_board;
 	if (map[y][x] == '0')
 		return (1);

@@ -64,7 +64,7 @@ void	dda_algorythm2(char **map, t_raycaster *rc, t_camera *cam)
 	dda_algorythm2_2(rc, *cam);
 }
 
-void	casting_through_door(t_game_data *game_data, \
+void	casting_through_vdoor(t_game_data *game_data, \
 t_raycaster raycaster, t_img_data *screen, int screen_x)
 {
 	t_draw_info	draw_info;
@@ -82,12 +82,12 @@ t_raycaster raycaster, t_img_data *screen, int screen_x)
 	target_door = get_door(game_data->door_list, raycaster.map_check.x, \
 	raycaster.map_check.y)->content;
 	if (raycaster.side == 1 && target_door->state != CLOSE)
-		casting_through_door(game_data, raycaster, screen, screen_x);
+		casting_through_vdoor(game_data, raycaster, screen, screen_x);
 	draw_vertical_line(&game_data->door_texture[(int)target_door->frame], \
 	screen, screen_x, &draw_info);
 }
 
-void	drawing_doors(t_game_data *game_data, t_img_data *screen)
+void	drawing_vdoors(t_game_data *game_data, t_img_data *screen)
 {
 	int			screen_x;
 	t_draw_info	draw_info;
@@ -105,7 +105,7 @@ void	drawing_doors(t_game_data *game_data, t_img_data *screen)
 			target_door = get_door(game_data->door_list, raycaster.map_check.x, \
 			raycaster.map_check.y)->content;
 			if (raycaster.side == 1 && target_door->state != CLOSE)
-				casting_through_door(game_data, raycaster, screen, screen_x);
+				casting_through_vdoor(game_data, raycaster, screen, screen_x);
 			draw_info_settup2(game_data->eye_level, game_data->camera, \
 			raycaster, &draw_info);
 			draw_vertical_line(&game_data->door_texture[\

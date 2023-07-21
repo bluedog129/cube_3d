@@ -55,7 +55,7 @@ t_list	*new_door(int x, int y)
 	return (new);
 }
 
-void	get_door_list(t_map *map_info, t_list **door_list)
+int	get_door_list(t_map *map_info, t_list **door_list)
 {
 	t_list	*new;
 	int		y;
@@ -72,11 +72,12 @@ void	get_door_list(t_map *map_info, t_list **door_list)
 			{
 				new = new_door(x, y);
 				if (!new)
-					return ;
+					return (0);
 				ft_lstadd_back2(door_list, new);
 			}
 			x++;
 		}
 		y++;
 	}
+	return (1);
 }
