@@ -8,10 +8,10 @@ void	first_settup(t_game_data	*game_data)
 	draw_screen(game_data);
 	mlx_do_key_autorepeatoff(game_data->mlx_ptr);
 	mlx_mouse_hide(game_data->mlx_ptr, game_data->win_ptr);
-	mlx_hook(game_data->win_ptr, 2, 1L << 0, my_key_pressed_hook, &game_data);
-	mlx_hook(game_data->win_ptr, 3, 1L << 1, my_key_released_hook, &game_data);
-	mlx_hook(game_data->win_ptr, 6, 1L << 6, my_mouse_motion_hook, &game_data);
-	mlx_loop_hook(game_data->mlx_ptr, my_loop_hook, &game_data);
+	mlx_hook(game_data->win_ptr, 2, 1L << 0, my_key_pressed_hook, game_data);
+	mlx_hook(game_data->win_ptr, 3, 1L << 1, my_key_released_hook, game_data);
+	mlx_hook(game_data->win_ptr, 6, 1L << 6, my_mouse_motion_hook, game_data);
+	mlx_loop_hook(game_data->mlx_ptr, my_loop_hook, game_data);
 }
 
 void	engine_main(t_map *map_info)

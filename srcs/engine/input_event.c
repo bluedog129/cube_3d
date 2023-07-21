@@ -57,8 +57,6 @@ static void	move_horizontal(t_game_data *game_data)
 	move_speed = game_data->camera.move_speed;
 	old_pos.x = game_data->camera.pos.x;
 	old_pos.y = game_data->camera.pos.y;
-	printf("old pos_x: %f\n", old_pos.x);
-	printf("old pos_y: %f\n", old_pos.y);
 	rot_dir.x = game_data->camera.dir.x * cos(90 * M_PI / 180) - \
 	game_data->camera.dir.y * sin(90 * M_PI / 180);
 	rot_dir.y = game_data->camera.dir.x * sin(90 * M_PI / 180) + \
@@ -84,8 +82,6 @@ static void	move_vertical(t_game_data *game_data)
 	move_speed = game_data->camera.move_speed;
 	old_pos.x = game_data->camera.pos.x;
 	old_pos.y = game_data->camera.pos.y;
-	printf("old pos_x: %f\n", old_pos.x);
-	printf("old pos_y: %f\n", old_pos.y);
 	new_pos.x = old_pos.x - game_data->camera.dir.x * move_speed * \
 	game_data->move_input.y;
 	new_pos.y = old_pos.y - game_data->camera.dir.y * move_speed * \

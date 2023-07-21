@@ -77,8 +77,6 @@ t_raycaster raycaster, t_img_data *screen, int screen_x)
 		return ;
 	draw_info_settup2(game_data->eye_level, game_data->camera, \
 	raycaster, &draw_info);
-	if (raycaster.side == 2)
-		return ;
 	target_door = get_door(game_data->door_list, raycaster.map_check.x, \
 	raycaster.map_check.y)->content;
 	if (raycaster.side == 1 && target_door->state != CLOSE)

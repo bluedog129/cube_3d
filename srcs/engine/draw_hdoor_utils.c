@@ -57,7 +57,7 @@ void	dda_algorythm3(char **map, t_raycaster *rc, t_camera *cam)
 			rc->side = 2;
 			return ;
 		}
-		else if (rc->side == 1 && map[(int)rc->map_check.y][\
+		else if (rc->side == 0 && map[(int)rc->map_check.y][\
 		(int)rc->map_check.x] == 'd')
 			break ;
 	}
@@ -70,15 +70,13 @@ t_raycaster raycaster, t_img_data *screen, int screen_x)
 	t_draw_info	draw_info;
 	t_door		*target_door;
 
-	raycaster.side_dist.y += raycaster.delta_dist.y / 2;
+	raycaster.side_dist.x += raycaster.delta_dist.y / 2;
 	dda_algorythm3(game_data->map_info->map_board, \
 	&raycaster, &game_data->camera);
 	if (raycaster.side == 2)
 		return ;
 	draw_info_settup3(game_data->eye_level, game_data->camera, \
 	raycaster, &draw_info);
-	if (raycaster.side == 2)
-		return ;
 	target_door = get_door(game_data->door_list, raycaster.map_check.x, \
 	raycaster.map_check.y)->content;
 	if (raycaster.side == 0 && target_door->state != CLOSE)
@@ -104,7 +102,7 @@ void	drawing_hdoors(t_game_data *game_data, t_img_data *screen)
 		{
 			target_door = get_door(game_data->door_list, raycaster.map_check.x, \
 			raycaster.map_check.y)->content;
-			if (raycaster.side == 1 && target_door->state != CLOSE)
+			if (raycaster.side == 0 && target_door->state != CLOSE)
 				casting_through_hdoor(game_data, raycaster, screen, screen_x);
 			draw_info_settup3(game_data->eye_level, game_data->camera, \
 			raycaster, &draw_info);
