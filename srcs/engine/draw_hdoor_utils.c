@@ -13,6 +13,7 @@ t_raycaster rc, t_draw_info *draw_info)
 		draw_info->draw_end = HEIGHT - 1;
 	draw_info->wall_x = cam.pos.y + rc.perp_wall_dist * rc.dir.y;
 	draw_info->wall_x -= (int)draw_info->wall_x;
+	draw_info->wall_x = 1 - draw_info->wall_x;
 	draw_info->texture_pos.x = 64.0 * draw_info->wall_x;
 	draw_info->texture_pos.y = (draw_info->draw_start - eye_level + \
 	draw_info->line_len / 2) * (64.0 / draw_info->line_len);
