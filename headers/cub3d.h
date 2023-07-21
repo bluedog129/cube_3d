@@ -143,4 +143,7 @@ t_list *get_door(t_list *door_list, int x, int y);
 void	door_update(void *content);
 void interact_doors(t_game_data *game_data);
 
+void	raycaster_setup2(t_raycaster *rc, t_camera cam, int screen_x);
+void	dda_algorythm2(char **map, t_raycaster *rc, t_camera *cam);
+
 #endif

@@ -9,7 +9,7 @@ int x, t_draw_info *draw_info)
 	int			color;
 
 	target_texture = &game_data->wall_texture[draw_info->texture_idx];
-	y = draw_info->draw_start; // 이 부분을 밖으로 빼면 모듈화가 될것같기도...?
+	y = draw_info->draw_start;
 	while (y <= draw_info->draw_end)
 	{
 		color = pixel_from_image(target_texture, draw_info->texture_pos.x, \
@@ -20,7 +20,8 @@ int x, t_draw_info *draw_info)
 	}
 }
 
-void	draw_info_settup(float eye_level, t_camera cam, t_raycaster rc, t_draw_info *draw_info)
+void	draw_info_settup(float eye_level, t_camera cam, \
+t_raycaster rc, t_draw_info *draw_info)
 {
 	draw_info->line_len = (int)(HEIGHT / rc.perp_wall_dist);
 	draw_info->draw_start = -draw_info->line_len / 2 + eye_level;
@@ -65,7 +66,6 @@ void	dda_algorythm(char **map, t_raycaster *rc)
 			rc->side = 1;
 		}
 	}
-
 	if (rc->side == 0)
 		rc->perp_wall_dist = rc->side_dist.x - rc->delta_dist.x;
 	else
@@ -77,10 +77,8 @@ void	raycaster_setup(t_raycaster *rc, t_camera cam, int screen_x)
 	rc->camera_x = 2 * screen_x / (float)WIDTH - 1;
 	rc->dir.x = cam.dir.x + cam.plane.x * rc->camera_x;
 	rc->dir.y = cam.dir.y + cam.plane.y * rc->camera_x;
-
 	rc->map_check.x = (int)cam.pos.x;
 	rc->map_check.y = (int)cam.pos.y;
-	
 	ft_bzero(&rc->step, sizeof(t_vec2d));
 	rc->delta_dist.x = fabsf(1 / rc->dir.x);
 	rc->delta_dist.y = fabsf(1 / rc->dir.y);
@@ -107,7 +105,8 @@ void	drawing_walls(t_game_data *game_data, t_img_data *screen)
 	{
 		raycaster_setup(&raycaster, game_data->camera, screen_x);
 		dda_algorythm(game_data->map_info->map_board, &raycaster);
-		draw_info_settup(game_data->eye_level, game_data->camera, raycaster, &draw_info);
+		draw_info_settup(game_data->eye_level, game_data->camera, \
+		raycaster, &draw_info);
 		draw_info.texture_idx = raycaster.side;
 		if ((raycaster.side == 0 && raycaster.dir.x < 0) || \
 		(raycaster.side == 1 && raycaster.dir.y > 0))

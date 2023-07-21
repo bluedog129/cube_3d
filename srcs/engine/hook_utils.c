@@ -32,9 +32,12 @@ int	my_key_pressed_hook(int keycode, t_game_data *game_data)
 
 int	my_key_released_hook(int keycode, t_game_data *game_data)
 {
-	if ((keycode == KEY_RIGHT_SQUARE_BRACKET) || (keycode == KEY_LEFT_SQUARE_BRACKET))
+	if ((keycode == KEY_RIGHT_SQUARE_BRACKET) || \
+	(keycode == KEY_LEFT_SQUARE_BRACKET))
 	{
-		game_data->camera.rotate_speed += ((keycode == KEY_RIGHT_SQUARE_BRACKET) - (keycode == KEY_LEFT_SQUARE_BRACKET)) * 0.002;
+		game_data->camera.rotate_speed += (\
+		(keycode == KEY_RIGHT_SQUARE_BRACKET) - \
+		(keycode == KEY_LEFT_SQUARE_BRACKET)) * 0.002;
 		if (game_data->camera.rotate_speed < 0)
 			game_data->camera.rotate_speed = 0;
 	}
@@ -57,6 +60,7 @@ int	my_loop_hook(t_game_data *game_data)
 	}
 	ft_lstiter(game_data->door_list, door_update);
 	draw_screen(game_data);
-	os_mouse_move(game_data->mlx_ptr, game_data->win_ptr, WIDTH / 2, HEIGHT / 2);
+	os_mouse_move(game_data->mlx_ptr, \
+	game_data->win_ptr, WIDTH / 2, HEIGHT / 2);
 	return (0);
 }

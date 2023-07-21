@@ -3,12 +3,6 @@
 
 void	darwing_wall(t_game_data *game_data, t_img_data *screen)
 {
-	// 맵 배열을 벗어나면 안됨
-	// 미니맵 사이즈를 벗어나면 안됨
-	// 기준점은 플레이어의 좌표 및 미니맵 화면 중앙
-	// int	y;
-	// int	x;
-
 	for (int y = 0; y < 100; y++)
 	{
 		for (int x = 0; x < 100; x++)
@@ -45,8 +39,6 @@ void	darwing_wall(t_game_data *game_data, t_img_data *screen)
 			}
 		}
 	}
-
-	// pixel_put_to_image(screen, 50, 50, create_trgb(0, 255, 0, 0));
 }
 
 void	filling_background(t_img_data *screen)
@@ -78,12 +70,9 @@ void	drawing_minimap(t_game_data *game_data)
 	screen.img_ptr = mlx_new_image(game_data->mlx_ptr, 100, 100);
 	screen.img_addr = mlx_get_data_addr(screen.img_ptr, &screen.img_bpp, \
 	&screen.img_line_len, &screen.img_endian);
-
 	filling_background(&screen);
-
 	darwing_wall(game_data, &screen);
-
-	mlx_put_image_to_window(game_data->mlx_ptr, game_data->win_ptr, screen.img_ptr, 530, 10);
-
+	mlx_put_image_to_window(game_data->mlx_ptr, game_data->win_ptr, \
+	screen.img_ptr, WIDTH - 110, 10);
 	mlx_destroy_image(game_data->mlx_ptr, screen.img_ptr);
 }

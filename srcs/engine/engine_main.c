@@ -1,21 +1,9 @@
 
 #include "cub3d.h"
 
-void	door_print(void *content)
-{
-	t_door *door;
-
-	door = content;
-	printf("--------------------\n");
-	printf("door x: %d\n", (int)door->pos.x);
-	printf("door y: %d\n", (int)door->pos.y);
-	printf("door state: %d\n", (int)door->state);
-	printf("door frame: %d\n", (int)door->frame);
-}
-
 void	door_update(void *content)
 {
-	t_door *door;
+	t_door	*door;
 
 	door = content;
 	if (door->state == OPENING)
@@ -34,9 +22,9 @@ void	door_update(void *content)
 	}
 }
 
-t_list *get_door(t_list *door_list, int x, int y)
+t_list	*get_door(t_list *door_list, int x, int y)
 {
-	t_door *door;
+	t_door	*door;
 
 	while (door_list)
 	{
@@ -48,10 +36,10 @@ t_list *get_door(t_list *door_list, int x, int y)
 	return (NULL);
 }
 
-t_list *new_door(int x, int y)
+t_list	*new_door(int x, int y)
 {
-	t_list *new;
-	t_door *content;
+	t_list	*new;
+	t_door	*content;
 
 	new = NULL;
 	content = malloc(sizeof(t_door));
@@ -69,9 +57,9 @@ t_list *new_door(int x, int y)
 
 void	get_door_list(t_map *map_info, t_list **door_list)
 {
-	t_list *new;
-	int y;
-	int x;
+	t_list	*new;
+	int		y;
+	int		x;
 
 	y = 0;
 	while (y < map_info->height)
@@ -79,7 +67,8 @@ void	get_door_list(t_map *map_info, t_list **door_list)
 		x = 0;
 		while (x < map_info->width)
 		{
-			if (map_info->map_board[y][x] == 'd' || map_info->map_board[y][x] == 'D')
+			if (map_info->map_board[y][x] == 'd' || \
+			map_info->map_board[y][x] == 'D')
 			{
 				new = new_door(x, y);
 				if (!new)
@@ -183,7 +172,6 @@ int	load_textures(t_game_data	*game_data)
 	game_data->door_texture[5].img_ptr = mlx_xpm_file_to_image(game_data->mlx_ptr, "./res/door6.xpm", &game_data->door_texture[5].img_width, &game_data->door_texture[5].img_height);
 	game_data->door_texture[5].img_addr = mlx_get_data_addr(game_data->door_texture[5].img_ptr, &game_data->door_texture[5].img_bpp, &game_data->door_texture[5].img_line_len, &game_data->door_texture[5].img_endian);
 	
-
 	return (SUCCESS);
 }
 
@@ -194,32 +182,22 @@ void	engine_main(t_map *map_info)
 	ft_bzero(&game_data, sizeof(t_game_data));
 	game_data.mlx_ptr = mlx_init();
 	game_data.map_info = map_info;
-
 	if (load_textures(&game_data) == ERROR)
 	{
 		printf("invalid resource path\n");
 		return ;
 	}
-
 	get_door_list(map_info, &game_data.door_list);
-	// ft_lstiter(game_data.door_list, door_print);
-	// printf("%p\n", game_data.door_list);
 	camera_setup(&game_data);
-
 	game_data.win_ptr = mlx_new_window(game_data.mlx_ptr, WIDTH, HEIGHT, \
 	"raycast practice");
-
 	os_mouse_move(game_data.mlx_ptr, game_data.win_ptr, WIDTH / 2, HEIGHT / 2);
 	draw_screen(&game_data);
-
 	mlx_do_key_autorepeatoff(game_data.mlx_ptr);
 	mlx_mouse_hide(game_data.mlx_ptr, game_data.win_ptr);
-
 	mlx_hook(game_data.win_ptr, 2, 1L << 0, my_key_pressed_hook, &game_data);
 	mlx_hook(game_data.win_ptr, 3, 1L << 1, my_key_released_hook, &game_data);
 	mlx_hook(game_data.win_ptr, 6, 1L << 6, my_mouse_motion_hook, &game_data);
-
 	mlx_loop_hook(game_data.mlx_ptr, my_loop_hook, &game_data);
-
 	mlx_loop(game_data.mlx_ptr);
 }

@@ -6,16 +6,16 @@ static void	rotate_vertical(t_game_data *game_data)
 	float	limit;
 
 	limit = HEIGHT / 8;
-	game_data->eye_level += game_data->rot_input.y * game_data->camera.rotate_speed;
+	game_data->eye_level += game_data->rot_input.y * \
+	game_data->camera.rotate_speed;
 	if (game_data->eye_level < -limit)
 		game_data->eye_level = -limit;
 	else if (game_data->eye_level >= HEIGHT + limit)
 		game_data->eye_level = HEIGHT + limit - 1;
-
 	if (fabsf(game_data->rot_input.y) > 0.05)
 		game_data->rot_input.y /= 2;
 	else
-		game_data->rot_input.y = 0;	
+		game_data->rot_input.y = 0;
 }
 
 static void	rotate_horizontal(t_game_data *game_data)
@@ -47,7 +47,7 @@ static void	rotate_horizontal(t_game_data *game_data)
 
 int	is_passable(t_game_data *game_data, int x, int y)
 {
-	char **map;
+	char	**map;
 	t_door	*door;
 
 	map = game_data->map_info->map_board;
@@ -72,19 +72,14 @@ static void	move_horizontal(t_game_data *game_data)
 
 	map = game_data->map_info->map_board;
 	move_speed = game_data->camera.move_speed;
-
 	old_pos.x = game_data->camera.pos.x;
 	old_pos.y = game_data->camera.pos.y;
-
-
 	rot_dir.x = game_data->camera.dir.x * cos(90 * M_PI / 180) - \
 	game_data->camera.dir.y * sin(90 * M_PI / 180);
 	rot_dir.y = game_data->camera.dir.x * sin(90 * M_PI / 180) + \
 	game_data->camera.dir.y * cos(90 * M_PI / 180);
-
 	new_pos.x = old_pos.x + rot_dir.x * move_speed * game_data->move_input.x;
 	new_pos.y = old_pos.y + rot_dir.y * move_speed * game_data->move_input.x;
-
 	if (is_passable(game_data, new_pos.x, old_pos.y))
 		game_data->camera.pos.x += rot_dir.x * move_speed * \
 		game_data->move_input.x;
@@ -102,13 +97,12 @@ static void	move_vertical(t_game_data *game_data)
 
 	map = game_data->map_info->map_board;
 	move_speed = game_data->camera.move_speed;
-
 	old_pos.x = game_data->camera.pos.x;
 	old_pos.y = game_data->camera.pos.y;
-	
-	new_pos.x = old_pos.x - game_data->camera.dir.x * move_speed * game_data->move_input.y;
-	new_pos.y = old_pos.y - game_data->camera.dir.y * move_speed * game_data->move_input.y;
-
+	new_pos.x = old_pos.x - game_data->camera.dir.x * move_speed * \
+	game_data->move_input.y;
+	new_pos.y = old_pos.y - game_data->camera.dir.y * move_speed * \
+	game_data->move_input.y;
 	if (is_passable(game_data, old_pos.x, new_pos.y))
 		game_data->camera.pos.y -= game_data->camera.dir.y * move_speed * \
 		game_data->move_input.y;
