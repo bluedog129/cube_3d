@@ -13,7 +13,7 @@ void	interact_doors(t_game_data *game_data)
 	screen_x = WIDTH / 4;
 	while (screen_x < WIDTH / 2)
 	{
-		raycaster_setup2(&raycaster, game_data->camera, screen_x);
+		raycaster_setup(&raycaster, game_data->camera, screen_x);
 		dda_algorythm2(game_data->map_info->map_board, &raycaster, \
 		&game_data->camera);
 		if (raycaster.side == 2)

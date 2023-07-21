@@ -1,21 +1,22 @@
 
 #include "cub3d.h"
 
-void	draw_vertical_line(t_game_data *game_data, t_img_data *img, \
+void	draw_vertical_line(t_img_data *target_texture, t_img_data *img, \
 int x, t_draw_info *draw_info)
 {
-	t_img_data	*target_texture;
 	int			y;
 	int			color;
 
-	target_texture = &game_data->wall_texture[draw_info->texture_idx];
 	y = draw_info->draw_start;
 	while (y <= draw_info->draw_end)
 	{
 		color = pixel_from_image(target_texture, draw_info->texture_pos.x, \
-		draw_info->texture_pos.y + (64.0 / draw_info->line_len));
-		pixel_put_to_image(img, x, y, color);
-		draw_info->texture_pos.y += (64.0 / draw_info->line_len);
+		draw_info->texture_pos.y + ((float)target_texture->img_height / \
+		draw_info->line_len));
+		if ((unsigned int)color != 0xff000000)
+			pixel_put_to_image(img, x, y, color);
+		draw_info->texture_pos.y += ((float)target_texture->img_height / \
+		draw_info->line_len);
 		y++;
 	}
 }
@@ -33,16 +34,16 @@ t_raycaster rc, t_draw_info *draw_info)
 	if (rc.side == 0)
 	{
 		draw_info->wall_x = cam.pos.y + rc.perp_wall_dist * rc.dir.y;
-		if (rc.dir.x < 0)
-			draw_info->wall_x = 64.0 - draw_info->wall_x;
 		draw_info->wall_x -= (int)draw_info->wall_x;
+		if (rc.dir.x < 0)
+			draw_info->wall_x = 1 - draw_info->wall_x;
 	}
 	else
 	{
 		draw_info->wall_x = cam.pos.x + rc.perp_wall_dist * rc.dir.x;
-		if (rc.dir.y > 0)
-			draw_info->wall_x = 64.0 - draw_info->wall_x;
 		draw_info->wall_x -= (int)draw_info->wall_x;
+		if (rc.dir.y > 0)
+			draw_info->wall_x = 1 - draw_info->wall_x;
 	}
 	draw_info->texture_pos.x = 64.0 * draw_info->wall_x;
 	draw_info->texture_pos.y = (draw_info->draw_start - eye_level + \
@@ -111,7 +112,8 @@ void	drawing_walls(t_game_data *game_data, t_img_data *screen)
 		if ((raycaster.side == 0 && raycaster.dir.x < 0) || \
 		(raycaster.side == 1 && raycaster.dir.y > 0))
 			draw_info.texture_idx += 2;
-		draw_vertical_line(game_data, screen, screen_x, &draw_info);
+		draw_vertical_line(&game_data->wall_texture[draw_info.texture_idx], \
+		screen, screen_x, &draw_info);
 		screen_x++;
 	}
 }

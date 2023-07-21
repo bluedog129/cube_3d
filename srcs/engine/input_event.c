@@ -45,23 +45,6 @@ static void	rotate_horizontal(t_game_data *game_data)
 		game_data->rot_input.x = 0;
 }
 
-int	is_passable(t_game_data *game_data, int x, int y)
-{
-	char	**map;
-	t_door	*door;
-
-	map = game_data->map_info->map_board;
-	if (map[y][x] == '0')
-		return (1);
-	else if (map[y][x] == 'D' || map[y][x] == 'd')
-	{
-		door = get_door(game_data->door_list, x, y)->content;
-		if (door->state == OPEN)
-			return (1);
-	}
-	return (0);
-}
-
 static void	move_horizontal(t_game_data *game_data)
 {
 	char	**map;

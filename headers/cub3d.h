@@ -141,9 +141,14 @@ void		os_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
 
 t_list *get_door(t_list *door_list, int x, int y);
 void	door_update(void *content);
+t_list	*new_door(int x, int y);
+void	get_door_list(t_map *map_info, t_list **door_list);
 void interact_doors(t_game_data *game_data);
 
-void	raycaster_setup2(t_raycaster *rc, t_camera cam, int screen_x);
+void	raycaster_setup(t_raycaster *rc, t_camera cam, int screen_x);
 void	dda_algorythm2(char **map, t_raycaster *rc, t_camera *cam);
+void	draw_textes(t_game_data *game_data);
+int	is_passable(t_game_data *game_data, int x, int y);
+void	draw_vertical_line(t_img_data *target_texture, t_img_data *img, int x, t_draw_info *draw_info);
 
 #endif
