@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_utils1.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonghyle <yonghyle@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/22 18:46:22 by yonghyle          #+#    #+#             */
+/*   Updated: 2023/07/22 18:46:23 by yonghyle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -14,9 +25,9 @@ float eye_level, int floor, int ceiling)
 		while (x < WIDTH)
 		{
 			if (y < eye_level)
-				pixel_put_to_image(screen, x, y, floor);
-			else
 				pixel_put_to_image(screen, x, y, ceiling);
+			else
+				pixel_put_to_image(screen, x, y, floor);
 			x++;
 		}
 		y++;
@@ -34,8 +45,7 @@ void	draw_screen(t_game_data *game_data)
 	game_data->map_info->side_info->floor_rgb, \
 	game_data->map_info->side_info->ceiling_rgb);
 	drawing_walls(game_data, &screen);
-	drawing_vdoors(game_data, &screen);
-	drawing_hdoors(game_data, &screen);
+	drawing_doors(game_data, &screen);
 	mlx_put_image_to_window(game_data->mlx_ptr, game_data->win_ptr, \
 	screen.img_ptr, 0, 0);
 	draw_textes(game_data);

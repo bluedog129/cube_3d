@@ -1,18 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   door_event_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonghyle <yonghyle@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/22 18:46:01 by yonghyle          #+#    #+#             */
+/*   Updated: 2023/07/22 18:46:02 by yonghyle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
-
-/*
-
-	serch nearset door
-
-	do dda2 and dda3
-	find nearest vdoor or hdoor
-	and change state of door
-
-	call serch nesrest door by each screen_x
-	update target_door
-
-*/
 
 void	serch_nearest_door(t_game_data *game_data, int screen_x, \
 float *event_dist, t_door **target_door)
@@ -43,7 +41,6 @@ float *event_dist, t_door **target_door)
 void	interact_doors(t_game_data *game_data)
 {
 	int			screen_x;
-	// t_raycaster	raycaster;
 	float		event_dist;
 	t_door		*target_door;
 

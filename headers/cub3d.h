@@ -116,7 +116,7 @@ void		free_lst_node(t_map_node *head);
 
 // engine part
 
-void		engine_main(t_map *map_info);
+void		engine_main(t_map *map_info, t_parse_info *parse_info);
 
 int			create_trgb(int t, int r, int g, int b);
 int			pixel_from_image(t_img_data *img, int x, int y);
@@ -133,8 +133,11 @@ void		move_event(t_game_data *game_data);
 
 void		draw_screen(t_game_data *game_data);
 void		drawing_walls(t_game_data *game_data, t_img_data *screen);
-void		drawing_vdoors(t_game_data *game_data, t_img_data *screen);
-void		drawing_hdoors(t_game_data *game_data, t_img_data *screen);
+// void		drawing_vdoors(t_game_data *game_data, t_img_data *screen);
+// void		drawing_hdoors(t_game_data *game_data, t_img_data *screen);
+void		drawing_doors(t_game_data *game_data, t_img_data *screen);
+void		drawing_vdoors(t_game_data *game_data, t_img_data *screen, int screen_x);
+void		drawing_hdoors(t_game_data *game_data, t_img_data *screen, int screen_x);
 void		drawing_minimap(t_game_data *game_data);
 
 void		os_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
@@ -157,5 +160,7 @@ void		draw_textes(t_game_data *game_data);
 int			is_passable(t_game_data *game_data, int x, int y);
 void		draw_vertical_line(t_img_data *target_texture, t_img_data *img, \
 int x, t_draw_info *draw_info);
+
+void		exit_cub3d(t_game_data *game_data);
 
 #endif

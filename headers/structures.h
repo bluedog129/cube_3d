@@ -113,16 +113,17 @@ typedef struct s_img_data
 
 typedef struct s_game_data
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_map		*map_info;
-	t_list		*door_list;
-	t_img_data	wall_texture[4];
-	t_img_data	door_texture[6];
-	t_vec2d		move_input;
-	t_vec2d		rot_input;
-	float		eye_level;
-	t_camera	camera;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	t_map			*map_info;
+	t_parse_info	*parse_info;
+	t_list			*door_list;
+	t_img_data		wall_texture[4];
+	t_img_data		door_texture[6];
+	t_vec2d			move_input;
+	t_vec2d			rot_input;
+	float			eye_level;
+	t_camera		camera;
 }	t_game_data;
 
 #endif

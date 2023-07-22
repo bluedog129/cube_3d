@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_vdoor_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonghyle <yonghyle@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/22 18:46:41 by yonghyle          #+#    #+#             */
+/*   Updated: 2023/07/22 18:46:43 by yonghyle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -85,30 +96,24 @@ t_raycaster raycaster, t_img_data *screen, int screen_x)
 	screen, screen_x, &draw_info);
 }
 
-void	drawing_vdoors(t_game_data *game_data, t_img_data *screen)
+void	drawing_vdoors(t_game_data *game_data, t_img_data *screen, int screen_x)
 {
-	int			screen_x;
 	t_draw_info	draw_info;
 	t_raycaster	raycaster;
 	t_door		*target_door;
 
-	screen_x = 0;
-	while (screen_x < WIDTH)
+	raycaster_setup(&raycaster, game_data->camera, screen_x);
+	dda_algorythm2(game_data->map_info->map_board, &raycaster, \
+	&game_data->camera);
+	if (raycaster.side != 2)
 	{
-		raycaster_setup(&raycaster, game_data->camera, screen_x);
-		dda_algorythm2(game_data->map_info->map_board, &raycaster, \
-		&game_data->camera);
-		if (raycaster.side != 2)
-		{
-			target_door = get_door(game_data->door_list, raycaster.map_check.x, \
-			raycaster.map_check.y)->content;
-			if (raycaster.side == 1 && target_door->state != CLOSE)
-				casting_through_vdoor(game_data, raycaster, screen, screen_x);
-			draw_info_settup2(game_data->eye_level, game_data->camera, \
-			raycaster, &draw_info);
-			draw_vertical_line(&game_data->door_texture[\
-			(int)target_door->frame], screen, screen_x, &draw_info);
-		}
-		screen_x++;
+		target_door = get_door(game_data->door_list, raycaster.map_check.x, \
+		raycaster.map_check.y)->content;
+		if (raycaster.side == 1 && target_door->state != CLOSE)
+			casting_through_vdoor(game_data, raycaster, screen, screen_x);
+		draw_info_settup2(game_data->eye_level, game_data->camera, \
+		raycaster, &draw_info);
+		draw_vertical_line(&game_data->door_texture[\
+		(int)target_door->frame], screen, screen_x, &draw_info);
 	}
 }

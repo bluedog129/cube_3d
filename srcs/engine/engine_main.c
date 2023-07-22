@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   engine_main.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonghyle <yonghyle@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/22 18:46:48 by yonghyle          #+#    #+#             */
+/*   Updated: 2023/07/22 18:46:49 by yonghyle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -14,17 +25,19 @@ void	first_settup(t_game_data	*game_data)
 	mlx_loop_hook(game_data->mlx_ptr, my_loop_hook, game_data);
 }
 
-void	engine_main(t_map *map_info)
+void	engine_main(t_map *map_info, t_parse_info *parse_info)
 {
 	t_game_data	game_data;
 
 	ft_bzero(&game_data, sizeof(t_game_data));
 	game_data.mlx_ptr = mlx_init();
 	game_data.map_info = map_info;
+	game_data.parse_info = parse_info;
 	if (load_textures1(&game_data) == ERROR || \
 	load_textures2(&game_data) == ERROR)
 	{
 		printf("invalid resource path\n");
+		exit_cub3d(&game_data);
 		return ;
 	}
 	get_door_list(map_info, &game_data.door_list);

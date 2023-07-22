@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hook_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonghyle <yonghyle@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/22 18:47:00 by yonghyle          #+#    #+#             */
+/*   Updated: 2023/07/22 18:47:01 by yonghyle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -17,7 +28,7 @@ int	my_mouse_motion_hook(int x, int y, t_game_data *game_data)
 int	my_key_pressed_hook(int keycode, t_game_data *game_data)
 {
 	if (keycode == KEY_ESC)
-		exit(EXIT_SUCCESS);
+		exit_cub3d(game_data);
 	if ((keycode == KEY_S) || (keycode == KEY_W))
 		game_data->move_input.y += ((keycode == KEY_S) - (keycode == KEY_W));
 	if ((keycode == KEY_D) || (keycode == KEY_A))
