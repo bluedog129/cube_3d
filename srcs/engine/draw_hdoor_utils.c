@@ -71,7 +71,7 @@ t_raycaster raycaster, t_img_data *screen, int screen_x)
 	t_draw_info	draw_info;
 	t_door		*target_door;
 
-	raycaster.side_dist.x += raycaster.delta_dist.y / 2;
+	raycaster.side_dist.x += raycaster.delta_dist.x / 2;
 	dda_algorythm3(game_data->map_info->map_board, \
 	&raycaster, &game_data->camera);
 	if (raycaster.side == 2)
