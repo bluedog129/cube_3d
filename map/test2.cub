@@ -1,7 +1,7 @@
 NO ./res/north.xpm
 SO ./res/south.xpm
 WE ./res/west.xpm
-EA ./res/eastt.xpm
+EA ./res/east.xpm
 F 220,100,0
 C 225,30,0
 1111111111111111111111111

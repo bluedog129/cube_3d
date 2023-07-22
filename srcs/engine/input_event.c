@@ -58,13 +58,11 @@ static void	rotate_horizontal(t_game_data *game_data)
 
 static void	move_horizontal(t_game_data *game_data)
 {
-	char	**map;
 	float	move_speed;
 	t_vec2d	rot_dir;
 	t_vec2d	old_pos;
 	t_vec2d	new_pos;
 
-	map = game_data->map_info->map_board;
 	move_speed = game_data->camera.move_speed;
 	old_pos.x = game_data->camera.pos.x;
 	old_pos.y = game_data->camera.pos.y;
@@ -84,12 +82,10 @@ static void	move_horizontal(t_game_data *game_data)
 
 static void	move_vertical(t_game_data *game_data)
 {
-	char	**map;
 	t_vec2d	old_pos;
 	t_vec2d	new_pos;
 	float	move_speed;
 
-	map = game_data->map_info->map_board;
 	move_speed = game_data->camera.move_speed;
 	old_pos.x = game_data->camera.pos.x;
 	old_pos.y = game_data->camera.pos.y;

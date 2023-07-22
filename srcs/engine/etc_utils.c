@@ -14,45 +14,53 @@
 
 void	draw_textes2(t_game_data *game_data)
 {
+	void	*mp;
+	void	*wp;
 	char	*str;
 	char	rschar[10];
 
+	mp = game_data->mlx_ptr;
+	wp = game_data->win_ptr;
 	sprintf(rschar, "%.3f", game_data->camera.rotate_speed);
-	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 75, 0x000000, "rotSpeed:");
-	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 110, 75, 0x000000, rschar);
+	mlx_string_put(mp, wp, 5, 75, 0x000000, "rotSpeed:");
+	mlx_string_put(mp, wp, 110, 75, 0x000000, rschar);
 	str = ft_itoa(game_data->rot_input.x);
-	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 90, 0x000000, "rotInputX:");
-	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 110, 90, 0x000000, str);
+	mlx_string_put(mp, wp, 5, 90, 0x000000, "rotInputX:");
+	mlx_string_put(mp, wp, 110, 90, 0x000000, str);
 	free(str);
 	str = ft_itoa(game_data->rot_input.y);
-	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 105, 0x000000, "rotInputY:");
-	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 110, 105, 0x000000, str);
+	mlx_string_put(mp, wp, 5, 105, 0x000000, "rotInputY:");
+	mlx_string_put(mp, wp, 110, 105, 0x000000, str);
 	free(str);
 }
 
 void	draw_textes1(t_game_data *game_data)
 {
+	void	*mp;
+	void	*wp;
 	char	*str;
-	int		mouse_x;
-	int		mouse_y;
+	t_vec2d	mouse_pos;
 
-	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 15, 0x000000, "mapX:");
+	mp = game_data->mlx_ptr;
+	wp = game_data->win_ptr;
+	mlx_string_put(mp, wp, 5, 15, 0x000000, "mapX:");
 	str = ft_itoa((int)game_data->camera.pos.x);
-	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 70, 15, 0x000000, str);
+	mlx_string_put(mp, wp, 70, 15, 0x000000, str);
 	free(str);
-	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 30, 0x000000, "mapY:");
+	mlx_string_put(mp, wp, 5, 30, 0x000000, "mapY:");
 	str = ft_itoa((int)game_data->camera.pos.y);
-	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 70, 30, 0x000000, str);
+	mlx_string_put(mp, wp, 70, 30, 0x000000, str);
 	free(str);
-	os_mouse_get_pos(game_data->mlx_ptr, game_data->win_ptr, &mouse_x, &mouse_y);
-	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 45, 0x000000, "mouseX:");
-	str = ft_itoa(mouse_x);
-	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 80, 45, 0x000000, str);
+	os_mouse_get_pos(mp, wp, (int *)&mouse_pos.x, (int *)&mouse_pos.y);
+	mlx_string_put(mp, wp, 5, 45, 0x000000, "mouseX:");
+	str = ft_itoa(mouse_pos.x);
+	mlx_string_put(mp, wp, 80, 45, 0x000000, str);
 	free(str);
-	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 5, 60, 0x000000, "mouseY:");
-	str = ft_itoa(mouse_y);
-	mlx_string_put(game_data->mlx_ptr, game_data->win_ptr, 80, 60, 0x000000, str);
+	mlx_string_put(mp, wp, 5, 60, 0x000000, "mouseY:");
+	str = ft_itoa(mouse_pos.y);
+	mlx_string_put(mp, wp, 80, 60, 0x000000, str);
 	free(str);
+	draw_textes2(game_data);
 }
 
 void	exit_cub3d(t_game_data *game_data)

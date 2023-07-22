@@ -48,7 +48,7 @@ void	draw_screen(t_game_data *game_data)
 	drawing_doors(game_data, &screen);
 	mlx_put_image_to_window(game_data->mlx_ptr, game_data->win_ptr, \
 	screen.img_ptr, 0, 0);
-	draw_textes(game_data);
+	draw_textes1(game_data);
 	drawing_minimap(game_data);
 	mlx_destroy_image(game_data->mlx_ptr, screen.img_ptr);
 }
