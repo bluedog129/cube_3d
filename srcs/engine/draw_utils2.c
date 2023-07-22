@@ -117,12 +117,14 @@ void	drawing_walls(t_game_data *game_data, t_img_data *screen)
 	{
 		raycaster_setup(&raycaster, game_data->camera, screen_x);
 		dda_algorythm(game_data->map_info->map_board, &raycaster);
-		draw_info_settup(game_data->eye_level, game_data->camera, \
-		raycaster, &draw_info);
 		draw_info.texture_idx = raycaster.side;
 		if ((raycaster.side == 0 && raycaster.dir.x < 0) || \
 		(raycaster.side == 1 && raycaster.dir.y > 0))
 			draw_info.texture_idx += 2;
+		draw_info.target_texture = &game_data->\
+		wall_texture[draw_info.texture_idx];
+		draw_info_settup(game_data->eye_level, game_data->camera, \
+		raycaster, &draw_info);
 		draw_vertical_line(&game_data->wall_texture[draw_info.texture_idx], \
 		screen, screen_x, &draw_info);
 		screen_x++;
