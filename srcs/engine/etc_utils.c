@@ -63,7 +63,7 @@ void	draw_textes1(t_game_data *game_data)
 	draw_textes2(game_data);
 }
 
-void	exit_cub3d(t_game_data *game_data)
+void	exit_cub3d(t_game_data *game_data, int is_err)
 {
 	int	i;
 
@@ -85,7 +85,7 @@ void	exit_cub3d(t_game_data *game_data)
 	if (game_data->win_ptr)
 		mlx_destroy_window(game_data->mlx_ptr, game_data->win_ptr);
 	finish_cub(game_data->map_info, game_data->parse_info);
-	exit(EXIT_SUCCESS);
+	exit(is_err);
 }
 
 void	rotate_vector2(t_vec2d *vec2, float degree)

@@ -166,6 +166,6 @@ t_raycaster raycaster, t_img_data *screen, int screen_x);
 void	casting_through_hdoor(t_game_data *game_data, \
 t_raycaster raycaster, t_img_data *screen, int screen_x);
 
-void		exit_cub3d(t_game_data *game_data);
+void		exit_cub3d(t_game_data *game_data, int is_err);
 
 #endif

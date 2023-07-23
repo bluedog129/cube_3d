@@ -37,7 +37,7 @@ void	engine_main(t_map *map_info, t_parse_info *parse_info)
 	load_textures2(&game_data) == ERROR)
 	{
 		printf("invalid resource path\n");
-		exit_cub3d(&game_data);
+		exit_cub3d(&game_data, 1);
 		return ;
 	}
 	get_door_list(map_info, &game_data.door_list);

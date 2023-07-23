@@ -28,7 +28,7 @@ int	my_mouse_motion_hook(int x, int y, t_game_data *game_data)
 int	my_key_pressed_hook(int keycode, t_game_data *game_data)
 {
 	if (keycode == KEY_ESC)
-		exit_cub3d(game_data);
+		exit_cub3d(game_data, 0);
 	if ((keycode == KEY_S) || (keycode == KEY_W))
 		game_data->move_input.y += ((keycode == KEY_S) - (keycode == KEY_W));
 	if ((keycode == KEY_D) || (keycode == KEY_A))
