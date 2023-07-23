@@ -42,23 +42,22 @@ t_raycaster rc, t_draw_info *draw_info)
 	draw_info->draw_end = draw_info->line_len / 2 + eye_level;
 	if (draw_info->draw_end >= HEIGHT)
 		draw_info->draw_end = HEIGHT - 1;
-	if (rc.side == 0)
-	{
-		draw_info->wall_x = cam.pos.y + rc.perp_wall_dist * rc.dir.y;
-		draw_info->wall_x -= (int)draw_info->wall_x;
-		if (rc.dir.x < 0)
-			draw_info->wall_x = 1 - draw_info->wall_x;
-	}
-	else
+	draw_info->wall_x = cam.pos.y + rc.perp_wall_dist * rc.dir.y;
+	draw_info->wall_x -= (int)draw_info->wall_x;
+	if (rc.dir.x < 0)
+		draw_info->wall_x = 1 - draw_info->wall_x;
+	if (rc.side % 2)
 	{
 		draw_info->wall_x = cam.pos.x + rc.perp_wall_dist * rc.dir.x;
 		draw_info->wall_x -= (int)draw_info->wall_x;
 		if (rc.dir.y > 0)
 			draw_info->wall_x = 1 - draw_info->wall_x;
 	}
-	draw_info->texture_pos.x = 64.0 * draw_info->wall_x;
+	draw_info->texture_pos.x = (float)draw_info->target_texture->\
+	img_width * draw_info->wall_x;
 	draw_info->texture_pos.y = (draw_info->draw_start - eye_level + \
-	draw_info->line_len / 2) * (64.0 / draw_info->line_len);
+	draw_info->line_len / 2) * ((float)draw_info->target_texture->\
+	img_height / draw_info->line_len);
 }
 
 void	dda_algorythm(char **map, t_raycaster *rc)

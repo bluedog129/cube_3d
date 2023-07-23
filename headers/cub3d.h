@@ -161,6 +161,11 @@ int			is_passable(t_game_data *game_data, int x, int y);
 void		draw_vertical_line(t_img_data *target_texture, t_img_data *img, \
 int x, t_draw_info *draw_info);
 
+void	casting_through_vdoor(t_game_data *game_data, \
+t_raycaster raycaster, t_img_data *screen, int screen_x);
+void	casting_through_hdoor(t_game_data *game_data, \
+t_raycaster raycaster, t_img_data *screen, int screen_x);
+
 void		exit_cub3d(t_game_data *game_data);
 
 #endif
