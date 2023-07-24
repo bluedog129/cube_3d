@@ -1,13 +1,10 @@
 NO ./res/netflix.xpm
 SO ./res/samsung.xpm
-
-
 WE ./res/walmart.xpm
+EA                ./res/ebay.xpm
 
 F 220,100,0
 C 225,30,0
-EA                ./res/ebay.xpm
-
 1111111111111111111111111
 100000000011000000000000D1
 1000000111000000000000001

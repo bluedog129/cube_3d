@@ -28,6 +28,11 @@
 # define WIDTH 640
 # define HEIGHT 480
 
+extern void* __debug_tmp__;
+# define malloc(x) \
+(__debug_tmp__ = malloc(x)); \
+printf("%s:%d %p [%lubyte]\n", __FILE__, __LINE__, __debug_tmp__, x)
+
 enum e_cub3d_enum
 {
 	SUCCESS = 1,

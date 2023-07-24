@@ -97,8 +97,7 @@ t_raycaster raycaster, t_img_data *screen, int screen_x)
 	&game_data->door_texture[(int)target_door->frame];
 	draw_info_settup3(game_data->eye_level, game_data->camera, \
 	raycaster, &draw_info);
-	draw_vertical_line(&game_data->door_texture[(int)target_door->frame], \
-	screen, screen_x, &draw_info);
+	draw_vertical_line(draw_info.target_texture, screen, screen_x, &draw_info);
 }
 
 void	drawing_hdoors(t_game_data *game_data, t_img_data *screen, int screen_x)
@@ -120,7 +119,6 @@ void	drawing_hdoors(t_game_data *game_data, t_img_data *screen, int screen_x)
 		&game_data->door_texture[(int)target_door->frame];
 		draw_info_settup3(game_data->eye_level, game_data->camera, \
 		raycaster, &draw_info);
-		draw_vertical_line(&game_data->door_texture[\
-		(int)target_door->frame], screen, screen_x, &draw_info);
+		draw_vertical_line(draw_info.target_texture, screen, screen_x, &draw_info);
 	}
 }
