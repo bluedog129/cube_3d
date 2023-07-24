@@ -134,6 +134,7 @@ void		move_event(t_game_data *game_data);
 void		draw_screen(t_game_data *game_data);
 void		drawing_walls(t_game_data *game_data, t_img_data *screen);
 void		drawing_doors(t_game_data *game_data, t_img_data *screen);
+
 void		drawing_vdoors(t_game_data *game_data, t_img_data *screen, \
 int screen_x);
 void		drawing_hdoors(t_game_data *game_data, t_img_data *screen, \
@@ -142,6 +143,7 @@ void		drawing_minimap(t_game_data *game_data);
 
 void		os_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
 void		os_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
+
 
 void		camera_setup1(t_game_data *game_data);
 int			load_textures1(t_game_data	*game_data);

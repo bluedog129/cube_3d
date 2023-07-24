@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_validation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choihyojong <choihyojong@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:42:18 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/09 16:54:01 by choihyojong      ###   ########.fr       */
+/*   Updated: 2023/07/18 15:56:01 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

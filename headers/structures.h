@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:16:34 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/10 18:26:03 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/07/18 15:06:26 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,18 @@ typedef struct s_raycaster
 	int		obj_type;
 }	t_raycaster;
 
+typedef struct s_draw_info
+{
+	int		line_len;
+	int		draw_start;
+	int		draw_end;
+	float	wall_x;
+	int		texture_idx;
+	t_vec2d	texture_pos;
+	int		obj_type;
+	int		color;
+}	t_draw_info;
+
 typedef struct s_camera
 {
 	t_vec2d	pos;
@@ -99,6 +111,7 @@ typedef struct s_img_data
 	int		img_width;
 	int		img_height;
 }	t_img_data;
+
 
 typedef struct s_draw_info
 {
@@ -125,6 +138,7 @@ typedef struct s_game_data
 	t_vec2d			rot_input;
 	float			eye_level;
 	t_camera		camera;
+
 }	t_game_data;
 
 #endif

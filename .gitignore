@@ -1,0 +1,4 @@
+./mlx_mms_mac
+./Makefile
+.DS_Store
+*.o

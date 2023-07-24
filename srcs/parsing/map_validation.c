@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:57:09 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/10 14:12:49 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:42:18 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,10 @@ int	validate_edge_part(t_parse_info *parse_info, t_map *map_info, \
 		if (map_info->map_board[height][width] != '1' && \
 			map_info->map_board[height][width] != ' ' && \
 			map_info->map_board[height][width] != '*')
+		{
+			printf("edge part\n");
 			return (ERROR);
+		}
 	}
 	else
 	{
