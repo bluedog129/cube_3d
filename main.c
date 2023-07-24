@@ -22,17 +22,19 @@ int	main(int argc, char **argv)
 	t_map			map_info;
 	t_parse_info	parse_info;
 
-	atexit(hyojocho);
+	// atexit(hyojocho);
 	validate_args(argc, argv[1]);
+
 	parse_cub_file(argv[1], &map_info, &parse_info);
 	make_array_map(&map_info, &parse_info);
-	engine_main(&map_info);
+	engine_main(&map_info, &parse_info);
+
 	// int i = 0;
 	// while (i < map_info.height)
 	// {
 	// 	printf("%s\n", map_info.map_board[i]);
 	// 	i++;
 	// }
-	finish_cub(&map_info, &parse_info);
+	// finish_cub(&map_info, &parse_info);
 	return (0);
 }

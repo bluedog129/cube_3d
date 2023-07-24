@@ -71,4 +71,11 @@ char		*get_next_line(int fd);
 ssize_t		find_char(const char *s, int c);
 char		*append_buffer(char const *s1, char const *s2, size_t len);
 
+t_list		*ft_lstnew(void *content);
+void		ft_lstdelone(t_list *lst, void (*del)(void *));
+void		ft_lstclear(t_list **lst, void (*del)(void *));
+void		ft_lstiter(t_list *lst, void (*f)(void *));
+void		ft_lstadd_back2(t_list **lst, t_list *new);
+t_list		*ft_lstlast2(t_list *lst);
+
 #endif

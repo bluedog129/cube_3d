@@ -60,6 +60,13 @@ typedef struct s_vec2d
 	float	y;
 }	t_vec2d;
 
+typedef struct s_door
+{
+	t_vec2d	pos;
+	int		state;
+	float	frame;
+}	t_door;
+
 typedef struct s_raycaster
 {
 	float	camera_x;
@@ -105,16 +112,33 @@ typedef struct s_img_data
 	int		img_height;
 }	t_img_data;
 
+
+typedef struct s_draw_info
+{
+	int			line_len;
+	int			draw_start;
+	int			draw_end;
+	float		wall_x;
+	int			texture_idx;
+	t_img_data	*target_texture;
+	t_vec2d		texture_pos;
+	int			color;
+}	t_draw_info;
+
 typedef struct s_game_data
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_map		*map_info;
-	t_img_data	wall_texture[4];
-	t_vec2d		move_input;
-	t_vec2d		rot_input;
-	float		eye_level;
-	t_camera	camera;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	t_map			*map_info;
+	t_parse_info	*parse_info;
+	t_list			*door_list;
+	t_img_data		wall_texture[4];
+	t_img_data		door_texture[6];
+	t_vec2d			move_input;
+	t_vec2d			rot_input;
+	float			eye_level;
+	t_camera		camera;
+
 }	t_game_data;
 
 #endif

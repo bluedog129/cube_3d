@@ -55,11 +55,12 @@ enum e_check_type_enum
 	RGB = 12
 };
 
-enum e_obj_types
+enum e_door_state
 {
-	WALL = 1,
-	V_DOOR = 2,
-	H_DOOR = 3
+	CLOSE = 0,
+	OPENING = 1,
+	OPEN = 2,
+	CLOSING = 3
 };
 
 // parsing
@@ -115,7 +116,7 @@ void		free_lst_node(t_map_node *head);
 
 // engine part
 
-void		engine_main(t_map *map_info);
+void		engine_main(t_map *map_info, t_parse_info *parse_info);
 
 int			create_trgb(int t, int r, int g, int b);
 int			pixel_from_image(t_img_data *img, int x, int y);
@@ -133,9 +134,40 @@ void		move_event(t_game_data *game_data);
 void		draw_screen(t_game_data *game_data);
 void		drawing_walls(t_game_data *game_data, t_img_data *screen);
 void		drawing_doors(t_game_data *game_data, t_img_data *screen);
+
+void		drawing_vdoors(t_game_data *game_data, t_img_data *screen, \
+int screen_x);
+void		drawing_hdoors(t_game_data *game_data, t_img_data *screen, \
+int screen_x);
 void		drawing_minimap(t_game_data *game_data);
 
 void		os_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
 void		os_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
+
+
+void		camera_setup1(t_game_data *game_data);
+int			load_textures1(t_game_data	*game_data);
+int			load_textures2(t_game_data	*game_data);
+
+t_list		*get_door(t_list *door_list, int x, int y);
+void		door_update(void *content);
+t_list		*new_door(int x, int y);
+int			get_door_list(t_map *map_info, t_list **door_list);
+void		interact_doors(t_game_data *game_data);
+
+void		raycaster_setup(t_raycaster *rc, t_camera cam, int screen_x);
+void		dda_algorythm2(char **map, t_raycaster *rc, t_camera *cam);
+void		dda_algorythm3(char **map, t_raycaster *rc, t_camera *cam);
+void		draw_textes1(t_game_data *game_data);
+int			is_passable(t_game_data *game_data, int x, int y);
+void		draw_vertical_line(t_img_data *target_texture, t_img_data *img, \
+int x, t_draw_info *draw_info);
+
+void	casting_through_vdoor(t_game_data *game_data, \
+t_raycaster raycaster, t_img_data *screen, int screen_x);
+void	casting_through_hdoor(t_game_data *game_data, \
+t_raycaster raycaster, t_img_data *screen, int screen_x);
+
+void		exit_cub3d(t_game_data *game_data, int is_err);
 
 #endif
