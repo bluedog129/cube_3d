@@ -88,12 +88,14 @@ t_raycaster raycaster, t_img_data *screen, int screen_x)
 	&raycaster, &game_data->camera);
 	if (raycaster.side == 2)
 		return ;
-	draw_info_settup2(game_data->eye_level, game_data->camera, \
-	raycaster, &draw_info);
 	target_door = get_door(game_data->door_list, raycaster.map_check.x, \
 	raycaster.map_check.y)->content;
 	if (raycaster.side == 1 && target_door->state != CLOSE)
 		casting_through_vdoor(game_data, raycaster, screen, screen_x);
+	draw_info.target_texture = \
+		&game_data->door_texture[(int)target_door->frame];
+	draw_info_settup2(game_data->eye_level, game_data->camera, \
+	raycaster, &draw_info);
 	draw_vertical_line(&game_data->door_texture[(int)target_door->frame], \
 	screen, screen_x, &draw_info);
 }
