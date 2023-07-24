@@ -44,7 +44,7 @@ OBJECTS         = $(SOURCES:.c=.o)
 UNAME := $(shell uname)
 ifeq ($(UNAME), Darwin)
 	MLX_DIR		:= ./mlx_mms_mac
-	MLX_A		:= $(MLX_DIR)/libmlx.a
+	MLX_A		:= $(MLX_DIR)/libmlx.dylib
 	MLX_FLAGS	:= -L$(MLX_DIR) -framework OpenGL -framework AppKit
 else ifeq ($(UNAME), Linux)
 	MLX_DIR		:= ./mlx_linux
@@ -68,9 +68,9 @@ $(LIBS) :
 
 $(MLX_A):
 	@make --no-print-directory -C $(MLX_DIR)
-# ifeq ($(UNAME), Darwin)
-# 	@install_name_tool -id $(MLX_A) $(MLX_A)
-# endif
+ifeq ($(UNAME), Darwin)
+	@install_name_tool -id $(MLX_A) $(MLX_A)
+endif
 
 %.o: %.c
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@

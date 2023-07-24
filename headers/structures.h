@@ -80,18 +80,6 @@ typedef struct s_raycaster
 	int		obj_type;
 }	t_raycaster;
 
-typedef struct s_draw_info
-{
-	int		line_len;
-	int		draw_start;
-	int		draw_end;
-	float	wall_x;
-	int		texture_idx;
-	t_vec2d	texture_pos;
-	int		obj_type;
-	int		color;
-}	t_draw_info;
-
 typedef struct s_camera
 {
 	t_vec2d	pos;
