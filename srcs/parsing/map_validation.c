@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:57:09 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/18 17:42:18 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:05:46 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	valid_map_characters(char *line, t_map *map_info, \
 		if (line[i] != '0' && line[i] != '1' && line[i] != 'E' && \
 			line[i] != 'W' && line[i] != 'S' && line[i] != 'N' && \
 			line[i] != ' ' && line[i] != 'D' && line[i] != 'd')
-			exit_error("Error: invalid map characters", map_info, parse_info);
+			exit_error("Error: invalid map characters\n", map_info, parse_info);
 		else if (line[i] == 'N')
 			parse_info->start_position_count++;
 		else if (line[i] == 'S')
@@ -93,7 +93,6 @@ int	validate_edge_part(t_parse_info *parse_info, t_map *map_info, \
 			map_info->map_board[height][width] != ' ' && \
 			map_info->map_board[height][width] != '*')
 		{
-			printf("edge part\n");
 			return (ERROR);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:28:09 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/19 18:23:32 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:50:13 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ static void	parse_line_by_line(t_map *map_info, t_parse_info *parse_info)
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		parse_info->line_type = check_type(line);
-		if (parse_info->line_type == SIDE_TEXTURE)
+		if (parse_info->line_type == SIDE_TEXTURE && map_info->height == 0)
 			validate_texture(line, map_info, parse_info);
-		else if (parse_info->line_type == RGB)
+		else if (parse_info->line_type == RGB && map_info->height == 0)
 			validate_rgb(line, map_info, parse_info);
 		else if (parse_info->line_type == MAP)
 			validate_map(line, map_info, parse_info);
-		else if (parse_info->line_type == EMPTY_LINE && map_info->height > 0)
+		if (parse_info->line_type == EMPTY_LINE && map_info->height > 0)
 			exit_error("Error: Invalid empty_line map\n", map_info, parse_info);
 		free(line);
 	}

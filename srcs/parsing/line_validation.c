@@ -6,11 +6,25 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 13:13:06 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/18 17:41:32 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/07/24 17:15:17 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int is_line_digit(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (ft_isdigit(line[i]) == FALSE && line[i] != ',')
+			return (ERROR);
+		i++;
+	}
+	return (SUCCESS);
+}
 
 void	validate_texture(char *tex_line, t_map *map_info, \
 						t_parse_info *parse_info)
@@ -40,14 +54,12 @@ void	validate_rgb(char *tex_line, t_map *map_info, t_parse_info *parse_info)
 
 	rgb_info = ft_split(tex_line, ' ');
 	if (rgb_info == NULL)
-	{
 		exit_error("Error: Invalid RGB\n", map_info, parse_info);
-	}
 	if (rgb_info[0] == NULL || rgb_info[1] == NULL || \
 		rgb_info[2] != NULL)
-	{
 		exit_error("Error: Invalid RGB\n", map_info, parse_info);
-	}
+	if (is_line_digit(rgb_info[1]) == ERROR)
+		exit_error("Error: Invalid RGB\n", map_info, parse_info);
 	if (ft_strcmp("F", rgb_info[0]) == 0)
 	{
 		map_info->side_info->floor_rgb = get_rgb(rgb_info[1], \

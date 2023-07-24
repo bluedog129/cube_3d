@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 17:30:02 by choihyojong       #+#    #+#             */
-/*   Updated: 2023/07/18 18:35:27 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:01:30 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,13 @@ static void	validate_surrounded_wall(t_map *map_info, t_parse_info *parse_info)
 		{
 			if (validate_edge_part(parse_info, map_info, \
 									height, width) == ERROR)
-				exit_error("Error: map is not surrounded by wall", \
+				exit_error("Error: map is not surrounded by wall\n", \
 							map_info, parse_info);
 			else
 			{
 				if (validate_all_round(map_info, map_info->map_board, \
 										height, width) == ERROR)
-					exit_error("Error: map is not surrounded by wall", \
+					exit_error("Error: map is not surrounded by wall\n", \
 										map_info, parse_info);
 			}
 			width++;
