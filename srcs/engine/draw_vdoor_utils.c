@@ -113,8 +113,8 @@ void	drawing_vdoors(t_game_data *game_data, t_img_data *screen, int screen_x)
 		raycaster.map_check.y)->content;
 		if (raycaster.side == 1 && target_door->state != CLOSE)
 			casting_through_vdoor(game_data, raycaster, screen, screen_x);
-		draw_info.target_texture = &game_data->door_texture\
-		[(int)target_door->frame];
+		draw_info.target_texture = \
+		&game_data->door_texture[(int)target_door->frame];
 		draw_info_settup2(game_data->eye_level, game_data->camera, \
 		raycaster, &draw_info);
 		draw_vertical_line(&game_data->door_texture[\

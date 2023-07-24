@@ -57,13 +57,6 @@ void	camera_setup1(t_game_data *game_data)
 
 void	set_door_texture_path(char **texture_path)
 {
-	texture_path[0] = "./res/door1.xpm";
-	texture_path[1] = "./res/door2.xpm";
-	texture_path[2] = "./res/door3.xpm";
-	texture_path[3] = "./res/door4.xpm";
-	texture_path[4] = "./res/door5.xpm";
-	texture_path[5] = "./res/door6.xpm";
-	//-------------
 	texture_path[0] = "./res/star0.xpm";
 	texture_path[1] = "./res/star1.xpm";
 	texture_path[2] = "./res/star2.xpm";
