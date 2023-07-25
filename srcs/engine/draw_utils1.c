@@ -45,7 +45,7 @@ void	draw_screen(t_game_data *game_data)
 	game_data->map_info->side_info->floor_rgb, \
 	game_data->map_info->side_info->ceiling_rgb);
 	drawing_walls(game_data, &screen);
-	drawing_doors(game_data, &screen);
+	// drawing_doors(game_data, &screen);
 	mlx_put_image_to_window(game_data->mlx_ptr, game_data->win_ptr, \
 	screen.img_ptr, 0, 0);
 	draw_textes1(game_data);
@@ -63,7 +63,7 @@ int	pixel_from_image(t_img_data *img, int x, int y)
 	char	*dest;
 
 	// if (x > 60 && y > 60)
-	if (x >= 1962 || y >= 1962)
+	if (x < 0 || x >= 1962 || y < 0 || y >= 1962)
 		printf("x: %d | y: %d\n", x, y);
 	dest = img->img_addr + (y * img->img_line_len + x * (img->img_bpp / 8));
 	return (*(unsigned int *)dest);

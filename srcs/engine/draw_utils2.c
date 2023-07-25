@@ -52,9 +52,8 @@ t_raycaster rc, t_draw_info *draw_info)
 		if (rc.dir.y > 0)
 			draw_info->wall_x = 1 - draw_info->wall_x;
 	}
-	draw_info->texture_pos.x = ((float)draw_info->target_texture->img_width) * draw_info->wall_x;
-	// draw_info->texture_pos.y = 0;
-	draw_info->texture_pos.y = (draw_info->draw_start - eye_level + draw_info->line_len / 2) * (((float)draw_info->target_texture->img_height) / draw_info->line_len);
+	draw_info->texture_pos.x = (float)draw_info->target_texture->img_width * draw_info->wall_x;
+	draw_info->texture_pos.y = (draw_info->draw_start - eye_level + draw_info->line_len / 2) * ((float)draw_info->target_texture->img_height / draw_info->line_len);
 }
 
 void	dda_algorythm(char **map, t_raycaster *rc)
