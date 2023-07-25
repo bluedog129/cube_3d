@@ -24,11 +24,13 @@ t_raycaster rc, t_draw_info *draw_info)
 		draw_info->draw_end = HEIGHT - 1;
 	draw_info->wall_x = cam.pos.x + rc.perp_wall_dist * rc.dir.x;
 	draw_info->wall_x -= (int)draw_info->wall_x;
-	draw_info->texture_pos.x = (float)draw_info->target_texture->\
-	img_width * draw_info->wall_x;
-	draw_info->texture_pos.y = (draw_info->draw_start - eye_level + \
-	draw_info->line_len / 2) * ((float)draw_info->target_texture->\
-	img_height / draw_info->line_len);
+
+	draw_info->texture_pos.x = (float)draw_info->target_texture->img_width * draw_info->wall_x;
+	draw_info->texture_pos.y = (draw_info->draw_start - eye_level + draw_info->line_len / 2) * ((float)draw_info->target_texture->img_height / draw_info->line_len);
+	// draw_info->texture_pos.y = 0;
+
+	// draw_info->texture_pos.x = 64.0 * draw_info->wall_x;
+	// draw_info->texture_pos.y = (draw_info->draw_start - eye_level + draw_info->line_len / 2) * (64.0 / draw_info->line_len);
 }
 
 void	dda_algorythm2_2(t_raycaster *rc, t_camera cam)

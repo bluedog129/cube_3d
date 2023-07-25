@@ -62,6 +62,9 @@ int	pixel_from_image(t_img_data *img, int x, int y)
 {
 	char	*dest;
 
+	// if (x > 60 && y > 60)
+	if (x >= 1962 || y >= 1962)
+		printf("x: %d | y: %d\n", x, y);
 	dest = img->img_addr + (y * img->img_line_len + x * (img->img_bpp / 8));
 	return (*(unsigned int *)dest);
 }

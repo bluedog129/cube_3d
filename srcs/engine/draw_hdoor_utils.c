@@ -30,6 +30,7 @@ t_raycaster rc, t_draw_info *draw_info)
 	draw_info->texture_pos.y = (draw_info->draw_start - eye_level + \
 	draw_info->line_len / 2) * ((float)draw_info->target_texture->\
 	img_height / draw_info->line_len);
+	// draw_info->texture_pos.y = 0;
 }
 
 void	dda_algorythm3_2(t_raycaster *rc, t_camera cam)
