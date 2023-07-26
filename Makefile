@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC              = cc
-CFLAGS          = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS          = -Wall -Wextra -Werror -g
 INC				= -I./headers -I./libft
 NAME            = cub3d
 RM              = rm -f
@@ -36,9 +36,12 @@ BONUS_PARSING_SRCS    = parsing_bonus.c args_validation_bonus.c getting_side_inf
 BONUS_PARSING         = $(addprefix $(BONUS_PARSING_PATH), $(BONUS_PARSING_SRCS))
 
 ENGINE_PATH		= srcs/engine/
-ENGINE			= $(wildcard srcs/engine/*.c)
+ENGINE_SRCS		= draw_utils1.c   draw_utils2.c   engine_main.c   etc_utils.c     hook_utils.c    init_utils1.c   input_event.c
+ENGINE			= $(addprefix $(ENGINE_PATH), $(ENGINE_SRCS))
 BONUS_ENGINE_PATH		= srcs_bonus/engine/
-BONUS_ENGINE			= $(wildcard srcs_bonus/engine/*.c)
+BONUS_ENGINE_SRCS		= door_event_utils_bonus.c draw_hdoor_utils_bonus.c draw_utils1_bonus.c draw_utils3_bonus.c engine_main_bonus.c hook_utils_bonus.c input_event_bonus.c \
+						  door_list_utils1_bonus.c draw_minimap_utils_bonus.c draw_utils2_bonus.c draw_vdoor_utils_bonus.c etc_utils_bonus.c init_utils1_bonus.c
+BONUS_ENGINE			= $(addprefix $(BONUS_ENGINE_PATH), $(BONUS_ENGINE_SRCS))
 
 SOURCES			= $(addprefix $(SRCS_PATH), $(MAIN))\
 				  $(addprefix $(SRCS_PATH), $(PARSING))\
