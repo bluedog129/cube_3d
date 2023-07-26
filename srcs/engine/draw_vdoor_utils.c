@@ -24,12 +24,11 @@ t_raycaster rc, t_draw_info *draw_info)
 		draw_info->draw_end = HEIGHT - 1;
 	draw_info->wall_x = cam.pos.x + rc.perp_wall_dist * rc.dir.x;
 	draw_info->wall_x -= (int)draw_info->wall_x;
-
-	draw_info->texture_pos.x = (float)draw_info->target_texture->img_width * draw_info->wall_x;
-	draw_info->texture_pos.y = (draw_info->draw_start - eye_level + draw_info->line_len / 2) * ((float)draw_info->target_texture->img_height / draw_info->line_len);
-
-	// draw_info->texture_pos.x = 64.0 * draw_info->wall_x;
-	// draw_info->texture_pos.y = (draw_info->draw_start - eye_level + draw_info->line_len / 2) * (64.0 / draw_info->line_len);
+	draw_info->texture_pos.x = \
+	(float)draw_info->target_texture->img_width * draw_info->wall_x;
+	draw_info->texture_pos.y = \
+	(draw_info->draw_start - eye_level + draw_info->line_len / 2) * \
+	((float)draw_info->target_texture->img_height / draw_info->line_len);
 }
 
 void	dda_algorythm2_2(t_raycaster *rc, t_camera cam)
@@ -119,6 +118,7 @@ void	drawing_vdoors(t_game_data *game_data, t_img_data *screen, int screen_x)
 		&game_data->door_texture[(int)target_door->frame];
 		draw_info_settup2(game_data->eye_level, game_data->camera, \
 		raycaster, &draw_info);
-		draw_vertical_line(draw_info.target_texture, screen, screen_x, &draw_info);
+		draw_vertical_line(draw_info.target_texture, screen, screen_x, \
+		&draw_info);
 	}
 }

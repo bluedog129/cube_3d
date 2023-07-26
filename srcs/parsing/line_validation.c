@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static int is_line_digit(char *line)
+static int	is_line_digit(char *line)
 {
 	int	i;
 
