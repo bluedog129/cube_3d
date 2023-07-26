@@ -12,20 +12,6 @@
 
 #include "cub3d.h"
 
-static int	is_line_digit(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (ft_isdigit(line[i]) == FALSE && line[i] != ',')
-			return (ERROR);
-		i++;
-	}
-	return (SUCCESS);
-}
-
 void	validate_texture(char *tex_line, t_map *map_info, \
 						t_parse_info *parse_info)
 {

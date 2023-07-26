@@ -33,8 +33,7 @@ void	engine_main(t_map *map_info, t_parse_info *parse_info)
 	game_data->mlx_ptr = mlx_init();
 	game_data->map_info = map_info;
 	game_data->parse_info = parse_info;
-	if (load_textures1(game_data) == ERROR || \
-	load_textures2(game_data) == ERROR)
+	if (load_textures1(game_data) == ERROR)
 	{
 		printf("invalid resource path\n");
 		exit_cub3d(game_data, 1);

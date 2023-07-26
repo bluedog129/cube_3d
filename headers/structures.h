@@ -112,7 +112,6 @@ typedef struct s_game_data
 	t_map			*map_info;
 	t_parse_info	*parse_info;
 	t_img_data		wall_texture[4];
-	t_img_data		door_texture[6];
 	t_vec2d			move_input;
 	t_vec2d			rot_input;
 	float			eye_level;

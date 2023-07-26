@@ -24,12 +24,6 @@ void	exit_cub3d(t_game_data *game_data, int is_err)
 		i++;
 	}
 	i = 0;
-	while (i < 6 && game_data->door_texture[i].img_ptr)
-	{
-		mlx_destroy_image(game_data->mlx_ptr, game_data->door_texture[i].\
-		img_ptr);
-		i++;
-	}
 	if (game_data->win_ptr)
 		mlx_destroy_window(game_data->mlx_ptr, game_data->win_ptr);
 	finish_cub(game_data->map_info, game_data->parse_info);

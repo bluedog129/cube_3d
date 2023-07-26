@@ -55,41 +55,6 @@ void	camera_setup1(t_game_data *game_data)
 	}
 }
 
-void	set_door_texture_path(char **texture_path)
-{
-	texture_path[0] = "./res/star0.xpm";
-	texture_path[1] = "./res/star1.xpm";
-	texture_path[2] = "./res/star2.xpm";
-	texture_path[3] = "./res/star3.xpm";
-	texture_path[4] = "./res/star4.xpm";
-	texture_path[5] = "./res/star5.xpm";
-}
-
-int	load_textures2(t_game_data	*game_data)
-{
-	char	*texture_path[6];
-	int		i;
-
-	set_door_texture_path(texture_path);
-	i = 0;
-	while (i < 6)
-	{
-		game_data->door_texture[i].img_ptr = mlx_xpm_file_to_image(\
-		game_data->mlx_ptr, texture_path[i], &game_data->door_texture[i].\
-		img_width, &game_data->door_texture[i].img_height);
-		if (game_data->door_texture[i].img_ptr == NULL)
-			return (ERROR);
-		game_data->door_texture[i].img_addr = mlx_get_data_addr(\
-		game_data->door_texture[i].img_ptr, &game_data->door_texture[i].\
-		img_bpp, &game_data->door_texture[i].img_line_len, \
-		&game_data->door_texture[i].img_endian);
-		if (game_data->door_texture[i].img_addr == NULL)
-			return (ERROR);
-		i++;
-	}
-	return (SUCCESS);
-}
-
 int	load_textures1(t_game_data	*game_data)
 {
 	char	*texture_path[4];

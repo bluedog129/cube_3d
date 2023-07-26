@@ -18,12 +18,11 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
-# include <stdio.h>//
 
 # include "libft.h"
-# include "structures.h"
+# include "structures_bonus.h"
 # include "mlx.h"
-# include "os_define.h"
+# include "os_define_bonus.h"
 
 # define WIDTH 640
 # define HEIGHT 480
@@ -88,6 +87,7 @@ void		validate_rgb(char *tex_line, t_map *map_info, \
 void		validate_map(char *map_line, t_map *map_info, \
 										t_parse_info *parse_info);
 int			validate_all_lines(t_parse_info *parse_info);
+int			is_line_digit(char *line);
 
 // map_validation
 void		valid_map_characters(char *line, t_map *map_info, \
@@ -102,7 +102,6 @@ void		make_array_map(t_map *map_info, t_parse_info *parse_info);
 void		print_error(char *str);
 int			check_line_empty(char *line);
 int			open_file(char *cub_file);
-int			is_blank(char c);
 
 // free_utils
 void		free_2d_arr(char **arr);
@@ -157,7 +156,6 @@ void		interact_doors(t_game_data *game_data);
 void		raycaster_setup(t_raycaster *rc, t_camera cam, int screen_x);
 void		dda_algorythm2(char **map, t_raycaster *rc, t_camera *cam);
 void		dda_algorythm3(char **map, t_raycaster *rc, t_camera *cam);
-void		draw_textes1(t_game_data *game_data);
 int			is_passable(t_game_data *game_data, int x, int y);
 void		draw_vertical_line(t_img_data *target_texture, t_img_data *img, \
 int x, t_draw_info *draw_info);

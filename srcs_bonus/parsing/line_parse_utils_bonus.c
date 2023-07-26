@@ -12,9 +12,18 @@
 
 #include "cub3d_bonus.h"
 
-int	is_blank(char c)
+int	is_line_digit(char *line)
 {
-	return ((c >= 9 && c <= 13) || c == 32);
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (ft_isdigit(line[i]) == FALSE && line[i] != ',')
+			return (ERROR);
+		i++;
+	}
+	return (SUCCESS);
 }
 
 int	open_file(char *cub_file)

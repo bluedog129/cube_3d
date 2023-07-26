@@ -29,15 +29,28 @@ PARSING_SRCS    = parsing.c args_validation.c getting_side_info.c initialize.c \
 					line_validation.c map_validation.c linked_list.c \
 					line_parse_utils.c making_map_array.c free_utils.c
 PARSING         = $(addprefix $(PARSING_PATH), $(PARSING_SRCS))
+BONUS_PARSING_PATH  	= srcs_bonus/parsing/
+BONUS_PARSING_SRCS    = parsing_bonus.c args_validation_bonus.c getting_side_info_bonus.c initialize_bonus.c \
+						line_validation_bonus.c map_validation_bonus.c linked_list_bonus.c \
+						line_parse_utils_bonus.c making_map_array_bonus.c free_utils_bonus.c
+BONUS_PARSING         = $(addprefix $(BONUS_PARSING_PATH), $(BONUS_PARSING_SRCS))
 
 ENGINE_PATH		= srcs/engine/
 ENGINE			= $(wildcard srcs/engine/*.c)
+BONUS_ENGINE_PATH		= srcs_bonus/engine/
+BONUS_ENGINE			= $(wildcard srcs_bonus/engine/*.c)
 
 SOURCES			= $(addprefix $(SRCS_PATH), $(MAIN))\
 				  $(addprefix $(SRCS_PATH), $(PARSING))\
 				  $(addprefix $(SRCS_PATH), $(ENGINE))
 
+BONUS_SOURCES			= $(addprefix $(SRCS_PATH), $(MAIN))\
+						  $(addprefix $(SRCS_PATH), $(BONUS_PARSING))\
+						  $(addprefix $(SRCS_PATH), $(BONUS_ENGINE))
+
 OBJECTS         = $(SOURCES:.c=.o)
+
+BONUS_OBJECTS   = $(BONUS_SOURCES:.c=.o)
 
 #----------
 
@@ -54,6 +67,7 @@ endif
 
 INC += -I$(MLX_DIR) -I./headers/os_$(UNAME)
 ENGINE			+= ./headers/os_$(UNAME)/os_$(UNAME)_mouse_func.c
+BONUS_ENGINE	+= ./headers/os_$(UNAME)/os_$(UNAME)_mouse_func_bonus.c
 
 #----------
 
@@ -62,6 +76,11 @@ all: $(NAME)
 $(NAME): $(LIBS) $(MLX_A) $(OBJECTS)
 	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBS) $(MLX_A) $(MLX_FLAGS) -o $(EXEC)
 	@echo "\n$(GREEN)$(EXEC) created!$(DEFAULT)\n"
+
+bonus: $(LIBS) $(MLX_A) $(BONUS_OBJECTS)
+	@$(CC) $(CFLAGS) $(BONUS_OBJECTS) $(LIBS) $(MLX_A) $(MLX_FLAGS) -o $(EXEC)
+	@echo "\n$(GREEN)$(EXEC) bonus created!$(DEFAULT)\n"
+	@touch $@;
 
 $(LIBS) :
 	@make -C libft all
@@ -78,12 +97,15 @@ endif
 clean:
 	@$(RM) $(OBJECTS)
 	@$(RM) $(OBJECTS:.o=.d)
+	@$(RM) $(BONUS_OBJECTS)
+	@$(RM) $(BONUS_OBJECTS:.o=.d)
 	make -C libft clean
 	@cd $(MLX_DIR); make --no-print-directory clean
 
 fclean: clean
 	@$(RM) $(EXEC)
 	@$(RM) $(LIBS)
+	@$(RM) bonus
 	@cd $(MLX_DIR); make --no-print-directory clean
 	@echo "\n$(BLUE)delete all!$(DEFAULT)\n"
 
