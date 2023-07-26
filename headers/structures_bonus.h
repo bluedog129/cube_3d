@@ -100,7 +100,6 @@ typedef struct s_img_data
 	int		img_height;
 }	t_img_data;
 
-
 typedef struct s_draw_info
 {
 	int			line_len;

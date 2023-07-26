@@ -21,7 +21,6 @@ void	first_settup(t_game_data	*game_data)
 	mlx_mouse_hide(game_data->mlx_ptr, game_data->win_ptr);
 	mlx_hook(game_data->win_ptr, 2, 1L << 0, my_key_pressed_hook, game_data);
 	mlx_hook(game_data->win_ptr, 3, 1L << 1, my_key_released_hook, game_data);
-	mlx_hook(game_data->win_ptr, 6, 1L << 6, my_mouse_motion_hook, game_data);
 	mlx_loop_hook(game_data->mlx_ptr, my_loop_hook, game_data);
 }
 
@@ -41,7 +40,6 @@ void	engine_main(t_map *map_info, t_parse_info *parse_info)
 		exit_cub3d(game_data, 1);
 		return ;
 	}
-	get_door_list(map_info, &game_data->door_list);
 	camera_setup1(game_data);
 	game_data->win_ptr = mlx_new_window(game_data->mlx_ptr, WIDTH, HEIGHT, \
 	"raycast practice");

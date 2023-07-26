@@ -144,7 +144,6 @@ void		drawing_minimap(t_game_data *game_data);
 void		os_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
 void		os_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
 
-
 void		camera_setup1(t_game_data *game_data);
 int			load_textures1(t_game_data	*game_data);
 int			load_textures2(t_game_data	*game_data);
