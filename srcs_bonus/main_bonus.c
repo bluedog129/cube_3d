@@ -18,7 +18,6 @@ int	main(int argc, char **argv)
 	t_parse_info	parse_info;
 
 	validate_args(argc, argv[1]);
-
 	parse_cub_file(argv[1], &map_info, &parse_info);
 	make_array_map(&map_info, &parse_info);
 	engine_main(&map_info, &parse_info);

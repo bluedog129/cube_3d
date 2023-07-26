@@ -20,9 +20,12 @@ LIBS			= libft/libft.a
 EXEC            = cub3d
 SRCS_PATH	    = ./
 
-MAIN_PATH  	    = ./
+MAIN_PATH  	    = ./srcs/
 MAIN_SRCS       = main.c
 MAIN            = $(addprefix $(MAIN_PATH), $(MAIN_SRCS))
+BONUS_MAIN_PATH  	    = ./srcs_bonus/
+BONUS_MAIN_SRCS       = main_bonus.c
+BONUS_MAIN            = $(addprefix $(BONUS_MAIN_PATH), $(BONUS_MAIN_SRCS))
 
 PARSING_PATH  	= srcs/parsing/
 PARSING_SRCS    = parsing.c args_validation.c getting_side_info.c initialize.c \
@@ -47,7 +50,7 @@ SOURCES			= $(addprefix $(SRCS_PATH), $(MAIN))\
 				  $(addprefix $(SRCS_PATH), $(PARSING))\
 				  $(addprefix $(SRCS_PATH), $(ENGINE))
 
-BONUS_SOURCES			= $(addprefix $(SRCS_PATH), $(MAIN))\
+BONUS_SOURCES			= $(addprefix $(SRCS_PATH), $(BONUS_MAIN))\
 						  $(addprefix $(SRCS_PATH), $(BONUS_PARSING))\
 						  $(addprefix $(SRCS_PATH), $(BONUS_ENGINE))
 
