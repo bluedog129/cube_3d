@@ -4,6 +4,7 @@
 		"ios": "c",
 		"libft.h": "c",
 		"__bit_reference": "c",
-		"algorithm": "c"
+		"algorithm": "c",
+		"cub3d_bonus.h": "c"
 	}
 }

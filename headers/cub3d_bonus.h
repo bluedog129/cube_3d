@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -110,7 +110,7 @@ void		finish_cub(t_map *map_info, t_parse_info *parse_info);
 void		exit_error(char *str, t_map *map_info, t_parse_info *parse_info);
 
 // linked list
-void		ft_lstadd_back(t_map_node *lst, t_map_node *new);
+void		ft_lstadd_back(t_map_node *lst, t_map_node *_new);
 t_map_node	*ft_lstlast(t_map_node *lst);
 void		free_lst_node(t_map_node *head);
 
