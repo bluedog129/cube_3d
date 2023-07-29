@@ -70,7 +70,6 @@ typedef struct s_raycaster
 	float	perp_wall_dist;
 	t_vec2d	step;
 	int		side;
-	int		obj_type;
 }	t_raycaster;
 
 typedef struct s_camera
