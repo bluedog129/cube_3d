@@ -6,7 +6,7 @@
 /*   By: yonghyle <yonghyle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:46:28 by yonghyle          #+#    #+#             */
-/*   Updated: 2023/07/22 18:46:28 by yonghyle         ###   ########.fr       */
+/*   Updated: 2023/07/29 19:40:32 by yonghyle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,13 @@ int x, t_draw_info *draw_info)
 	}
 }
 
-void	draw_info_settup(float eye_level, t_camera cam, \
-t_raycaster rc, t_draw_info *draw_info)
+void	draw_info_settup(t_camera cam, t_raycaster rc, t_draw_info *draw_info)
 {
 	draw_info->line_len = (int)(HEIGHT / rc.perp_wall_dist);
-	draw_info->draw_start = -draw_info->line_len / 2 + eye_level;
+	draw_info->draw_start = -draw_info->line_len / 2 + HEIGHT / 2;
 	if (draw_info->draw_start < 0)
 		draw_info->draw_start = 0;
-	draw_info->draw_end = draw_info->line_len / 2 + eye_level;
+	draw_info->draw_end = draw_info->line_len / 2 + HEIGHT / 2;
 	if (draw_info->draw_end >= HEIGHT)
 		draw_info->draw_end = HEIGHT - 1;
 	draw_info->wall_x = cam.pos.y + rc.perp_wall_dist * rc.dir.y;
@@ -55,7 +54,7 @@ t_raycaster rc, t_draw_info *draw_info)
 	draw_info->texture_pos.x = \
 	(float)draw_info->target_texture->img_width * draw_info->wall_x;
 	draw_info->texture_pos.y = \
-	(draw_info->draw_start - eye_level + draw_info->line_len / 2) * \
+	(draw_info->draw_start - HEIGHT / 2 + draw_info->line_len / 2) * \
 	((float)draw_info->target_texture->img_height / draw_info->line_len);
 }
 
@@ -121,8 +120,7 @@ void	drawing_walls(t_game_data *game_data, t_img_data *screen)
 			draw_info.texture_idx += 2;
 		draw_info.target_texture = &game_data->\
 		wall_texture[draw_info.texture_idx];
-		draw_info_settup(game_data->eye_level, game_data->camera, \
-		raycaster, &draw_info);
+		draw_info_settup(game_data->camera, raycaster, &draw_info);
 		draw_vertical_line(&game_data->wall_texture[draw_info.texture_idx], \
 		screen, screen_x, &draw_info);
 		screen_x++;

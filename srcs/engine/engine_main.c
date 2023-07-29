@@ -6,21 +6,25 @@
 /*   By: yonghyle <yonghyle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:46:48 by yonghyle          #+#    #+#             */
-/*   Updated: 2023/07/22 18:46:49 by yonghyle         ###   ########.fr       */
+/*   Updated: 2023/07/29 19:46:55 by yonghyle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	first_settup(t_game_data	*game_data)
+static int	dest_event_hook(t_game_data *game_data)
 {
-	os_mouse_move(game_data->mlx_ptr, game_data->win_ptr, \
-	WIDTH / 2, HEIGHT / 2);
+	exit_cub3d(game_data, 0);
+	return (0);
+}
+
+static void	first_settup(t_game_data	*game_data)
+{
 	draw_screen(game_data);
 	mlx_do_key_autorepeatoff(game_data->mlx_ptr);
-	mlx_mouse_hide(game_data->mlx_ptr, game_data->win_ptr);
 	mlx_hook(game_data->win_ptr, 2, 1L << 0, my_key_pressed_hook, game_data);
 	mlx_hook(game_data->win_ptr, 3, 1L << 1, my_key_released_hook, game_data);
+	mlx_hook(game_data->win_ptr, 17, 0, dest_event_hook, game_data);
 	mlx_loop_hook(game_data->mlx_ptr, my_loop_hook, game_data);
 }
 

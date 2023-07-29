@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yonghyle <yonghyle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:16:34 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/07/18 15:06:26 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:28:04 by yonghyle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ typedef struct s_game_data
 	t_img_data		wall_texture[4];
 	t_vec2d			move_input;
 	t_vec2d			rot_input;
-	float			eye_level;
 	t_camera		camera;
 
 }	t_game_data;

@@ -6,7 +6,7 @@
 /*   By: yonghyle <yonghyle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:47:00 by yonghyle          #+#    #+#             */
-/*   Updated: 2023/07/22 18:47:01 by yonghyle         ###   ########.fr       */
+/*   Updated: 2023/07/29 19:38:18 by yonghyle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ int	my_key_released_hook(int keycode, t_game_data *game_data)
 int	my_loop_hook(t_game_data *game_data)
 {
 	if (game_data->move_input.x != 0 || game_data->move_input.y != 0 \
-	|| game_data->rot_input.x != 0 || game_data->rot_input.y != 0)
+	|| game_data->rot_input.x != 0)
 		move_event(game_data);
 	draw_screen(game_data);
-	os_mouse_move(game_data->mlx_ptr, \
-	game_data->win_ptr, WIDTH / 2, HEIGHT / 2);
 	return (0);
 }

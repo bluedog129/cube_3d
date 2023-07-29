@@ -3,21 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+         #
+#    By: yonghyle <yonghyle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 14:41:13 by hyojocho          #+#    #+#              #
-#    Updated: 2023/07/18 14:19:04 by hyojocho         ###   ########.fr        #
+#    Updated: 2023/07/29 18:25:57 by yonghyle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC              = cc
 CFLAGS          = -Wall -Wextra -Werror -g
 INC				= -I./headers -I./libft
-NAME            = cub3d
+NAME            = cub3D
 RM              = rm -f
 LIBS			= libft/libft.a
 
-EXEC            = cub3d
+EXEC            = cub3D
 SRCS_PATH	    = ./
 
 MAIN_PATH  	    = ./srcs/

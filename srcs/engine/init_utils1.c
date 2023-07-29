@@ -6,7 +6,7 @@
 /*   By: yonghyle <yonghyle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:47:05 by yonghyle          #+#    #+#             */
-/*   Updated: 2023/07/22 18:47:05 by yonghyle         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:23:50 by yonghyle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	camera_setup1(t_game_data *game_data)
 	game_data->camera.plane.x = 0.66;
 	game_data->camera.move_speed = 0.04;
 	game_data->camera.rotate_speed = 0.03;
-	game_data->eye_level = HEIGHT / 2;
 	y = 0;
 	while (y < game_data->map_info->height)
 	{

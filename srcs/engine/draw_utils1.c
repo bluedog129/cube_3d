@@ -6,14 +6,13 @@
 /*   By: yonghyle <yonghyle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:46:22 by yonghyle          #+#    #+#             */
-/*   Updated: 2023/07/22 18:46:23 by yonghyle         ###   ########.fr       */
+/*   Updated: 2023/07/29 19:39:18 by yonghyle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	fill_floor_and_ceiling(t_img_data *screen, \
-float eye_level, int floor, int ceiling)
+static void	fill_floor_and_ceiling(t_img_data *screen, int floor, int ceiling)
 {
 	int	x;
 	int	y;
@@ -24,7 +23,7 @@ float eye_level, int floor, int ceiling)
 		x = 0;
 		while (x < WIDTH)
 		{
-			if (y < eye_level)
+			if (y < HEIGHT / 2)
 				pixel_put_to_image(screen, x, y, ceiling);
 			else
 				pixel_put_to_image(screen, x, y, floor);
@@ -41,8 +40,7 @@ void	draw_screen(t_game_data *game_data)
 	screen.img_ptr = mlx_new_image(game_data->mlx_ptr, WIDTH, HEIGHT);
 	screen.img_addr = mlx_get_data_addr(screen.img_ptr, &screen.img_bpp, \
 	&screen.img_line_len, &screen.img_endian);
-	fill_floor_and_ceiling(&screen, game_data->eye_level, \
-	game_data->map_info->side_info->floor_rgb, \
+	fill_floor_and_ceiling(&screen, game_data->map_info->side_info->floor_rgb, \
 	game_data->map_info->side_info->ceiling_rgb);
 	drawing_walls(game_data, &screen);
 	mlx_put_image_to_window(game_data->mlx_ptr, game_data->win_ptr, \
