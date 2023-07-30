@@ -17,11 +17,11 @@ int	my_key_pressed_hook(int keycode, t_game_data *game_data)
 	if (keycode == KEY_ESC)
 		exit_cub3d(game_data, 0);
 	if ((keycode == KEY_S) || (keycode == KEY_W))
-		game_data->move_input.y += ((keycode == KEY_S) - (keycode == KEY_W));
+		game_data->move_input.y = ((keycode == KEY_S) - (keycode == KEY_W));
 	if ((keycode == KEY_D) || (keycode == KEY_A))
-		game_data->move_input.x += ((keycode == KEY_D) - (keycode == KEY_A));
+		game_data->move_input.x = ((keycode == KEY_D) - (keycode == KEY_A));
 	if ((keycode == KEY_RIGHT) || (keycode == KEY_LEFT))
-		game_data->rot_input.x += ((keycode == KEY_RIGHT) - \
+		game_data->rot_input.x = ((keycode == KEY_RIGHT) - \
 		(keycode == KEY_LEFT));
 	return (1);
 }
@@ -37,13 +37,15 @@ int	my_key_released_hook(int keycode, t_game_data *game_data)
 		if (game_data->camera.rotate_speed < 0)
 			game_data->camera.rotate_speed = 0;
 	}
-	if ((keycode == KEY_S) || (keycode == KEY_W))
-		game_data->move_input.y -= ((keycode == KEY_S) - (keycode == KEY_W));
-	if ((keycode == KEY_D) || (keycode == KEY_A))
-		game_data->move_input.x -= ((keycode == KEY_D) - (keycode == KEY_A));
-	if ((keycode == KEY_RIGHT) || (keycode == KEY_LEFT))
-		game_data->rot_input.x -= ((keycode == KEY_RIGHT) - \
-		(keycode == KEY_LEFT));
+	if (((keycode == KEY_S) || (keycode == KEY_W)) && \
+	game_data->move_input.y == ((keycode == KEY_S) - (keycode == KEY_W)))
+		game_data->move_input.y = 0;
+	if (((keycode == KEY_D) || (keycode == KEY_A)) && \
+	game_data->move_input.x == ((keycode == KEY_D) - (keycode == KEY_A)))
+		game_data->move_input.x = 0;
+	if (((keycode == KEY_RIGHT) || (keycode == KEY_LEFT)) && \
+	game_data->rot_input.x == ((keycode == KEY_RIGHT) - (keycode == KEY_LEFT)))
+		game_data->rot_input.x = 0;
 	return (1);
 }
 
