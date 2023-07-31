@@ -61,7 +61,7 @@ t_raycaster rc, t_draw_info *draw_info)
 
 void	dda_algorythm(char **map, t_raycaster *rc)
 {
-	while (map[(int)rc->map_check.y][(int)rc->map_check.x] != '1')
+	while (1)
 	{
 		if (rc->side_dist.x < rc->side_dist.y)
 		{
@@ -75,6 +75,8 @@ void	dda_algorythm(char **map, t_raycaster *rc)
 			rc->map_check.y += rc->step.y;
 			rc->side = 1;
 		}
+		if (map[(int)rc->map_check.y][(int)rc->map_check.x] == '1')
+			break ;
 	}
 	if (rc->side == 0)
 		rc->perp_wall_dist = rc->side_dist.x - rc->delta_dist.x;

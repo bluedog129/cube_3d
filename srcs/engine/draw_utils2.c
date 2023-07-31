@@ -52,7 +52,7 @@ void	draw_info_settup(t_camera cam, t_raycaster rc, t_draw_info *draw_info)
 			draw_info->wall_x = 1 - draw_info->wall_x;
 	}
 	draw_info->texture_pos.x = \
-	(float)draw_info->target_texture->img_width * draw_info->wall_x;
+	(float)(draw_info->target_texture->img_width * draw_info->wall_x);
 	draw_info->texture_pos.y = \
 	(draw_info->draw_start - HEIGHT / 2 + draw_info->line_len / 2) * \
 	((float)draw_info->target_texture->img_height / draw_info->line_len);
@@ -60,7 +60,7 @@ void	draw_info_settup(t_camera cam, t_raycaster rc, t_draw_info *draw_info)
 
 void	dda_algorythm(char **map, t_raycaster *rc)
 {
-	while (map[(int)rc->map_check.y][(int)rc->map_check.x] != '1')
+	while (1)
 	{
 		if (rc->side_dist.x < rc->side_dist.y)
 		{
@@ -74,6 +74,8 @@ void	dda_algorythm(char **map, t_raycaster *rc)
 			rc->map_check.y += rc->step.y;
 			rc->side = 1;
 		}
+		if (map[(int)rc->map_check.y][(int)rc->map_check.x] == '1')
+			break ;
 	}
 	if (rc->side == 0)
 		rc->perp_wall_dist = rc->side_dist.x - rc->delta_dist.x;

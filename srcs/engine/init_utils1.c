@@ -40,7 +40,7 @@ void	camera_setup1(t_game_data *game_data)
 	game_data->camera.dir.y = -1.0;
 	game_data->camera.plane.x = 0.66;
 	game_data->camera.move_speed = 0.04;
-	game_data->camera.rotate_speed = 0.03;
+	game_data->camera.rotate_speed = 0.06;
 	y = 0;
 	while (y < game_data->map_info->height)
 	{

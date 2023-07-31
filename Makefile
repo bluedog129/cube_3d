@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC              = cc
-CFLAGS          = -Wall -Wextra -Werror -g
+CFLAGS          = -Wall -Wextra -Werror -g -fsanitize=address
 INC				= -I./headers -I./libft
 NAME            = cub3D
 RM              = rm -f
